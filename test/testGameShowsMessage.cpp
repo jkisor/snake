@@ -1,12 +1,9 @@
 // tests-factorial.cpp
 #include "catch.hpp"
 
-class ShowMessage {
-  public:
-  virtual void show(std::string message) = 0;
-};
+#include "game.h"
 
-class TestShowMessage : public ShowMessage {
+class MockShowMessage : public ShowMessage {
   
   public:
 
@@ -24,23 +21,8 @@ class TestShowMessage : public ShowMessage {
 
 };
 
-class Game {
-  
-  ShowMessage * showMessage;
-
-  public:
-
-  Game(ShowMessage &showMessage) {
-    this->showMessage = &showMessage;
-  }
-
-  void run() {
-    this->showMessage->show("Hello World");
-  }
-};
-
 TEST_CASE( "Game shows message") {
-  TestShowMessage showMessage = TestShowMessage();
+  MockShowMessage showMessage = MockShowMessage();
   Game game = Game(showMessage);
 
   game.run();
