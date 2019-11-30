@@ -1,7 +1,7 @@
 #include <iostream>
 
 #include "game.h"
-#include "showMessageConsole.h"
+#include "show_message_console.h"
 
 int main() {
   ShowMessageConsole showMessage;

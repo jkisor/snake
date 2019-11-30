@@ -1,6 +1,6 @@
 #include "game.h"
 
-Game::Game(ShowMessage &showMessage) {
+Game::Game(ShowMessageInterface &showMessage) {
   this->showMessage = &showMessage;
 }
 

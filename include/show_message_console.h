@@ -1,8 +1,8 @@
 #pragma once
 
-#include "showMessage.h"
+#include "show_message_interface.h"
 
-class ShowMessageConsole : public ShowMessage {
+class ShowMessageConsole : public ShowMessageInterface {
   
   public:
 

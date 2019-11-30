@@ -2,7 +2,7 @@
 
 #include <string>
 
-class ShowMessage {
+class ShowMessageInterface {
   public:
   virtual void show(std::string message) = 0;
 };

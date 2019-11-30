@@ -1,14 +1,14 @@
 #pragma once
 
-#include "showMessage.h"
+#include "show_message_interface.h"
 
 class Game {
   
-  ShowMessage * showMessage;
+  ShowMessageInterface * showMessage;
 
   public:
 
-  Game(ShowMessage &showMessage);
+  Game(ShowMessageInterface &showMessage);
 
   void run();
 
