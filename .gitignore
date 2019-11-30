@@ -1,2 +1,5 @@
 game
 *.o
+.vscode
+bin/
+test/catch.hpp
