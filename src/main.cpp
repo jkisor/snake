@@ -1,6 +1,13 @@
 #include <iostream>
 
+#include "game.h"
+#include "showMessageConsole.h"
+
 int main() {
-  std::cout << "Hello world." << std::endl; 
+  ShowMessageConsole showMessage;
+
+  Game game(showMessage);
+  game.run();
+
   return 0;
 }
