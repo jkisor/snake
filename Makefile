@@ -26,7 +26,7 @@ clean_test:
 	rm -f $(test_obj) bin/test
 
 bin/test: $(test_obj) $(filter-out src/main.o, $(obj))
-	clang++ -std=c++17 $^ -o $@ -I include
+	clang++ -std=c++17 $^ -o $@ $(LDFLAGS) -I include
 
 test/%.o: test/%.cpp
 	clang++ -std=c++17 -o $@ -c $< -I include
