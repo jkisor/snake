@@ -1,14 +1,28 @@
 #include <iostream>
 
 #include "game.h"
-#include "open_window_sfml.h"
+#include "window.h"
 #include "show_message_console.h"
 
 int main() {
-  OpenWindowSFML openWindow;
-  ShowMessageConsole showMessage;
 
-  Game game(openWindow, showMessage);
+  Window window;
+
+  window.open();
+
+  while (window.isOpen())
+  {
+    std::vector<std::string> events = window.events();
+
+    // if(events.size() != 0 && events[0] == "QUIT")
+    //   window.close();
+
+    window.clear();
+    window.display();
+  }
+  
+  ShowMessageConsole showMessage;
+  Game game(showMessage);
   game.run();
 
   return 0;
