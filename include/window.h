@@ -27,7 +27,6 @@ class Window
     this->window.close();
   }
 
-
   bool isOpen()
   {
     return this->window.isOpen();
@@ -58,5 +57,9 @@ class Window
   void display()
   {
     this->window.display();
+  }
+
+  void draw(const sf::Drawable &drawable){
+    this->window.draw(drawable);
   }
 };

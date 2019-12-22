@@ -4,8 +4,30 @@
 #include "window.h"
 #include "show_message_console.h"
 
+#include <string>
+
 int main() {
 
+  sf::Font font;
+  font.loadFromFile("./basictitlefont.ttf");
+
+  sf::Text text;
+
+  // select the font
+  text.setFont(font); // font is a sf::Font
+
+  // set the string to display
+  text.setString("Hello world");
+
+  // set the character size
+  text.setCharacterSize(24); // in pixels, not points!
+
+  // set the color
+  text.setFillColor(sf::Color::Black);
+
+  // set the text style
+  // text.setStyle(sf::Text::Bold | sf::Text::Underlined);
+  //
   Window window;
 
   window.open();
@@ -18,9 +40,12 @@ int main() {
     //   window.close();
 
     window.clear();
+
+    window.draw(text);
+
     window.display();
   }
-  
+
   ShowMessageConsole showMessage;
   Game game(showMessage);
   game.run();
