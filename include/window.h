@@ -3,6 +3,7 @@
 #include <vector>
 #include <string>
 #include <SFML/Graphics.hpp>
+#include "events.h"
 
 // A "Gateway"
 class Window
@@ -32,26 +33,25 @@ class Window
     return this->window.isOpen();
   }
 
-  std::vector<std::string> events()
+  Events events()
   {
-    std::vector<std::string> results;
+    std::vector<sf::Event> results;
 
     sf::Event event;
     while (this->window.pollEvent(event))
     {
       if (event.type == sf::Event::Closed)
-      {
-        results.push_back("QUIT");
         close();
-      }
+      
+      results.push_back(event);
     }
 
-    return results;
+    return Events(results);
   }
 
   void clear()
   {
-    this->window.clear(sf::Color::Green);
+    this->window.clear(sf::Color::Cyan);
   }
 
   void display()

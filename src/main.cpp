@@ -5,11 +5,25 @@
 #include "show_message_console.h"
 
 #include <string>
+#include <vector>
+
+#include "events.h"
+
+const std::vector<std::string> messages = {"1", "2", "3"};
+int messageIndex = 0;
+
+sf::Font loadFont(std::string file)
+{
+  sf::Font font;
+
+  font.loadFromFile("./basictitlefont.ttf");
+
+  return font;
+};
 
 int main() {
 
-  sf::Font font;
-  font.loadFromFile("./basictitlefont.ttf");
+  sf::Font font = loadFont("./basictitlefont.ttf");
 
   sf::Text text;
 
@@ -17,16 +31,19 @@ int main() {
   text.setFont(font); // font is a sf::Font
 
   // set the string to display
-  text.setString("Hello world");
+  text.setString(messages[messageIndex]);
 
   // set the character size
-  text.setCharacterSize(24); // in pixels, not points!
+  text.setCharacterSize(48); // in pixels, not points!
 
   // set the color
   text.setFillColor(sf::Color::Black);
 
   // set the text style
   // text.setStyle(sf::Text::Bold | sf::Text::Underlined);
+  text.setStyle(sf::Text::Bold);
+
+  text.setPosition(400, 0);
   //
   Window window;
 
@@ -34,10 +51,15 @@ int main() {
 
   while (window.isOpen())
   {
-    std::vector<std::string> events = window.events();
+    Events events = window.events();
 
-    // if(events.size() != 0 && events[0] == "QUIT")
-    //   window.close();
+    if(events.keyPresses().size() > 0)
+    {
+      messageIndex += 1;
+      messageIndex %= messages.size();
+
+      text.setString(messages[messageIndex]);
+    }
 
     window.clear();
 
