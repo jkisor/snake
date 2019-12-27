@@ -9,6 +9,8 @@
 
 #include "events.h"
 
+#include <algorithm>
+
 const std::vector<std::string> messages = {"1", "2", "3"};
 int messageIndex = 0;
 
@@ -49,16 +51,36 @@ int main() {
 
   window.open();
 
+  std::vector<sf::Keyboard::Key> downKeys;
+
   while (window.isOpen())
   {
     Events events = window.events();
 
-    if(events.keyPresses().size() > 0)
+    for(auto e : events.keyPresses())
     {
-      messageIndex += 1;
-      messageIndex %= messages.size();
+      if(std::find(downKeys.begin(), downKeys.end(), e.key.code) != downKeys.end()) {
+        // contains
+      } else {
+        // does not contain
+        downKeys.push_back(e.key.code);
 
-      text.setString(messages[messageIndex]);
+        if(e.key.code == sf::Keyboard::Key::Z)
+        {
+          messageIndex += 1;
+          messageIndex %= messages.size();
+
+          text.setString(messages[messageIndex]);
+        }
+      }
+    }
+
+    for(auto e : events.keyReleases())
+    {
+      downKeys.erase(
+        std::remove(downKeys.begin(), downKeys.end(), e.key.code),
+        downKeys.end()
+      );
     }
 
     window.clear();
