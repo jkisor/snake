@@ -23,21 +23,9 @@ sf::Font loadFont(std::string file)
   return font;
 };
 
-std::vector<sf::Keyboard::Key> downKeys;
+#include "pressed_keys.h"
 
-bool contains(std::vector<sf::Keyboard::Key> &downKeys, sf::Keyboard::Key keyCode)
-{
-  return std::find(downKeys.begin(), downKeys.end(), keyCode) != downKeys.end();
-};
-
-void remove(std::vector<sf::Keyboard::Key> &downKeys, sf::Keyboard::Key keyCode)
-{
-  downKeys.erase(
-    std::remove(downKeys.begin(), downKeys.end(), keyCode),
-    downKeys.end()
-  );
-
-};
+PressedKeys pressedKeys;
 
 
 int main() {
@@ -68,19 +56,17 @@ int main() {
 
   window.open();
 
-
   while (window.isOpen())
   {
     Events events = window.events();
 
     for(auto e : events.keyPresses())
     {
-      // if(std::find(downKeys.begin(), downKeys.end(), e.key.code) != downKeys.end()) {
-      if (contains(downKeys, e.key.code)) {
+      if ( pressedKeys.contains(e.key.code)) {
         // contains
       } else {
         // does not contain
-        downKeys.push_back(e.key.code);
+        pressedKeys.add(e.key.code);
 
         switch(e.key.code) {
           case sf::Keyboard::Key::Z:
@@ -97,7 +83,7 @@ int main() {
     }
 
     for(auto e : events.keyReleases())
-      remove(downKeys, e.key.code);
+      pressedKeys.remove(e.key.code);
 
     window.clear();
 
