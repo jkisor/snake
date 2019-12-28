@@ -7,14 +7,17 @@
 #include <string>
 #include <vector>
 #include <unordered_map>
+#include <algorithm>
 
 #include "events.h"
-
-#include <algorithm>
+#include "pressed_keys.h"
+#include "action.h"
 
 const std::vector<std::string> messages = {"One", "Two", "Three"};
 int messageIndex = 0;
 sf::Text text;
+PressedKeys pressedKeys;
+
 
 sf::Font loadFont(std::string file)
 {
@@ -23,16 +26,6 @@ sf::Font loadFont(std::string file)
   font.loadFromFile("./basictitlefont.ttf");
 
   return font;
-};
-
-#include "pressed_keys.h"
-
-PressedKeys pressedKeys;
-
-class Action
-{
-  public:
-  virtual void call() {  };
 };
 
 class NextMessage : public Action
@@ -60,7 +53,6 @@ int main() {
   actionByKey[sf::Keyboard::Key::Z] = &nextMessage;
 
   sf::Font font = loadFont("./basictitlefont.ttf");
-
 
   // select the font
   text.setFont(font); // font is a sf::Font
