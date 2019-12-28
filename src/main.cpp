@@ -23,6 +23,14 @@ sf::Font loadFont(std::string file)
   return font;
 };
 
+std::vector<sf::Keyboard::Key> downKeys;
+
+bool contains(std::vector<sf::Keyboard::Key> &downKeys, sf::Keyboard::Key keyCode)
+{
+  return std::find(downKeys.begin(), downKeys.end(), keyCode) != downKeys.end();
+};
+
+
 int main() {
 
   sf::Font font = loadFont("./basictitlefont.ttf");
@@ -51,7 +59,6 @@ int main() {
 
   window.open();
 
-  std::vector<sf::Keyboard::Key> downKeys;
 
   while (window.isOpen())
   {
@@ -59,19 +66,24 @@ int main() {
 
     for(auto e : events.keyPresses())
     {
-      if(std::find(downKeys.begin(), downKeys.end(), e.key.code) != downKeys.end()) {
+      // if(std::find(downKeys.begin(), downKeys.end(), e.key.code) != downKeys.end()) {
+      if (contains(downKeys, e.key.code)) {
         // contains
       } else {
         // does not contain
         downKeys.push_back(e.key.code);
 
-        if(e.key.code == sf::Keyboard::Key::Z)
-        {
-          messageIndex += 1;
-          messageIndex %= messages.size();
+        switch(e.key.code) {
+          case sf::Keyboard::Key::Z:
+            messageIndex += 1;
+            messageIndex %= messages.size();
 
-          text.setString(messages[messageIndex]);
-        }
+            text.setString(messages[messageIndex]);
+            break;
+          default:
+            break;
+        };
+        
       }
     }
 
