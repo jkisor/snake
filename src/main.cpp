@@ -60,7 +60,7 @@ int main() {
   {
     Events events = window.events();
 
-    for(auto e : events.keyPresses())
+    for(sf::Event e : events.keyPresses())
     {
       if ( !pressedKeys.contains(e.key.code)) {
         pressedKeys.add(e.key.code);
@@ -79,7 +79,7 @@ int main() {
       }
     }
 
-    for(auto e : events.keyReleases())
+    for(sf::Event e : events.keyReleases())
       pressedKeys.remove(e.key.code);
 
     window.clear();
