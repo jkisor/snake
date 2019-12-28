@@ -11,7 +11,7 @@
 
 #include <algorithm>
 
-const std::vector<std::string> messages = {"1", "2", "3"};
+const std::vector<std::string> messages = {"One", "Two", "Three"};
 int messageIndex = 0;
 
 sf::Font loadFont(std::string file)
@@ -62,10 +62,7 @@ int main() {
 
     for(auto e : events.keyPresses())
     {
-      if ( pressedKeys.contains(e.key.code)) {
-        // contains
-      } else {
-        // does not contain
+      if ( !pressedKeys.contains(e.key.code)) {
         pressedKeys.add(e.key.code);
 
         switch(e.key.code) {
