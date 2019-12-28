@@ -6,6 +6,7 @@
 
 #include <string>
 #include <vector>
+#include <unordered_map>
 
 #include "events.h"
 
@@ -13,6 +14,7 @@
 
 const std::vector<std::string> messages = {"One", "Two", "Three"};
 int messageIndex = 0;
+sf::Text text;
 
 sf::Font loadFont(std::string file)
 {
@@ -27,12 +29,38 @@ sf::Font loadFont(std::string file)
 
 PressedKeys pressedKeys;
 
+class Action
+{
+  public:
+  virtual void call() {  };
+};
+
+class NextMessage : public Action
+{
+  public:
+
+  void call() {
+    messageIndex += 1;
+    messageIndex %= messages.size();
+
+    text.setString(messages[messageIndex]);
+  }
+};
+
+std::unordered_map<sf::Keyboard::Key, Action*> actionByKey;
+
+
+bool isKeyPresent(std::unordered_map<sf::Keyboard::Key, Action*> m, sf::Keyboard::Key key)
+{
+  return !(m.find(key) == m.end());
+}
 
 int main() {
+  NextMessage nextMessage;
+  actionByKey[sf::Keyboard::Key::Z] = &nextMessage;
 
   sf::Font font = loadFont("./basictitlefont.ttf");
 
-  sf::Text text;
 
   // select the font
   text.setFont(font); // font is a sf::Font
@@ -65,16 +93,8 @@ int main() {
       if ( !pressedKeys.contains(e.key.code)) {
         pressedKeys.add(e.key.code);
 
-        switch(e.key.code) {
-          case sf::Keyboard::Key::Z:
-            messageIndex += 1;
-            messageIndex %= messages.size();
-
-            text.setString(messages[messageIndex]);
-            break;
-          default:
-            break;
-        };
+        if (isKeyPresent(actionByKey, e.key.code))
+          actionByKey[e.key.code]->call();
 
       }
     }
