@@ -30,6 +30,15 @@ bool contains(std::vector<sf::Keyboard::Key> &downKeys, sf::Keyboard::Key keyCod
   return std::find(downKeys.begin(), downKeys.end(), keyCode) != downKeys.end();
 };
 
+void remove(std::vector<sf::Keyboard::Key> &downKeys, sf::Keyboard::Key keyCode)
+{
+  downKeys.erase(
+    std::remove(downKeys.begin(), downKeys.end(), keyCode),
+    downKeys.end()
+  );
+
+};
+
 
 int main() {
 
@@ -83,17 +92,12 @@ int main() {
           default:
             break;
         };
-        
+
       }
     }
 
     for(auto e : events.keyReleases())
-    {
-      downKeys.erase(
-        std::remove(downKeys.begin(), downKeys.end(), e.key.code),
-        downKeys.end()
-      );
-    }
+      remove(downKeys, e.key.code);
 
     window.clear();
 
