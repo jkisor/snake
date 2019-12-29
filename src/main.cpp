@@ -13,21 +13,12 @@
 #include "pressed_keys.h"
 #include "action.h"
 
+#include "dialog.h"
 #include "dialog_view.h"
 #include "presenter.h"
 
-const std::vector<std::string> messages = {"One", "Two", "Three"};
-int messageIndex = 0;
 PressedKeys pressedKeys;
 
-class Dialog
-{
-  public:
-
-  const std::vector<std::string> messages = {"One", "Two", "Three"};
-  int index = 0;
-
-};
 class NextMessage : public Action
 {
   Presenter * presenter;
@@ -45,10 +36,10 @@ class NextMessage : public Action
   {
     dialog->index += 1;
 
-    if (dialog->index < dialog->messages.size())
-      presenter->onChangeMessage(dialog->messages[ dialog->index]);
-    else
+    if (dialog->isComplete())
       presenter->onDone();
+    else
+      presenter->onChangeMessage(dialog->message());
   }
 };
 
@@ -61,12 +52,12 @@ bool isKeyPresent(std::unordered_map<sf::Keyboard::Key, Action*> m, sf::Keyboard
 }
 
 int main() {
+  Dialog dialog;
 
   DialogView dialogView;
-  dialogView.setString(messages[messageIndex]);
+  dialogView.setString(dialog.message());
 
   Presenter presenter(dialogView);
-  Dialog dialog;
   NextMessage nextMessage(dialog, presenter);
 
   actionByKey[sf::Keyboard::Key::Z] = &nextMessage;
