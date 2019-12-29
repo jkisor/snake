@@ -7,16 +7,11 @@ class Dialog
 {
   public:
 
-  const std::vector<std::string> messages = {
-    "...",
-    "Hello?",
-    "...",
-    "No way."
-  };
+  std::vector<std::string> messages;
   int index = 0;
 
+  Dialog();
   std::string message();
-
   bool isComplete();
 
 };
