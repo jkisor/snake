@@ -15,9 +15,7 @@
 
 const std::vector<std::string> messages = {"One", "Two", "Three"};
 int messageIndex = 0;
-sf::Text text;
 PressedKeys pressedKeys;
-
 
 sf::Font loadFont(std::string file)
 {
@@ -30,32 +28,45 @@ sf::Font loadFont(std::string file)
 
 class Presenter
 {
+  sf::Text * text;
+
   public:
+
+  Presenter(sf::Text &t)
+  {
+    text = &t;
+  }
 
   void onChangeMessage(std::string message)
   {
-    text.setString(message);
+    text->setString(message);
   }
 
   void onDone()
   {
-    text.setString("");
+    text->setString("");
   }
 };
 
 class NextMessage : public Action
 {
-  Presenter presenter;
+  Presenter * presenter;
 
   public:
 
-  void call() {
+  NextMessage(Presenter &p)
+  {
+    presenter = &p;
+  }
+
+  void call() 
+  {
     messageIndex += 1;
 
     if (messageIndex < messages.size())
-      presenter.onChangeMessage(messages[messageIndex]);
+      presenter->onChangeMessage(messages[messageIndex]);
     else
-      presenter.onDone();
+      presenter->onDone();
   }
 };
 
@@ -68,11 +79,9 @@ bool isKeyPresent(std::unordered_map<sf::Keyboard::Key, Action*> m, sf::Keyboard
 }
 
 int main() {
-  NextMessage nextMessage;
-  actionByKey[sf::Keyboard::Key::Z] = &nextMessage;
+  sf::Text text;
 
   sf::Font font = loadFont("./basictitlefont.ttf");
-
   // select the font
   text.setFont(font); // font is a sf::Font
 
@@ -90,6 +99,12 @@ int main() {
   text.setStyle(sf::Text::Bold);
 
   text.setPosition(400, 0);
+
+  Presenter presenter(text);
+  NextMessage nextMessage(presenter);
+  actionByKey[sf::Keyboard::Key::Z] = &nextMessage;
+
+  
   //
   Window window;
 
