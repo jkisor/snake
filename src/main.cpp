@@ -32,9 +32,11 @@ int main() {
   Dialog dialog;
 
   DialogView dialogView;
-  dialogView.setString(dialog.message());
+  // dialogView.setString(dialog.message());
 
   Presenter presenter(dialogView);
+  presenter.onChangeMessage(dialog.message());
+  
   NextMessage nextMessage(dialog, presenter);
 
   actionByKey[sf::Keyboard::Key::Z] = &nextMessage;

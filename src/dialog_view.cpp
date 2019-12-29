@@ -2,13 +2,13 @@
 
 DialogView::DialogView()
 {
-  font.loadFromFile("./basictitlefont.ttf");
+  font.loadFromFile("./VCR_OSD_MONO_1.001.ttf");
   text.setFont(font);
   text.setString("");
-  text.setCharacterSize(48); // in pixels, not points!
+  text.setCharacterSize(32); // in pixels, not points!
   text.setFillColor(sf::Color::Black);
-  text.setStyle(sf::Text::Bold);
-  text.setPosition(400, 0);
+  // text.setStyle(sf::Text::Bold);
+  text.setPosition(0, 0);
 }
 
 void DialogView::setString(std::string string)

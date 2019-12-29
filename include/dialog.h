@@ -7,7 +7,12 @@ class Dialog
 {
   public:
 
-  const std::vector<std::string> messages = {"One", "Two", "Three"};
+  const std::vector<std::string> messages = {
+    "...",
+    "Hello?",
+    "...",
+    "No way."
+  };
   int index = 0;
 
   std::string message();
