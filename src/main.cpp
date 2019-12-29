@@ -13,79 +13,40 @@
 #include "pressed_keys.h"
 #include "action.h"
 
+#include "dialog_view.h"
+#include "presenter.h"
+
 const std::vector<std::string> messages = {"One", "Two", "Three"};
 int messageIndex = 0;
 PressedKeys pressedKeys;
 
-class DialogView
+class Dialog
 {
-
-  public:
-  
-  sf::Font font;
-  sf::Text text;
-
-  DialogView()
-  {
-    font.loadFromFile("./basictitlefont.ttf");
-    text.setFont(font);
-    text.setString("");
-    text.setCharacterSize(48); // in pixels, not points!
-    text.setFillColor(sf::Color::Black);
-    text.setStyle(sf::Text::Bold);
-    text.setPosition(400, 0);
-  }
-
-  void setString(std::string string)
-  {
-    text.setString(string);
-  }
-
-  void clear()
-  {
-    text.setString("");
-  }
-};
-
-class Presenter
-{
-  DialogView * view;
-
   public:
 
-  Presenter(DialogView &v)
-  {
-    view = &v;
-  }
+  const std::vector<std::string> messages = {"One", "Two", "Three"};
+  int index = 0;
 
-  void onChangeMessage(std::string message)
-  {
-    view->setString(message);
-  }
-
-  void onDone()
-  {
-    view->clear();
-  }
 };
-
 class NextMessage : public Action
 {
   Presenter * presenter;
+  Dialog * dialog;
 
   public:
 
-  NextMessage(Presenter &p)
+  NextMessage(Dialog &d, Presenter &p)
   {
     presenter = &p;
+    dialog = &d;
   }
 
   void call()
   {
-    messageIndex += 1;
+    dialog->index += 1;
 
-    if (messageIndex < messages.size())
-      presenter->onChangeMessage(messages[messageIndex]);
+    if (dialog->index < dialog->messages.size())
+      presenter->onChangeMessage(dialog->messages[ dialog->index]);
     else
       presenter->onDone();
   }
@@ -105,7 +66,8 @@ int main() {
   dialogView.setString(messages[messageIndex]);
 
   Presenter presenter(dialogView);
-  NextMessage nextMessage(presenter);
+  Dialog dialog;
+  NextMessage nextMessage(dialog, presenter);
 
   actionByKey[sf::Keyboard::Key::Z] = &nextMessage;
 
