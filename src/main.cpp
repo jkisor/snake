@@ -28,15 +28,34 @@ sf::Font loadFont(std::string file)
   return font;
 };
 
+class Presenter
+{
+  public:
+
+  void onChangeMessage(std::string message)
+  {
+    text.setString(message);
+  }
+
+  void onDone()
+  {
+    text.setString("");
+  }
+};
+
 class NextMessage : public Action
 {
+  Presenter presenter;
+
   public:
 
   void call() {
     messageIndex += 1;
-    messageIndex %= messages.size();
 
-    text.setString(messages[messageIndex]);
+    if (messageIndex < messages.size())
+      presenter.onChangeMessage(messages[messageIndex]);
+    else
+      presenter.onDone();
   }
 };
 
