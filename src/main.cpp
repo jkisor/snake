@@ -17,34 +17,11 @@
 #include "dialog_view.h"
 #include "presenter.h"
 
+#include "next_message.h"
+
 PressedKeys pressedKeys;
 
-class NextMessage : public Action
-{
-  Presenter * presenter;
-  Dialog * dialog;
-
-  public:
-
-  NextMessage(Dialog &d, Presenter &p)
-  {
-    presenter = &p;
-    dialog = &d;
-  }
-
-  void call()
-  {
-    dialog->index += 1;
-
-    if (dialog->isComplete())
-      presenter->onDone();
-    else
-      presenter->onChangeMessage(dialog->message());
-  }
-};
-
 std::unordered_map<sf::Keyboard::Key, Action*> actionByKey;
-
 
 bool isKeyPresent(std::unordered_map<sf::Keyboard::Key, Action*> m, sf::Keyboard::Key key)
 {
