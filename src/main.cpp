@@ -17,34 +17,55 @@ const std::vector<std::string> messages = {"One", "Two", "Three"};
 int messageIndex = 0;
 PressedKeys pressedKeys;
 
-sf::Font loadFont(std::string file)
+class DialogView
 {
+
+  public:
+  
   sf::Font font;
+  sf::Text text;
 
-  font.loadFromFile("./basictitlefont.ttf");
+  DialogView()
+  {
+    font.loadFromFile("./basictitlefont.ttf");
+    text.setFont(font);
+    text.setString("");
+    text.setCharacterSize(48); // in pixels, not points!
+    text.setFillColor(sf::Color::Black);
+    text.setStyle(sf::Text::Bold);
+    text.setPosition(400, 0);
+  }
 
-  return font;
+  void setString(std::string string)
+  {
+    text.setString(string);
+  }
+
+  void clear()
+  {
+    text.setString("");
+  }
 };
 
 class Presenter
 {
-  sf::Text * text;
+  DialogView * view;
 
   public:
 
-  Presenter(sf::Text &t)
+  Presenter(DialogView &v)
   {
-    text = &t;
+    view = &v;
   }
 
   void onChangeMessage(std::string message)
   {
-    text->setString(message);
+    view->setString(message);
   }
 
   void onDone()
   {
-    text->setString("");
+    view->clear();
   }
 };
 
@@ -59,7 +80,7 @@ class NextMessage : public Action
     presenter = &p;
   }
 
-  void call() 
+  void call()
   {
     messageIndex += 1;
 
@@ -79,32 +100,15 @@ bool isKeyPresent(std::unordered_map<sf::Keyboard::Key, Action*> m, sf::Keyboard
 }
 
 int main() {
-  sf::Text text;
 
-  sf::Font font = loadFont("./basictitlefont.ttf");
-  // select the font
-  text.setFont(font); // font is a sf::Font
+  DialogView dialogView;
+  dialogView.setString(messages[messageIndex]);
 
-  // set the string to display
-  text.setString(messages[messageIndex]);
-
-  // set the character size
-  text.setCharacterSize(48); // in pixels, not points!
-
-  // set the color
-  text.setFillColor(sf::Color::Black);
-
-  // set the text style
-  // text.setStyle(sf::Text::Bold | sf::Text::Underlined);
-  text.setStyle(sf::Text::Bold);
-
-  text.setPosition(400, 0);
-
-  Presenter presenter(text);
+  Presenter presenter(dialogView);
   NextMessage nextMessage(presenter);
+
   actionByKey[sf::Keyboard::Key::Z] = &nextMessage;
 
-  
   //
   Window window;
 
@@ -130,7 +134,7 @@ int main() {
 
     window.clear();
 
-    window.draw(text);
+    window.draw(dialogView.text);
 
     window.display();
   }
