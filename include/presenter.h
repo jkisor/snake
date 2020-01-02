@@ -1,9 +1,9 @@
 #pragma once
 
-#include <string>
+#include "presenter_interface.h"
 #include "dialog_view.h"
 
-class Presenter
+class Presenter : public PresenterInterface
 {
   DialogView * view;
 
@@ -11,6 +11,6 @@ class Presenter
 
   Presenter(DialogView &v);
 
-  void onChangeMessage(std::string message);
-  void onDone();
+  virtual void onChangeMessage(std::string message);
+  virtual void onDone();
 };
