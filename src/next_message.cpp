@@ -1,6 +1,6 @@
 #include "next_message.h"
 
-NextMessage::NextMessage(Dialog &d, Presenter &p)
+NextMessage::NextMessage(Dialog &d, PresenterInterface &p)
 {
   presenter = &p;
   dialog = &d;

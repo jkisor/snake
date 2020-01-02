@@ -1,17 +1,17 @@
 #pragma once
 
 #include "action.h"
-#include "presenter.h"
+#include "presenter_interface.h"
 #include "dialog.h"
 
 class NextMessage : public Action
 {
-  Presenter * presenter;
+  PresenterInterface * presenter;
   Dialog * dialog;
 
   public:
 
-  NextMessage(Dialog &d, Presenter &p);
+  NextMessage(Dialog &d, PresenterInterface &p);
   void call();
 
 };
