@@ -1,8 +1,6 @@
 #include <iostream>
 
-#include "game.h"
 #include "window.h"
-#include "show_message_console.h"
 
 #include <string>
 #include <vector>
@@ -70,10 +68,6 @@ int main() {
 
     window.display();
   }
-
-  ShowMessageConsole showMessage;
-  Game game(showMessage);
-  game.run();
 
   return 0;
 }
