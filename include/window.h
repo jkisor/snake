@@ -51,7 +51,7 @@ class Window
 
   void clear()
   {
-    this->window.clear(sf::Color::Cyan);
+    this->window.clear(sf::Color::Black);
   }
 
   void display()
