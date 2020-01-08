@@ -26,6 +26,11 @@ bool isKeyPresent(std::unordered_map<sf::Keyboard::Key, Action*> m, sf::Keyboard
   return !(m.find(key) == m.end());
 }
 
+int x = 0;
+int y = 0;
+
+int SIZE = 32;
+
 int main() {
   Dialog dialog;
 
@@ -34,7 +39,7 @@ int main() {
 
   Presenter presenter(dialogView);
   presenter.onChangeMessage(dialog.message());
-  
+
   NextMessage nextMessage(dialog, presenter);
 
   actionByKey[sf::Keyboard::Key::Z] = &nextMessage;
@@ -65,11 +70,11 @@ int main() {
     window.clear();
 
     sf::RectangleShape rectangle;
-    rectangle.setSize(sf::Vector2f(32, 32));
+    rectangle.setSize(sf::Vector2f(SIZE, SIZE));
     rectangle.setOutlineColor(sf::Color::Blue);
     rectangle.setOutlineThickness(2);
-    rectangle.setPosition(0, 0);
-    
+    rectangle.setPosition(x * SIZE, y * SIZE);
+
     window.draw(rectangle);
 
     sf::CircleShape shape(20);
