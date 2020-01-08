@@ -61,6 +61,23 @@ int main() {
         if (isKeyPresent(actionByKey, e.key.code))
           actionByKey[e.key.code]->call();
 
+        if( e.key.code == sf::Keyboard::Right)
+        {
+          x += 1;
+        }
+        else if( e.key.code == sf::Keyboard::Left)
+        {
+          x -= 1;
+        }
+        else if( e.key.code == sf::Keyboard::Up)
+        {
+          y -= 1;
+        }
+        else if ( e.key.code == sf::Keyboard::Down)
+        {
+          y += 1;
+        }
+
       }
     }
 
