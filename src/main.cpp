@@ -31,6 +31,9 @@ int y = 0;
 
 int SIZE = 32;
 
+int BOUNDS_WIDTH = 4;
+int BOUNDS_HEIGHT = 4;
+
 int main() {
   Dialog dialog;
 
@@ -63,19 +66,23 @@ int main() {
 
         if( e.key.code == sf::Keyboard::Right)
         {
-          x += 1;
+          if( x < BOUNDS_WIDTH-1)
+            x += 1;
         }
         else if( e.key.code == sf::Keyboard::Left)
         {
-          x -= 1;
+          if( x > 0 )
+            x -= 1;
         }
         else if( e.key.code == sf::Keyboard::Up)
         {
+          if( y > 0 )
           y -= 1;
         }
         else if ( e.key.code == sf::Keyboard::Down)
         {
-          y += 1;
+          if( y < BOUNDS_HEIGHT-1)
+            y += 1;
         }
 
       }
@@ -86,8 +93,19 @@ int main() {
 
     window.clear();
 
+    sf::RectangleShape bounds_rectangle;
+    bounds_rectangle.setSize(sf::Vector2f(SIZE * BOUNDS_WIDTH, SIZE * BOUNDS_HEIGHT));
+    bounds_rectangle.setOutlineColor(sf::Color::White);
+    bounds_rectangle.setFillColor(sf::Color::Black);
+
+    bounds_rectangle.setOutlineThickness(2);
+    bounds_rectangle.setPosition(0, 0);
+
+    window.draw(bounds_rectangle);
+
     sf::RectangleShape rectangle;
     rectangle.setSize(sf::Vector2f(SIZE, SIZE));
+
     rectangle.setOutlineColor(sf::Color::Blue);
     rectangle.setOutlineThickness(2);
     rectangle.setPosition(x * SIZE, y * SIZE);
