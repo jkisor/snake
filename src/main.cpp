@@ -64,6 +64,14 @@ int main() {
 
     window.clear();
 
+    sf::RectangleShape rectangle;
+    rectangle.setSize(sf::Vector2f(32, 32));
+    rectangle.setOutlineColor(sf::Color::Blue);
+    rectangle.setOutlineThickness(2);
+    rectangle.setPosition(0, 0);
+    
+    window.draw(rectangle);
+
     sf::CircleShape shape(20);
     shape.setPosition(200, 0);
     shape.setFillColor(sf::Color(100, 250, 50));
