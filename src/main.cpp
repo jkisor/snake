@@ -64,6 +64,13 @@ int main() {
 
     window.clear();
 
+    sf::CircleShape shape(20);
+    shape.setPosition(200, 0);
+    shape.setFillColor(sf::Color(100, 250, 50));
+
+    window.draw(shape);
+
+    //
     window.draw(dialogView.text);
 
     window.display();
