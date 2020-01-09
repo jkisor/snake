@@ -26,8 +26,16 @@ bool isKeyPresent(std::unordered_map<sf::Keyboard::Key, Action*> m, sf::Keyboard
   return !(m.find(key) == m.end());
 }
 
-int x = 0;
-int y = 0;
+// TODO don't depend on global state
+// move classes to their own source
+
+struct Object
+{
+  int x = 0;
+  int y = 0;
+};
+
+Object object;
 
 int SIZE = 64;
 
@@ -40,8 +48,8 @@ class MoveRight : public Action
 
   void call()
   {
-    if( x < BOUNDS_WIDTH-1)
-      x += 1;
+    if( object.x < BOUNDS_WIDTH-1)
+      object.x += 1;
   }
 
 };
@@ -52,8 +60,8 @@ class MoveLeft : public Action
 
   void call()
   {
-    if( x > 0 )
-      x -= 1;
+    if( object.x > 0 )
+      object.x -= 1;
   }
 };
 
@@ -63,8 +71,8 @@ class MoveUp : public Action
 
   void call()
   {
-    if( y > 0 )
-      y -= 1;
+    if( object.y > 0 )
+      object.y -= 1;
   }
 };
 
@@ -74,8 +82,8 @@ class MoveDown : public Action
 
   void call()
   {
-    if( y < BOUNDS_HEIGHT-1)
-      y += 1;
+    if( object.y < BOUNDS_HEIGHT-1)
+      object.y += 1;
   }
 
 };
@@ -141,7 +149,7 @@ int main() {
 
     sf::RectangleShape rectangle;
     rectangle.setSize(sf::Vector2f(SIZE, SIZE));
-    rectangle.setPosition(x * SIZE, y * SIZE);
+    rectangle.setPosition(object.x * SIZE, object.y * SIZE);
 
     window.draw(rectangle);
 
