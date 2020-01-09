@@ -26,9 +26,6 @@ bool isKeyPresent(std::unordered_map<sf::Keyboard::Key, Action*> m, sf::Keyboard
   return !(m.find(key) == m.end());
 }
 
-// TODO don't depend on global state
-// move classes to their own source
-
 struct Object
 {
   int x = 0;
@@ -44,46 +41,74 @@ int BOUNDS_HEIGHT = 4;
 
 class MoveRight : public Action
 {
+  Object * object;
+
   public:
+
+  MoveRight(Object &object)
+  {
+    this->object = &object;
+  }
 
   void call()
   {
-    if( object.x < BOUNDS_WIDTH-1)
-      object.x += 1;
+    if( object->x < BOUNDS_WIDTH-1)
+      object->x += 1;
   }
 
 };
 
 class MoveLeft : public Action
 {
+  Object * object;
+
   public:
+
+  MoveLeft(Object &object)
+  {
+    this->object = &object;
+  }
 
   void call()
   {
-    if( object.x > 0 )
-      object.x -= 1;
+    if( object->x > 0 )
+      object->x -= 1;
   }
 };
 
 class MoveUp : public Action
 {
+  Object * object;
+
   public:
+
+  MoveUp(Object &object)
+  {
+    this->object = &object;
+  }
 
   void call()
   {
-    if( object.y > 0 )
-      object.y -= 1;
+    if( object->y > 0 )
+      object->y -= 1;
   }
 };
 
 class MoveDown : public Action
 {
+  Object * object;
+
   public:
+
+  MoveDown(Object &object)
+  {
+    this->object = &object;
+  }
 
   void call()
   {
-    if( object.y < BOUNDS_HEIGHT-1)
-      object.y += 1;
+    if( object->y < BOUNDS_HEIGHT-1)
+      object->y += 1;
   }
 
 };
@@ -100,16 +125,16 @@ int main() {
   NextMessage nextMessage(dialog, presenter);
   actionByKey[sf::Keyboard::Z] = &nextMessage;
 
-  MoveRight moveRight;
+  MoveRight moveRight(object);
   actionByKey[sf::Keyboard::Right] = &moveRight;
 
-  MoveLeft moveLeft;
+  MoveLeft moveLeft(object);
   actionByKey[sf::Keyboard::Left] = &moveLeft;
 
-  MoveUp moveUp;
+  MoveUp moveUp(object);
   actionByKey[sf::Keyboard::Up] = &moveUp;
 
-  MoveDown moveDown;
+  MoveDown moveDown(object);
   actionByKey[sf::Keyboard::Down] = &moveDown;
 
   //
