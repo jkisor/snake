@@ -96,9 +96,9 @@ int main() {
     sf::RectangleShape bounds_rectangle;
     bounds_rectangle.setSize(sf::Vector2f(SIZE * BOUNDS_WIDTH, SIZE * BOUNDS_HEIGHT));
     bounds_rectangle.setOutlineColor(sf::Color::White);
+    bounds_rectangle.setOutlineThickness(4);
     bounds_rectangle.setFillColor(sf::Color::Black);
 
-    bounds_rectangle.setOutlineThickness(2);
     bounds_rectangle.setPosition(0, 0);
 
     window.draw(bounds_rectangle);
@@ -109,13 +109,6 @@ int main() {
 
     window.draw(rectangle);
 
-    sf::CircleShape shape(20);
-    shape.setPosition(200, 0);
-    shape.setFillColor(sf::Color(100, 250, 50));
-
-    window.draw(shape);
-
-    //
     window.draw(dialogView.text);
 
     window.display();
