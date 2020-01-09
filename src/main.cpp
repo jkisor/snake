@@ -18,14 +18,12 @@
 #include "next_message.h"
 #include "object.h"
 
-int BOUNDS_WIDTH = 4;
-int BOUNDS_HEIGHT = 4;
+#include "bounds.h"
 
 #include "move_down.h"
 #include "move_right.h"
 #include "move_left.h"
 #include "move_up.h"
-
 
 PressedKeys pressedKeys;
 
@@ -64,7 +62,6 @@ int main() {
   MoveDown moveDown(object);
   actionByKey[sf::Keyboard::Down] = &moveDown;
 
-  //
   Window window;
 
   window.open();
