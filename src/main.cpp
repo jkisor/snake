@@ -34,6 +34,52 @@ int SIZE = 64;
 int BOUNDS_WIDTH = 4;
 int BOUNDS_HEIGHT = 4;
 
+class MoveRight : public Action
+{
+  public:
+
+  void call()
+  {
+    if( x < BOUNDS_WIDTH-1)
+      x += 1;
+  }
+
+};
+
+class MoveLeft : public Action
+{
+  public:
+
+  void call()
+  {
+    if( x > 0 )
+      x -= 1;
+  }
+};
+
+class MoveUp : public Action
+{
+  public:
+
+  void call()
+  {
+    if( y > 0 )
+      y -= 1;
+  }
+};
+
+class MoveDown : public Action
+{
+  public:
+
+  void call()
+  {
+    if( y < BOUNDS_HEIGHT-1)
+      y += 1;
+  }
+
+};
+
 int main() {
   Dialog dialog;
 
@@ -44,8 +90,19 @@ int main() {
   presenter.onChangeMessage(dialog.message());
 
   NextMessage nextMessage(dialog, presenter);
+  actionByKey[sf::Keyboard::Z] = &nextMessage;
 
-  actionByKey[sf::Keyboard::Key::Z] = &nextMessage;
+  MoveRight moveRight;
+  actionByKey[sf::Keyboard::Right] = &moveRight;
+
+  MoveLeft moveLeft;
+  actionByKey[sf::Keyboard::Left] = &moveLeft;
+
+  MoveUp moveUp;
+  actionByKey[sf::Keyboard::Up] = &moveUp;
+
+  MoveDown moveDown;
+  actionByKey[sf::Keyboard::Down] = &moveDown;
 
   //
   Window window;
@@ -63,27 +120,6 @@ int main() {
 
         if (isKeyPresent(actionByKey, e.key.code))
           actionByKey[e.key.code]->call();
-
-        if( e.key.code == sf::Keyboard::Right)
-        {
-          if( x < BOUNDS_WIDTH-1)
-            x += 1;
-        }
-        else if( e.key.code == sf::Keyboard::Left)
-        {
-          if( x > 0 )
-            x -= 1;
-        }
-        else if( e.key.code == sf::Keyboard::Up)
-        {
-          if( y > 0 )
-          y -= 1;
-        }
-        else if ( e.key.code == sf::Keyboard::Down)
-        {
-          if( y < BOUNDS_HEIGHT-1)
-            y += 1;
-        }
 
       }
     }
