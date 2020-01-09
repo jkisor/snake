@@ -29,7 +29,7 @@ bool isKeyPresent(std::unordered_map<sf::Keyboard::Key, Action*> m, sf::Keyboard
 int x = 0;
 int y = 0;
 
-int SIZE = 32;
+int SIZE = 64;
 
 int BOUNDS_WIDTH = 4;
 int BOUNDS_HEIGHT = 4;
@@ -105,9 +105,6 @@ int main() {
 
     sf::RectangleShape rectangle;
     rectangle.setSize(sf::Vector2f(SIZE, SIZE));
-
-    rectangle.setOutlineColor(sf::Color::Blue);
-    rectangle.setOutlineThickness(2);
     rectangle.setPosition(x * SIZE, y * SIZE);
 
     window.draw(rectangle);

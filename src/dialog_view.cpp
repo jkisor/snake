@@ -6,9 +6,9 @@ DialogView::DialogView()
   text.setFont(font);
   text.setString("");
   text.setCharacterSize(32); // in pixels, not points!
-  text.setFillColor(sf::Color::Black);
+  text.setFillColor(sf::Color::White);
   // text.setStyle(sf::Text::Bold);
-  text.setPosition(0, 0);
+  text.setPosition(0, 500);
 }
 
 void DialogView::setString(std::string string)
