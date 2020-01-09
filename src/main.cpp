@@ -16,6 +16,16 @@
 #include "presenter.h"
 
 #include "next_message.h"
+#include "object.h"
+
+int BOUNDS_WIDTH = 4;
+int BOUNDS_HEIGHT = 4;
+
+#include "move_down.h"
+#include "move_right.h"
+#include "move_left.h"
+#include "move_up.h"
+
 
 PressedKeys pressedKeys;
 
@@ -26,92 +36,9 @@ bool isKeyPresent(std::unordered_map<sf::Keyboard::Key, Action*> m, sf::Keyboard
   return !(m.find(key) == m.end());
 }
 
-struct Object
-{
-  int x = 0;
-  int y = 0;
-};
-
 Object object;
 
 int SIZE = 64;
-
-int BOUNDS_WIDTH = 4;
-int BOUNDS_HEIGHT = 4;
-
-class MoveRight : public Action
-{
-  Object * object;
-
-  public:
-
-  MoveRight(Object &object)
-  {
-    this->object = &object;
-  }
-
-  void call()
-  {
-    if( object->x < BOUNDS_WIDTH-1)
-      object->x += 1;
-  }
-
-};
-
-class MoveLeft : public Action
-{
-  Object * object;
-
-  public:
-
-  MoveLeft(Object &object)
-  {
-    this->object = &object;
-  }
-
-  void call()
-  {
-    if( object->x > 0 )
-      object->x -= 1;
-  }
-};
-
-class MoveUp : public Action
-{
-  Object * object;
-
-  public:
-
-  MoveUp(Object &object)
-  {
-    this->object = &object;
-  }
-
-  void call()
-  {
-    if( object->y > 0 )
-      object->y -= 1;
-  }
-};
-
-class MoveDown : public Action
-{
-  Object * object;
-
-  public:
-
-  MoveDown(Object &object)
-  {
-    this->object = &object;
-  }
-
-  void call()
-  {
-    if( object->y < BOUNDS_HEIGHT-1)
-      object->y += 1;
-  }
-
-};
 
 int main() {
   Dialog dialog;
