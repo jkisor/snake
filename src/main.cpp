@@ -41,10 +41,13 @@ int SIZE = 64;
 
 int main() {
 
-  object.x = 1;
+  object.x = 2;
   object.y = 0;
-  object.tailX = 0;
+  object.tailX = 1;
   object.tailY = 0;
+  object.otherTailX = 0;
+  object.otherTailY = 0;
+
   Dialog dialog;
 
   DialogView dialogView;
@@ -74,7 +77,6 @@ int main() {
 
   while (window.isOpen())
   {
-
     Events events = window.events();
 
     for(sf::Event e : events.keyPresses())
@@ -117,6 +119,13 @@ int main() {
     tailRectangle.setFillColor(sf::Color::Red);
 
     window.draw(tailRectangle);
+
+    sf::RectangleShape otherTailRectangle;
+    otherTailRectangle.setSize(sf::Vector2f(SIZE, SIZE));
+    otherTailRectangle.setPosition(object.otherTailX * SIZE, object.otherTailY * SIZE);
+    otherTailRectangle.setFillColor(sf::Color::Red);
+
+    window.draw(otherTailRectangle);
 
     window.draw(dialogView.text);
 

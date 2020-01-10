@@ -2,9 +2,13 @@
 
 struct Object
 {
-  int x = 1;
-  int y = 0;
+  int x;
+  int y;
 
-  int tailX = 0;
-  int tailY = 0;
+  int tailX;
+  int tailY;
+
+  int otherTailX;
+  int otherTailY;
+
 };

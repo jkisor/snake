@@ -19,6 +19,10 @@ class MoveLeft : public Action
   {
     if( object->x > 0 && (object->x - 1) != object->tailX )
     {
+
+      object->otherTailX = object->tailX;
+      object->otherTailY = object->tailY;
+
       object->tailX = object->x;
       object->tailY = object->y;
 
