@@ -17,6 +17,11 @@ class MoveUp : public Action
   void call()
   {
     if( object->y > 0 )
+    {
+      object->tailX = object->x;
+      object->tailY = object->y;
       object->y -= 1;
+    }
+
   }
 };

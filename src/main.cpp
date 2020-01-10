@@ -36,9 +36,15 @@ bool isKeyPresent(std::unordered_map<sf::Keyboard::Key, Action*> m, sf::Keyboard
 
 Object object;
 
+
 int SIZE = 64;
 
 int main() {
+
+  object.x = 1;
+  object.y = 0;
+  object.tailX = 0;
+  object.tailY = 0;
   Dialog dialog;
 
   DialogView dialogView;
@@ -68,6 +74,7 @@ int main() {
 
   while (window.isOpen())
   {
+
     Events events = window.events();
 
     for(sf::Event e : events.keyPresses())
@@ -99,8 +106,17 @@ int main() {
     sf::RectangleShape rectangle;
     rectangle.setSize(sf::Vector2f(SIZE, SIZE));
     rectangle.setPosition(object.x * SIZE, object.y * SIZE);
+    rectangle.setFillColor(sf::Color::Green);
+
 
     window.draw(rectangle);
+
+    sf::RectangleShape tailRectangle;
+    tailRectangle.setSize(sf::Vector2f(SIZE, SIZE));
+    tailRectangle.setPosition(object.tailX * SIZE, object.tailY * SIZE);
+    tailRectangle.setFillColor(sf::Color::Red);
+
+    window.draw(tailRectangle);
 
     window.draw(dialogView.text);
 

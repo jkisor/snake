@@ -5,7 +5,6 @@
 #include <SFML/Graphics.hpp>
 #include "events.h"
 
-// A "Gateway"
 class Window
 {
 
@@ -19,7 +18,7 @@ class Window
 
     // High cpu usage unless limited
     // MUST be called after create.
-    this->window.setFramerateLimit(60); 
+    this->window.setFramerateLimit(60);
   }
 
   void close()
@@ -37,12 +36,12 @@ class Window
     std::vector<sf::Event> results;
 
     sf::Event event;
-    
+
     while (this->window.pollEvent(event))
     {
       if (event.type == sf::Event::Closed)
         close();
-      
+
       results.push_back(event);
     }
 

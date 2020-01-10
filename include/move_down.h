@@ -17,7 +17,13 @@ class MoveDown : public Action
   void call()
   {
     if( object->y < BOUNDS_HEIGHT-1)
+    {
+      object->tailX = object->x;
+      object->tailY = object->y;
+
       object->y += 1;
+    }
+
   }
 
 };

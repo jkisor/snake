@@ -18,6 +18,12 @@ class MoveLeft : public Action
   void call()
   {
     if( object->x > 0 )
+    {
+      object->tailX = object->x;
+      object->tailY = object->y;
+
       object->x -= 1;
+    }
+      
   }
 };
