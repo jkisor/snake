@@ -16,7 +16,7 @@ class MoveRight : public Action
 
   void call()
   {
-    if( object->x < BOUNDS_WIDTH-1)
+    if( object->x < BOUNDS_WIDTH-1 && (object->x + 1) != object->tailX )
     {
       object->tailX = object->x;
       object->tailY = object->y;
