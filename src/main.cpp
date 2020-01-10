@@ -20,6 +20,9 @@
 
 #include "bounds.h"
 
+#include "snake.h"
+#include "position.h"
+
 #include "move_down.h"
 #include "move_right.h"
 #include "move_left.h"
@@ -34,19 +37,35 @@ bool isKeyPresent(std::unordered_map<sf::Keyboard::Key, Action*> m, sf::Keyboard
   return !(m.find(key) == m.end());
 }
 
-Object object;
-
+// Object object;
+Snake snake;
 
 int SIZE = 64;
 
 int main() {
 
-  object.x = 2;
-  object.y = 0;
-  object.tailX = 1;
-  object.tailY = 0;
-  object.otherTailX = 0;
-  object.otherTailY = 0;
+  Position p0;
+  p0.x = 2;
+  p0.y = 0;
+
+  Position p1;
+  p1.x = 1;
+  p1.y = 0;
+
+  Position p2;
+  p2.x = 0;
+  p2.y = 0;
+
+  snake.positions.push_back(p0);
+  snake.positions.push_back(p1);
+  snake.positions.push_back(p2);
+
+  // object.x = 2;
+  // object.y = 0;
+  // object.tailX = 1;
+  // object.tailY = 0;
+  // object.otherTailX = 0;
+  // object.otherTailY = 0;
 
   Dialog dialog;
 
@@ -59,16 +78,16 @@ int main() {
   NextMessage nextMessage(dialog, presenter);
   actionByKey[sf::Keyboard::Z] = &nextMessage;
 
-  MoveRight moveRight(object);
+  MoveRight moveRight(snake);
   actionByKey[sf::Keyboard::Right] = &moveRight;
 
-  MoveLeft moveLeft(object);
+  MoveLeft moveLeft(snake);
   actionByKey[sf::Keyboard::Left] = &moveLeft;
 
-  MoveUp moveUp(object);
+  MoveUp moveUp(snake);
   actionByKey[sf::Keyboard::Up] = &moveUp;
 
-  MoveDown moveDown(object);
+  MoveDown moveDown(snake);
   actionByKey[sf::Keyboard::Down] = &moveDown;
 
   Window window;
@@ -107,22 +126,26 @@ int main() {
 
     sf::RectangleShape rectangle;
     rectangle.setSize(sf::Vector2f(SIZE, SIZE));
-    rectangle.setPosition(object.x * SIZE, object.y * SIZE);
+    // rectangle.setPosition(object.x * SIZE, object.y * SIZE);
+    rectangle.setPosition(snake.positions[0].x * SIZE, snake.positions[0].y * SIZE);
     rectangle.setFillColor(sf::Color::Green);
-
 
     window.draw(rectangle);
 
     sf::RectangleShape tailRectangle;
     tailRectangle.setSize(sf::Vector2f(SIZE, SIZE));
-    tailRectangle.setPosition(object.tailX * SIZE, object.tailY * SIZE);
+    // tailRectangle.setPosition(object.tailX * SIZE, object.tailY * SIZE);
+    tailRectangle.setPosition(snake.positions[1].x * SIZE, snake.positions[1].y * SIZE);
+
     tailRectangle.setFillColor(sf::Color::Red);
 
     window.draw(tailRectangle);
 
     sf::RectangleShape otherTailRectangle;
     otherTailRectangle.setSize(sf::Vector2f(SIZE, SIZE));
-    otherTailRectangle.setPosition(object.otherTailX * SIZE, object.otherTailY * SIZE);
+    // otherTailRectangle.setPosition(object.otherTailX * SIZE, object.otherTailY * SIZE);
+    otherTailRectangle.setPosition(snake.positions[2].x * SIZE, snake.positions[2].y * SIZE);
+
     otherTailRectangle.setFillColor(sf::Color::Red);
 
     window.draw(otherTailRectangle);

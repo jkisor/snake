@@ -1,31 +1,31 @@
 #pragma once
 
 #include "action.h"
-#include "object.h"
+#include "snake.h"
 
 class MoveRight : public Action
 {
-  Object * object;
+  Snake * snake;
 
   public:
 
-  MoveRight(Object &object)
+  MoveRight(Snake &snake)
   {
-    this->object = &object;
+    this->snake = &snake;
   }
 
   void call()
   {
-    if( object->x < BOUNDS_WIDTH-1 && (object->x + 1) != object->tailX )
+    if( snake->positions[0].x < BOUNDS_WIDTH-1 && (snake->positions[0].x + 1) != snake->positions[1].x )
     {
 
-      object->otherTailX = object->tailX;
-      object->otherTailY = object->tailY;
+      snake->positions[2].x = snake->positions[1].x;
+      snake->positions[2].y = snake->positions[1].y;
 
-      object->tailX = object->x;
-      object->tailY = object->y;
+      snake->positions[1].x = snake->positions[0].x;
+      snake->positions[1].y = snake->positions[0].y;
 
-      object->x += 1;
+      snake->positions[0].x += 1;
     }
   }
 
