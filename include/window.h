@@ -13,14 +13,13 @@ class Window
 
   sf::RenderWindow window;
 
-  Window()
-  {
-    this->window.setFramerateLimit(60); // High cpu usage unless limited
-  }
-
   void open()
   {
     this->window.create(sf::VideoMode(800, 600), "SFML works!");
+
+    // High cpu usage unless limited
+    // MUST be called after create.
+    this->window.setFramerateLimit(60); 
   }
 
   void close()
@@ -38,6 +37,7 @@ class Window
     std::vector<sf::Event> results;
 
     sf::Event event;
+    
     while (this->window.pollEvent(event))
     {
       if (event.type == sf::Event::Closed)
