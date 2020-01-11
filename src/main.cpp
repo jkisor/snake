@@ -47,21 +47,9 @@ int main() {
   bounds.width = 8;
   bounds.height = 8;
 
-  Position p0;
-  p0.x = 2;
-  p0.y = 0;
-
-  Position p1;
-  p1.x = 1;
-  p1.y = 0;
-
-  Position p2;
-  p2.x = 0;
-  p2.y = 0;
-
-  snake.positions.push_back(p0);
-  snake.positions.push_back(p1);
-  snake.positions.push_back(p2);
+  snake.positions.push_back({2,0});
+  snake.positions.push_back({1,0});
+  snake.positions.push_back({0,0});
 
   Dialog dialog;
 
@@ -116,10 +104,10 @@ int main() {
     bounds_rectangle.setOutlineColor(sf::Color::White);
     bounds_rectangle.setOutlineThickness(4);
     bounds_rectangle.setFillColor(sf::Color::Black);
-
     bounds_rectangle.setPosition(0, 0);
 
     window.draw(bounds_rectangle);
+
     for(sf::RectangleShape shape : snakeView.drawables(snake))
       window.draw(shape);
 
