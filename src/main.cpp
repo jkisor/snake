@@ -39,7 +39,6 @@ bool isKeyPresent(std::unordered_map<sf::Keyboard::Key, Action*> m, sf::Keyboard
   return !(m.find(key) == m.end());
 }
 
-// Object object;
 Snake snake;
 
 int SIZE = 64;
@@ -65,17 +64,9 @@ int main() {
   snake.positions.push_back(p1);
   snake.positions.push_back(p2);
 
-  // object.x = 2;
-  // object.y = 0;
-  // object.tailX = 1;
-  // object.tailY = 0;
-  // object.otherTailX = 0;
-  // object.otherTailY = 0;
-
   Dialog dialog;
 
   DialogView dialogView;
-  // dialogView.setString(dialog.message());
 
   Presenter presenter(dialogView);
   presenter.onChangeMessage(dialog.message());
@@ -131,7 +122,6 @@ int main() {
 
     sf::RectangleShape rectangle;
     rectangle.setSize(sf::Vector2f(SIZE, SIZE));
-    // rectangle.setPosition(object.x * SIZE, object.y * SIZE);
     rectangle.setPosition(snake.positions[0].x * SIZE, snake.positions[0].y * SIZE);
     rectangle.setFillColor(sf::Color::Green);
 
@@ -139,7 +129,6 @@ int main() {
 
     sf::RectangleShape tailRectangle;
     tailRectangle.setSize(sf::Vector2f(SIZE, SIZE));
-    // tailRectangle.setPosition(object.tailX * SIZE, object.tailY * SIZE);
     tailRectangle.setPosition(snake.positions[1].x * SIZE, snake.positions[1].y * SIZE);
 
     tailRectangle.setFillColor(sf::Color::Red);
@@ -148,7 +137,6 @@ int main() {
 
     sf::RectangleShape otherTailRectangle;
     otherTailRectangle.setSize(sf::Vector2f(SIZE, SIZE));
-    // otherTailRectangle.setPosition(object.otherTailX * SIZE, object.otherTailY * SIZE);
     otherTailRectangle.setPosition(snake.positions[2].x * SIZE, snake.positions[2].y * SIZE);
 
     otherTailRectangle.setFillColor(sf::Color::Red);
