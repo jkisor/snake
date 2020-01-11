@@ -121,9 +121,7 @@ int main() {
 
     window.draw(bounds_rectangle);
     for(sf::RectangleShape shape : snakeView.drawables(snake))
-    {
       window.draw(shape);
-    }
 
     window.draw(dialogView.text);
 
