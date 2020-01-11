@@ -19,9 +19,6 @@
 
 #include "bounds.h"
 
-int BOUNDS_WIDTH = 8;
-int BOUNDS_HEIGHT = 8;
-
 #include "snake.h"
 #include "position.h"
 
@@ -111,7 +108,7 @@ int main() {
     window.clear();
 
     sf::RectangleShape bounds_rectangle;
-    bounds_rectangle.setSize(sf::Vector2f(SIZE * BOUNDS_WIDTH, SIZE * BOUNDS_HEIGHT));
+    bounds_rectangle.setSize(sf::Vector2f(SIZE * bounds.width, SIZE * bounds.height));
     bounds_rectangle.setOutlineColor(sf::Color::White);
     bounds_rectangle.setOutlineThickness(4);
     bounds_rectangle.setFillColor(sf::Color::Black);
