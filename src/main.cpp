@@ -40,6 +40,8 @@ Snake snake;
 
 int SIZE = 64;
 
+#include "snake_view.h"
+
 int main() {
   Bounds bounds;
   bounds.width = 8;
@@ -64,6 +66,8 @@ int main() {
   Dialog dialog;
 
   DialogView dialogView;
+
+  SnakeView snakeView;
 
   Presenter presenter(dialogView);
   presenter.onChangeMessage(dialog.message());
@@ -116,29 +120,10 @@ int main() {
     bounds_rectangle.setPosition(0, 0);
 
     window.draw(bounds_rectangle);
-
-    sf::RectangleShape rectangle;
-    rectangle.setSize(sf::Vector2f(SIZE, SIZE));
-    rectangle.setPosition(snake.positions[0].x * SIZE, snake.positions[0].y * SIZE);
-    rectangle.setFillColor(sf::Color::Green);
-
-    window.draw(rectangle);
-
-    sf::RectangleShape tailRectangle;
-    tailRectangle.setSize(sf::Vector2f(SIZE, SIZE));
-    tailRectangle.setPosition(snake.positions[1].x * SIZE, snake.positions[1].y * SIZE);
-
-    tailRectangle.setFillColor(sf::Color::Red);
-
-    window.draw(tailRectangle);
-
-    sf::RectangleShape otherTailRectangle;
-    otherTailRectangle.setSize(sf::Vector2f(SIZE, SIZE));
-    otherTailRectangle.setPosition(snake.positions[2].x * SIZE, snake.positions[2].y * SIZE);
-
-    otherTailRectangle.setFillColor(sf::Color::Red);
-
-    window.draw(otherTailRectangle);
+    for(sf::RectangleShape shape : snakeView.drawables(snake))
+    {
+      window.draw(shape);
+    }
 
     window.draw(dialogView.text);
 
