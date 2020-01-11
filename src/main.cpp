@@ -19,6 +19,9 @@
 
 #include "bounds.h"
 
+int BOUNDS_WIDTH = 8;
+int BOUNDS_HEIGHT = 8;
+
 #include "snake.h"
 #include "position.h"
 
@@ -42,6 +45,9 @@ Snake snake;
 int SIZE = 64;
 
 int main() {
+  Bounds bounds;
+  bounds.width = 8;
+  bounds.height = 8;
 
   Position p0;
   p0.x = 2;
@@ -86,7 +92,7 @@ int main() {
   MoveUp moveUp(snake);
   actionByKey[sf::Keyboard::Up] = &moveUp;
 
-  MoveDown moveDown(snake);
+  MoveDown moveDown(snake, bounds);
   actionByKey[sf::Keyboard::Down] = &moveDown;
 
   Window window;

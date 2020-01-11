@@ -1,4 +1,7 @@
 #pragma once
 
-int BOUNDS_WIDTH = 8;
-int BOUNDS_HEIGHT = 8;
+struct Bounds
+{
+  int width;
+  int height;
+};
