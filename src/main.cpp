@@ -26,6 +26,7 @@
 #include "move_right.h"
 #include "move_left.h"
 #include "move_up.h"
+#include "pickup.h"
 
 PressedKeys pressedKeys;
 
@@ -36,13 +37,14 @@ bool isKeyPresent(std::unordered_map<sf::Keyboard::Key, Action*> m, sf::Keyboard
   return !(m.find(key) == m.end());
 }
 
-Snake snake;
-
 int SIZE = 64;
 
 #include "snake_view.h"
 
 int main() {
+  Snake snake;
+  Pickup pickup;
+
   Bounds bounds;
   bounds.width = 8;
   bounds.height = 8;
@@ -50,6 +52,9 @@ int main() {
   snake.positions.push_back({2,0});
   snake.positions.push_back({1,0});
   snake.positions.push_back({0,0});
+
+  pickup.position.x = 5;
+  pickup.position.y = 0;
 
   Dialog dialog;
 
@@ -107,6 +112,13 @@ int main() {
     bounds_rectangle.setPosition(0, 0);
 
     window.draw(bounds_rectangle);
+
+    sf::RectangleShape pickupRect;
+    pickupRect.setSize(sf::Vector2f(SIZE, SIZE));
+    pickupRect.setFillColor(sf::Color::Yellow);
+    pickupRect.setPosition(pickup.position.x * SIZE, pickup.position.y * SIZE);
+
+    window.draw(pickupRect);
 
     for(sf::RectangleShape shape : snakeView.drawables(snake))
       window.draw(shape);
