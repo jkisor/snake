@@ -16,7 +16,6 @@
 #include "presenter.h"
 
 #include "next_message.h"
-#include "object.h"
 
 #include "bounds.h"
 
