@@ -6,4 +6,6 @@
 struct Snake
 {
   std::vector<Position> positions;
+
+  Position& head();
 };
