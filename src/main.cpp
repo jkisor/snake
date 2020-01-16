@@ -68,7 +68,7 @@ int main() {
   NextMessage nextMessage(dialog, presenter);
   actionByKey[sf::Keyboard::Z] = &nextMessage;
 
-  MoveRight moveRight(snake, bounds);
+  MoveRight moveRight(snake, bounds, pickup);
   actionByKey[sf::Keyboard::Right] = &moveRight;
 
   MoveLeft moveLeft(snake);
