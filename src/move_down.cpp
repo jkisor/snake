@@ -1,10 +1,11 @@
 #include "move_down.h"
 #include "direction.h"
 
-MoveDown::MoveDown(Snake &snake, Bounds bounds)
+MoveDown::MoveDown(Snake &snake, Bounds bounds, Pickup &pickup)
 {
   this->snake = &snake;
   this->bounds = bounds;
+  this->pickup = &pickup;
 }
 
 void MoveDown::call()
@@ -14,6 +15,8 @@ void MoveDown::call()
 
   if( isInBounds() && (snake->positions[0].y + direction.y) != snake->positions[1].y )
   {
+    Position oldEnd = snake->positions[snake->positions.size()-1];
+    Position newHead = { snake->head().x, snake->head().y + direction.y};
 
     for(int i = snake->positions.size()-1; i > 0; i--)
     {
@@ -21,7 +24,11 @@ void MoveDown::call()
       snake->positions[i].y = snake->positions[i-1].y;
     }
 
-    snake->positions[0].y += direction.y;
+     snake->head() = newHead;
+
+    if (newHead.x == pickup->position.x && newHead.y == pickup->position.y)
+      snake->positions.push_back(oldEnd);
+
   }
 
 }

@@ -71,13 +71,13 @@ int main() {
   MoveRight moveRight(snake, bounds, pickup);
   actionByKey[sf::Keyboard::Right] = &moveRight;
 
-  MoveLeft moveLeft(snake);
+  MoveLeft moveLeft(snake, pickup);
   actionByKey[sf::Keyboard::Left] = &moveLeft;
 
-  MoveUp moveUp(snake);
+  MoveUp moveUp(snake, pickup);
   actionByKey[sf::Keyboard::Up] = &moveUp;
 
-  MoveDown moveDown(snake, bounds);
+  MoveDown moveDown(snake, bounds, pickup);
   actionByKey[sf::Keyboard::Down] = &moveDown;
 
   Window window;

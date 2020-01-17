@@ -3,14 +3,16 @@
 #include "action.h"
 
 #include "snake.h"
+#include "pickup.h"
 
 class MoveLeft : public Action
 {
   Snake * snake;
+  Pickup * pickup;
 
   public:
 
-  MoveLeft(Snake &snake);
+  MoveLeft(Snake &snake, Pickup &pickup);
   void call();
 
   private:
