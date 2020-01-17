@@ -10,7 +10,7 @@ void MoveLeft::call()
 {
   Direction direction = { -1, 0 };
 
-  if( snake->positions[0].x > 0 && (snake->positions[0].x + direction.x) != snake->positions[1].x )
+  if( isInBounds() && (snake->positions[0].x + direction.x) != snake->positions[1].x )
   {
 
     for(int i = snake->positions.size()-1; i > 0; i--)
@@ -22,4 +22,9 @@ void MoveLeft::call()
     snake->positions[0].x += direction.x;
 
   }
+}
+
+bool MoveLeft::isInBounds()
+{
+  return snake->positions[0].x > 0;
 }

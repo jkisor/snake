@@ -12,7 +12,7 @@ void MoveDown::call()
 
   Direction direction = { 0, 1 };
 
-  if( snake->positions[0].y < bounds.height-1 && (snake->positions[0].y + direction.y) != snake->positions[1].y )
+  if( isInBounds() && (snake->positions[0].y + direction.y) != snake->positions[1].y )
   {
 
     for(int i = snake->positions.size()-1; i > 0; i--)
@@ -24,4 +24,9 @@ void MoveDown::call()
     snake->positions[0].y += direction.y;
   }
 
+}
+
+bool MoveDown::isInBounds()
+{
+  return snake->positions[0].y < bounds.height-1;
 }

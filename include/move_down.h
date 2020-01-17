@@ -13,4 +13,9 @@ class MoveDown : public Action
 
   MoveDown(Snake &snake, Bounds bounds);
   void call();
+
+  private:
+
+  bool isInBounds();
+
 };

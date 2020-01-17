@@ -16,4 +16,8 @@ class MoveRight : public Action
   MoveRight(Snake &snake, Bounds bounds, Pickup &pickup);
   void call();
 
+  private:
+
+  bool isInBounds();
+
 };

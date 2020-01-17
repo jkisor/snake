@@ -12,7 +12,7 @@ void MoveRight::call()
 {
   Direction direction = { 1, 0 };
 
-  if( snake->head().x < bounds.width-1 && (snake->head().x + direction.x) != snake->positions[1].x )
+  if(isInBounds() && (snake->head().x + direction.x) != snake->positions[1].x )
   {
 
     Position oldEnd = snake->positions[snake->positions.size()-1];
@@ -30,4 +30,9 @@ void MoveRight::call()
       snake->positions.push_back(oldEnd);
 
   }
+}
+
+bool MoveRight::isInBounds()
+{
+  return snake->head().x < bounds.width-1;
 }

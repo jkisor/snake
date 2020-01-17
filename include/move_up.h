@@ -11,4 +11,8 @@ class MoveUp : public Action
 
   MoveUp(Snake &snake);
   void call();
+
+  private:
+
+  bool isInBounds();
 };
