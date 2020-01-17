@@ -12,15 +12,14 @@ void MoveRight::call()
   if( snake->head().x < bounds.width-1 && (snake->head().x + 1) != snake->positions[1].x )
   {
 
-    Position oldEnd = snake->positions[2];
-
+    Position oldEnd = snake->positions[snake->positions.size()-1];
     Position newHead = { snake->head().x + 1, snake->head().y };
 
-    snake->positions[2].x = snake->positions[1].x;
-    snake->positions[2].y = snake->positions[1].y;
-
-    snake->positions[1].x = snake->head().x;
-    snake->positions[1].y = snake->head().y;
+    for(int i = snake->positions.size()-1; i > 0; i--)
+    {
+      snake->positions[i].x = snake->positions[i-1].x;
+      snake->positions[i].y = snake->positions[i-1].y;
+    }
 
     snake->head() = newHead;
 
