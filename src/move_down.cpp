@@ -1,4 +1,5 @@
 #include "move_down.h"
+#include "direction.h"
 
 MoveDown::MoveDown(Snake &snake, Bounds bounds)
 {
@@ -8,7 +9,10 @@ MoveDown::MoveDown(Snake &snake, Bounds bounds)
 
 void MoveDown::call()
 {
-  if( snake->positions[0].y < bounds.height-1 && (snake->positions[0].y + 1) != snake->positions[1].y )
+
+  Direction direction = { 0, 1 };
+
+  if( snake->positions[0].y < bounds.height-1 && (snake->positions[0].y + direction.y) != snake->positions[1].y )
   {
 
     for(int i = snake->positions.size()-1; i > 0; i--)
@@ -17,7 +21,7 @@ void MoveDown::call()
       snake->positions[i].y = snake->positions[i-1].y;
     }
 
-    snake->positions[0].y += 1;
+    snake->positions[0].y += direction.y;
   }
 
 }

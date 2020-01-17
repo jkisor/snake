@@ -1,4 +1,5 @@
 #include "move_up.h"
+#include "direction.h"
 
 MoveUp::MoveUp(Snake &snake)
 {
@@ -7,7 +8,9 @@ MoveUp::MoveUp(Snake &snake)
 
 void MoveUp::call()
 {
-  if( snake->positions[0].y > 0 && (snake->positions[0].y - 1) != snake->positions[1].y)
+  Direction direction = { 0, -1 };
+
+  if( snake->positions[0].y > 0 && (snake->positions[0].y + direction.y) != snake->positions[1].y)
   {
 
     for(int i = snake->positions.size()-1; i > 0; i--)
@@ -16,7 +19,7 @@ void MoveUp::call()
       snake->positions[i].y = snake->positions[i-1].y;
     }
 
-    snake->positions[0].y -= 1;
+    snake->positions[0].y += direction.y;
   }
 
 }

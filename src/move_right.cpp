@@ -1,4 +1,5 @@
 #include "move_right.h"
+#include "direction.h"
 
 MoveRight::MoveRight(Snake &snake, Bounds bounds, Pickup &pickup)
 {
@@ -9,11 +10,13 @@ MoveRight::MoveRight(Snake &snake, Bounds bounds, Pickup &pickup)
 
 void MoveRight::call()
 {
-  if( snake->head().x < bounds.width-1 && (snake->head().x + 1) != snake->positions[1].x )
+  Direction direction = { 1, 0 };
+
+  if( snake->head().x < bounds.width-1 && (snake->head().x + direction.x) != snake->positions[1].x )
   {
 
     Position oldEnd = snake->positions[snake->positions.size()-1];
-    Position newHead = { snake->head().x + 1, snake->head().y };
+    Position newHead = { snake->head().x + direction.x, snake->head().y };
 
     for(int i = snake->positions.size()-1; i > 0; i--)
     {
