@@ -18,5 +18,6 @@ class MoveUp : public Action
 
   bool isInBounds();
   bool isCollidingWithPickup();
+  void changePositions();
 
 };

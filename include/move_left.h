@@ -19,5 +19,6 @@ class MoveLeft : public Action
 
   bool isInBounds();
   bool isCollidingWithPickup();
+  void changePositions();
 
 };
