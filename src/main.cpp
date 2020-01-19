@@ -29,6 +29,7 @@
 #include "pickup.h"
 
 #include "pickup_view.h"
+#include "bounds_view.h"
 
 PressedKeys pressedKeys;
 
@@ -100,15 +101,7 @@ int main() {
 
     window.clear();
 
-    sf::RectangleShape bounds_rectangle;
-    bounds_rectangle.setSize(sf::Vector2f(SIZE * bounds.width, SIZE * bounds.height));
-    bounds_rectangle.setOutlineColor(sf::Color::White);
-    bounds_rectangle.setOutlineThickness(4);
-    bounds_rectangle.setFillColor(sf::Color::Black);
-    bounds_rectangle.setPosition(0, 0);
-
-    window.draw(bounds_rectangle);
-
+    window.draw(BoundsView(bounds).shape);
     window.draw(PickupView(pickup).shape);
 
     for(sf::RectangleShape shape : snakeView.drawables(snake))
