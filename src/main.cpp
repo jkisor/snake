@@ -28,6 +28,8 @@
 #include "move_up.h"
 #include "pickup.h"
 
+#include "pickup_view.h"
+
 PressedKeys pressedKeys;
 
 std::unordered_map<sf::Keyboard::Key, Action*> actionByKey;
@@ -107,12 +109,7 @@ int main() {
 
     window.draw(bounds_rectangle);
 
-    sf::RectangleShape pickupRect;
-    pickupRect.setSize(sf::Vector2f(SIZE, SIZE));
-    pickupRect.setFillColor(sf::Color::Yellow);
-    pickupRect.setPosition(pickup.position.x * SIZE, pickup.position.y * SIZE);
-
-    window.draw(pickupRect);
+    window.draw(PickupView(pickup).shape);
 
     for(sf::RectangleShape shape : snakeView.drawables(snake))
       window.draw(shape);
