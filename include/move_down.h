@@ -19,5 +19,6 @@ class MoveDown : public Action
   private:
 
   bool isInBounds();
+  bool isCollidingWithPickup();
 
 };

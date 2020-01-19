@@ -19,5 +19,6 @@ class MoveRight : public Action
   private:
 
   bool isInBounds();
+  bool isCollidingWithPickup();
 
 };

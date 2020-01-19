@@ -26,7 +26,7 @@ void MoveDown::call()
 
      snake->head() = newHead;
 
-    if (newHead.x == pickup->position.x && newHead.y == pickup->position.y)
+    if (isCollidingWithPickup())
       snake->positions.push_back(oldEnd);
 
   }
@@ -37,3 +37,9 @@ bool MoveDown::isInBounds()
 {
   return snake->positions[0].y < bounds.height-1;
 }
+
+bool MoveDown::isCollidingWithPickup()
+{
+  return snake->head().x == pickup->position.x && snake->head().y == pickup->position.y;
+}
+

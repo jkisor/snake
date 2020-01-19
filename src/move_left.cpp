@@ -25,7 +25,7 @@ void MoveLeft::call()
 
     snake->head() = newHead;
 
-    if (newHead.x == pickup->position.x && newHead.y == pickup->position.y)
+    if (isCollidingWithPickup())
       snake->positions.push_back(oldEnd);
 
   }
@@ -34,4 +34,9 @@ void MoveLeft::call()
 bool MoveLeft::isInBounds()
 {
   return snake->positions[0].x > 0;
+}
+
+bool MoveLeft::isCollidingWithPickup()
+{
+  return snake->head().x == pickup->position.x && snake->head().y == pickup->position.y;
 }
