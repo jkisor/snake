@@ -45,9 +45,7 @@ int main() {
   Snake snake;
   Pickup pickup;
 
-  Bounds bounds;
-  bounds.width = 8;
-  bounds.height = 8;
+  Bounds bounds = { 8, 8 };
 
   snake.positions = { {2,0}, {1,0}, {0,0} };
   pickup.position = { 5, 4 };
