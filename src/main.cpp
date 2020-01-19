@@ -49,9 +49,7 @@ int main() {
   bounds.width = 8;
   bounds.height = 8;
 
-  snake.positions.push_back({2,0});
-  snake.positions.push_back({1,0});
-  snake.positions.push_back({0,0});
+  snake.positions = { {2,0}, {1,0}, {0,0} };
 
   pickup.position.x = 5;
   pickup.position.y = 0;
