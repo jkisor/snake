@@ -50,9 +50,7 @@ int main() {
   bounds.height = 8;
 
   snake.positions = { {2,0}, {1,0}, {0,0} };
-
-  pickup.position.x = 5;
-  pickup.position.y = 0;
+  pickup.position = { 5, 4 };
 
   Dialog dialog;
 
