@@ -4,11 +4,14 @@
 
 #include "snake.h"
 #include "pickup.h"
+#include "direction.h"
 
 class MoveLeft : public Action
 {
   Snake * snake;
   Pickup * pickup;
+  Direction direction;
+
 
   public:
 

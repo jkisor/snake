@@ -6,17 +6,18 @@ MoveRight::MoveRight(Snake &snake, Bounds bounds, Pickup &pickup)
   this->snake = &snake;
   this->bounds = bounds;
   this->pickup = &pickup;
+  this->direction = { 1, 0 };
+
 }
 
 void MoveRight::call()
 {
-  Direction direction = { 1, 0 };
 
   if(isInBounds() && (snake->head().x + direction.x) != snake->positions[1].x )
   {
 
     Position oldEnd = snake->positions[snake->positions.size()-1];
-    
+
     changePositions();
 
     if (isCollidingWithPickup())
@@ -36,8 +37,6 @@ bool MoveRight::isCollidingWithPickup()
 
 void MoveRight::changePositions()
 {
-  Direction direction = { 1, 0 };
-
   for(int i = snake->positions.size()-1; i > 0; i--)
   {
     snake->positions[i].x = snake->positions[i-1].x;

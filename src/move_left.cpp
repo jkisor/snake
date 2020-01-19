@@ -5,11 +5,12 @@ MoveLeft::MoveLeft(Snake &snake, Pickup &pickup)
 {
   this->snake = &snake;
   this->pickup = &pickup;
+  this->direction = { -1, 0 };
+
 }
 
 void MoveLeft::call()
 {
-  Direction direction = { -1, 0 };
 
   if( isInBounds() && (snake->positions[0].x + direction.x) != snake->positions[1].x )
   {
@@ -36,7 +37,6 @@ bool MoveLeft::isCollidingWithPickup()
 
 void MoveLeft::changePositions()
 {
-  Direction direction = { -1, 0 };
 
   for(int i = snake->positions.size()-1; i > 0; i--)
   {

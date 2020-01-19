@@ -6,12 +6,11 @@ MoveDown::MoveDown(Snake &snake, Bounds bounds, Pickup &pickup)
   this->snake = &snake;
   this->bounds = bounds;
   this->pickup = &pickup;
+  this->direction = { 0, 1 };
 }
 
 void MoveDown::call()
 {
-
-  Direction direction = { 0, 1 };
 
   if( isInBounds() && (snake->positions[0].y + direction.y) != snake->positions[1].y )
   {
@@ -38,7 +37,6 @@ bool MoveDown::isCollidingWithPickup()
 
 void MoveDown::changePositions()
 {
-  Direction direction = { 0, 1 };
 
   for(int i = snake->positions.size()-1; i > 0; i--)
   {
