@@ -22,6 +22,6 @@ class MoveDown : public Action
 
   bool isInBounds();
   bool isCollidingWithPickup();
-  void changePositions();
+  std::vector<Position> nextPositions();
 
 };

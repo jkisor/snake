@@ -16,7 +16,7 @@ void MoveDown::call()
   {
     Position oldEnd = snake->positions[snake->positions.size()-1];
 
-    changePositions();
+    snake->positions = nextPositions();
 
     if (isCollidingWithPickup())
       snake->positions.push_back(oldEnd);
@@ -35,15 +35,16 @@ bool MoveDown::isCollidingWithPickup()
   return snake->head().x == pickup->position.x && snake->head().y == pickup->position.y;
 }
 
-void MoveDown::changePositions()
+std::vector<Position> MoveDown::nextPositions()
 {
+  std::vector<Position> results;
 
-  for(int i = snake->positions.size()-1; i > 0; i--)
-  {
-    snake->positions[i].x = snake->positions[i-1].x;
-    snake->positions[i].y = snake->positions[i-1].y;
-  }
+  results.push_back({ snake->head().x + direction.x, snake->head().y + direction.y});
 
-  snake->head() = { snake->head().x, snake->head().y + direction.y};
+  for(int i = 0; i < snake->positions.size() - 1; i++)
+    results.push_back(snake->positions[i]);
+
+  return results;
+
 }
 
