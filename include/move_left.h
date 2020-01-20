@@ -22,6 +22,5 @@ class MoveLeft : public Action
 
   bool isInBounds();
   bool isCollidingWithPickup();
-  std::vector<Position> nextPositions();
 
 };

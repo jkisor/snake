@@ -1,5 +1,6 @@
 #include "move_down.h"
 #include "direction.h"
+#include "next_snake.h"
 
 MoveDown::MoveDown(Snake &snake, Bounds bounds, Pickup &pickup)
 {
@@ -16,7 +17,8 @@ void MoveDown::call()
   {
     Position oldEnd = snake->positions[snake->positions.size()-1];
 
-    snake->positions = nextPositions();
+    Snake nextSnake = NextSnake().call(*snake, direction);
+    snake->positions = nextSnake.positions;
 
     if (isCollidingWithPickup())
       snake->positions.push_back(oldEnd);
@@ -35,16 +37,4 @@ bool MoveDown::isCollidingWithPickup()
   return snake->head().x == pickup->position.x && snake->head().y == pickup->position.y;
 }
 
-std::vector<Position> MoveDown::nextPositions()
-{
-  std::vector<Position> results;
-
-  results.push_back({ snake->head().x + direction.x, snake->head().y + direction.y});
-
-  for(int i = 0; i < snake->positions.size() - 1; i++)
-    results.push_back(snake->positions[i]);
-
-  return results;
-
-}
 

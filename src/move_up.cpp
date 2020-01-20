@@ -1,5 +1,6 @@
 #include "move_up.h"
 #include "direction.h"
+#include "next_snake.h"
 
 MoveUp::MoveUp(Snake &snake, Pickup &pickup)
 {
@@ -15,7 +16,8 @@ void MoveUp::call()
   {
 
     Position oldEnd = snake->positions[snake->positions.size()-1];
-    snake->positions = nextPositions();
+    Snake nextSnake = NextSnake().call(*snake, direction);
+    snake->positions = nextSnake.positions;
 
     if (isCollidingWithPickup())
       snake->positions.push_back(oldEnd);
@@ -31,17 +33,4 @@ bool MoveUp::isInBounds()
 bool MoveUp::isCollidingWithPickup()
 {
   return snake->head().x == pickup->position.x && snake->head().y == pickup->position.y;
-}
-
-std::vector<Position> MoveUp::nextPositions()
-{
-  std::vector<Position> results;
-
-  results.push_back({ snake->head().x + direction.x, snake->head().y + direction.y});
-
-  for(int i = 0; i < snake->positions.size() - 1; i++)
-    results.push_back(snake->positions[i]);
-
-  return results;
-
 }
