@@ -31,5 +31,5 @@ bool MoveUp::isInBounds()
 
 bool MoveUp::isCollidingWithPickup(Snake &snake)
 {
-  return snake.head().x == state->pickup.position.x && snake.head().y == state->pickup.position.y;
+  return snake.head() == state->pickup.position;
 }
