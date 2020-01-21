@@ -17,6 +17,6 @@ class MoveUp : public Action
   private:
 
   bool isInBounds();
-  bool isCollidingWithPickup();
+  bool isCollidingWithPickup(Snake &snake);
 
 };

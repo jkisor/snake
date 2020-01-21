@@ -10,15 +10,15 @@ MoveLeft::MoveLeft(State &state)
 void MoveLeft::call()
 {
 
-  if( isInBounds() && (state->snake.positions[0].x + direction.x) != state->snake.positions[1].x )
+  Snake currentSnake = state->snake;
+  Snake nextSnake = NextSnake().call(currentSnake, direction);
+
+  if( isInBounds() && nextSnake.head().x != currentSnake.positions[1].x )
   {
+    if (isCollidingWithPickup(nextSnake))
+      nextSnake.positions.push_back(currentSnake.tail());
 
-    Position tail = state->snake.tail();
-
-    state->snake = NextSnake().call(state->snake, direction);
-
-    if (isCollidingWithPickup())
-      state->snake.positions.push_back(tail);
+    state->snake = nextSnake;
 
   }
 }
@@ -28,7 +28,7 @@ bool MoveLeft::isInBounds()
   return state->snake.positions[0].x > 0;
 }
 
-bool MoveLeft::isCollidingWithPickup()
+bool MoveLeft::isCollidingWithPickup(Snake &snake)
 {
-  return state->snake.head().x == state->pickup.position.x && state->snake.head().y == state->pickup.position.y;
+  return snake.head().x == state->pickup.position.x && snake.head().y == state->pickup.position.y;
 }

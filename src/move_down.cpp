@@ -11,15 +11,15 @@ MoveDown::MoveDown(State &state)
 void MoveDown::call()
 {
 
-  if( isInBounds() && (state->snake.positions[0].y + direction.y) != state->snake.positions[1].y )
+  Snake currentSnake = state->snake;
+  Snake nextSnake = NextSnake().call(currentSnake, direction);
+
+  if( isInBounds() && nextSnake.head().y != currentSnake.positions[1].y )
   {
-    Position tail = state->snake.tail();
+    if (isCollidingWithPickup(nextSnake))
+      nextSnake.positions.push_back(currentSnake.tail());
 
-    Snake nextSnake = NextSnake().call(state->snake, direction);
     state->snake = nextSnake;
-
-    if (isCollidingWithPickup())
-      state->snake.positions.push_back(tail);
 
   }
 
@@ -30,9 +30,9 @@ bool MoveDown::isInBounds()
   return state->snake.positions[0].y < state->bounds.height-1;
 }
 
-bool MoveDown::isCollidingWithPickup()
+bool MoveDown::isCollidingWithPickup(Snake &snake)
 {
-  return state->snake.head().x == state->pickup.position.x && state->snake.head().y == state->pickup.position.y;
+  return snake.head().x == state->pickup.position.x && snake.head().y == state->pickup.position.y;
 }
 
 
