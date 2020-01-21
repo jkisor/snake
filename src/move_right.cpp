@@ -15,12 +15,12 @@ void MoveRight::call()
   if(isInBounds() && (state->snake.head().x + direction.x) != state->snake.positions[1].x )
   {
 
-    Position oldEnd = state->snake.positions[state->snake.positions.size()-1];
+    Position tail = state->snake.tail();
 
     state->snake = NextSnake().call(state->snake, direction);
 
     if (isCollidingWithPickup())
-      state->snake.positions.push_back(oldEnd);
+      state->snake.positions.push_back(tail);
   }
 }
 
