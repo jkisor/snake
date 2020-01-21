@@ -2,11 +2,9 @@
 #include "direction.h"
 #include "next_snake.h"
 
-MoveRight::MoveRight(Snake &snake, Bounds bounds, Pickup &pickup)
+MoveRight::MoveRight(State &state)
 {
-  this->snake = &snake;
-  this->bounds = bounds;
-  this->pickup = &pickup;
+  this->state = &state;
   this->direction = { 1, 0 };
 
 }
@@ -14,25 +12,24 @@ MoveRight::MoveRight(Snake &snake, Bounds bounds, Pickup &pickup)
 void MoveRight::call()
 {
 
-  if(isInBounds() && (snake->head().x + direction.x) != snake->positions[1].x )
+  if(isInBounds() && (state->snake.head().x + direction.x) != state->snake.positions[1].x )
   {
 
-    Position oldEnd = snake->positions[snake->positions.size()-1];
+    Position oldEnd = state->snake.positions[state->snake.positions.size()-1];
 
-    Snake nextSnake = NextSnake().call(*snake, direction);
-    snake->positions = nextSnake.positions;
+    state->snake = NextSnake().call(state->snake, direction);
 
     if (isCollidingWithPickup())
-      snake->positions.push_back(oldEnd);
+      state->snake.positions.push_back(oldEnd);
   }
 }
 
 bool MoveRight::isInBounds()
 {
-  return snake->head().x < bounds.width-1;
+  return state->snake.head().x < state->bounds.width-1;
 }
 
 bool MoveRight::isCollidingWithPickup()
 {
-  return snake->head().x == pickup->position.x && snake->head().y == pickup->position.y;
+  return state->snake.head().x == state->pickup.position.x && state->snake.head().y == state->pickup.position.y;
 }

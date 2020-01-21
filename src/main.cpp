@@ -43,15 +43,15 @@ bool isKeyPresent(std::unordered_map<sf::Keyboard::Key, Action*> m, sf::Keyboard
 int SIZE = 64;
 
 #include "snake_view.h"
+#include "state.h"
 
 int main() {
-  Snake snake;
-  Pickup pickup;
+  State state;
 
-  Bounds bounds = { 8, 8 };
+  state.bounds = { 8, 8 };
 
-  snake.positions = { {2,0}, {1,0}, {0,0} };
-  pickup.position = { 5, 4 };
+  state.snake.positions = { {2,0}, {1,0}, {0,0} };
+  state.pickup.position = { 5, 4 };
 
   Dialog dialog;
 
@@ -65,16 +65,16 @@ int main() {
   NextMessage nextMessage(dialog, presenter);
   actionByKey[sf::Keyboard::Z] = &nextMessage;
 
-  MoveRight moveRight(snake, bounds, pickup);
+  MoveRight moveRight(state);
   actionByKey[sf::Keyboard::Right] = &moveRight;
 
-  MoveLeft moveLeft(snake, pickup);
+  MoveLeft moveLeft(state);
   actionByKey[sf::Keyboard::Left] = &moveLeft;
 
-  MoveUp moveUp(snake, pickup);
+  MoveUp moveUp(state);
   actionByKey[sf::Keyboard::Up] = &moveUp;
 
-  MoveDown moveDown(snake, bounds, pickup);
+  MoveDown moveDown(state);
   actionByKey[sf::Keyboard::Down] = &moveDown;
 
   Window window;
@@ -101,10 +101,10 @@ int main() {
 
     window.clear();
 
-    window.draw(BoundsView(bounds).shape);
-    window.draw(PickupView(pickup).shape);
+    window.draw(BoundsView(state.bounds).shape);
+    window.draw(PickupView(state.pickup).shape);
 
-    for(sf::RectangleShape shape : snakeView.drawables(snake))
+    for(sf::RectangleShape shape : snakeView.drawables(state.snake))
       window.draw(shape);
 
     window.draw(dialogView.text);

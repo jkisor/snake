@@ -1,19 +1,17 @@
 #pragma once
 
 #include "action.h"
-#include "snake.h"
-#include "pickup.h"
+#include "state.h"
 #include "direction.h"
 
 class MoveUp : public Action
 {
-  Snake * snake;
-  Pickup * pickup;
+  State * state;
   Direction direction;
 
   public:
 
-  MoveUp(Snake &snake, Pickup &pickup);
+  MoveUp(State &state);
   void call();
 
   private:
