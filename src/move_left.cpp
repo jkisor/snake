@@ -31,7 +31,11 @@ void MoveLeft::call()
 
 bool MoveLeft::isInBounds(Snake &snake)
 {
-  return snake.positions[0].x >= 0;
+  return snake.head().y < state->bounds.height
+    && snake.head().x >= 0
+    && snake.head().x < state->bounds.width
+    && snake.head().y >= 0;
+
 }
 
 bool MoveLeft::isCollidingWithPickup(Snake &snake)
