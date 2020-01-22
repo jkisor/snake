@@ -22,10 +22,7 @@
 #include "snake.h"
 #include "position.h"
 
-#include "move_down.h"
-#include "move_right.h"
-#include "move_left.h"
-#include "move_up.h"
+#include "move.h"
 #include "pickup.h"
 
 #include "pickup_view.h"
@@ -65,16 +62,16 @@ int main() {
   NextMessage nextMessage(dialog, presenter);
   actionByKey[sf::Keyboard::Z] = &nextMessage;
 
-  MoveRight moveRight(state);
+  Move moveRight(state, {1,0});
   actionByKey[sf::Keyboard::Right] = &moveRight;
 
-  MoveLeft moveLeft(state);
+  Move moveLeft(state, {-1,0});
   actionByKey[sf::Keyboard::Left] = &moveLeft;
 
-  MoveUp moveUp(state);
+  Move moveUp(state, {0,-1});
   actionByKey[sf::Keyboard::Up] = &moveUp;
 
-  MoveDown moveDown(state);
+  Move moveDown(state, {0,1});
   actionByKey[sf::Keyboard::Down] = &moveDown;
 
   Window window;

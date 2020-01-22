@@ -1,21 +1,20 @@
-#include "move_down.h"
-#include "direction.h"
+#include "move.h"
 #include "next_snake.h"
 
-MoveDown::MoveDown(State &state)
+Move::Move(State &state, Direction direction)
 {
   this->state = &state;
-  this->direction = { 0, 1 };
+  this->direction = direction;
 }
 
-void MoveDown::call()
+void Move::call()
 {
-
   Snake currentSnake = state->snake;
   Snake nextSnake = NextSnake().call(currentSnake, direction);
 
-  if( isInBounds(nextSnake) && nextSnake.head() != currentSnake.positions[1] )
+  if(isInBounds(nextSnake) && nextSnake.head() != currentSnake.positions[1] )
   {
+
     if (isCollidingWithPickup(nextSnake))
     {
       nextSnake.positions.push_back(currentSnake.tail());
@@ -28,21 +27,17 @@ void MoveDown::call()
     state->snake = nextSnake;
 
   }
-
 }
 
-bool MoveDown::isInBounds(Snake &snake)
+bool Move::isInBounds(Snake &snake)
 {
   return snake.head().y < state->bounds.height
     && snake.head().x >= 0
     && snake.head().x < state->bounds.width
     && snake.head().y >= 0;
-
 }
 
-bool MoveDown::isCollidingWithPickup(Snake &snake)
+bool Move::isCollidingWithPickup(Snake &snake)
 {
   return snake.head() == state->pickup.position;
 }
-
-

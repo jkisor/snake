@@ -4,14 +4,14 @@
 #include "state.h"
 #include "direction.h"
 
-class MoveRight : public Action
+class Move : public Action
 {
   State * state;
   Direction direction;
 
   public:
 
-  MoveRight(State &state);
+  Move(State &state, Direction direction);
   void call();
 
   private:
