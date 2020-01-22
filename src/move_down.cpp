@@ -33,7 +33,7 @@ void MoveDown::call()
 
 bool MoveDown::isInBounds(Snake &snake)
 {
-  return snake.positions[0].y < state->bounds.height;
+  return snake.head().y < state->bounds.height;
 }
 
 bool MoveDown::isCollidingWithPickup(Snake &snake)

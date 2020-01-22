@@ -102,10 +102,11 @@ int main() {
     window.clear();
 
     window.draw(BoundsView(state.bounds).shape);
-    window.draw(PickupView(state.pickup).shape);
 
     for(sf::RectangleShape shape : snakeView.drawables(state.snake))
       window.draw(shape);
+
+    window.draw(PickupView(state.pickup).shape);
 
     window.draw(dialogView.text);
 
