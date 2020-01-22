@@ -1,5 +1,6 @@
 #include "move_up.h"
 #include "next_snake.h"
+#include <cstdlib>
 
 MoveUp::MoveUp(State &state)
 {
@@ -17,7 +18,13 @@ void MoveUp::call()
   {
 
     if (isCollidingWithPickup(nextSnake))
+    {
       nextSnake.positions.push_back(currentSnake.tail());
+
+      Pickup nextPickup;
+      nextPickup.position = { rand() % state->bounds.width, rand() % state->bounds.height };
+      state->pickup = nextPickup;
+    }
 
     state->snake = nextSnake;
   }

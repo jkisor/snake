@@ -16,7 +16,13 @@ void MoveLeft::call()
   if( isInBounds(nextSnake) && nextSnake.head().x != currentSnake.positions[1].x )
   {
     if (isCollidingWithPickup(nextSnake))
+    {
       nextSnake.positions.push_back(currentSnake.tail());
+
+      Pickup nextPickup;
+      nextPickup.position = { rand() % state->bounds.width, rand() % state->bounds.height };
+      state->pickup = nextPickup;
+    }
 
     state->snake = nextSnake;
 
