@@ -14,7 +14,7 @@ void MoveRight::call()
   Snake currentSnake = state->snake;
   Snake nextSnake = NextSnake().call(currentSnake, direction);
 
-  if(isInBounds(nextSnake) && nextSnake.head().x != currentSnake.positions[1].x )
+  if(isInBounds(nextSnake) && nextSnake.head() != currentSnake.positions[1] )
   {
 
     if (isCollidingWithPickup(nextSnake))
@@ -25,7 +25,7 @@ void MoveRight::call()
       nextPickup.position = { rand() % state->bounds.width, rand() % state->bounds.height };
       state->pickup = nextPickup;
     }
-    
+
     state->snake = nextSnake;
 
   }

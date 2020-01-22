@@ -13,7 +13,7 @@ void MoveLeft::call()
   Snake currentSnake = state->snake;
   Snake nextSnake = NextSnake().call(currentSnake, direction);
 
-  if( isInBounds(nextSnake) && nextSnake.head().x != currentSnake.positions[1].x )
+  if( isInBounds(nextSnake) && nextSnake.head() != currentSnake.positions[1] )
   {
     if (isCollidingWithPickup(nextSnake))
     {

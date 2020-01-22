@@ -14,7 +14,7 @@ void MoveDown::call()
   Snake currentSnake = state->snake;
   Snake nextSnake = NextSnake().call(currentSnake, direction);
 
-  if( isInBounds(nextSnake) && nextSnake.head().y != currentSnake.positions[1].y )
+  if( isInBounds(nextSnake) && nextSnake.head() != currentSnake.positions[1] )
   {
     if (isCollidingWithPickup(nextSnake))
     {
