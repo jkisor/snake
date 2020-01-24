@@ -51,6 +51,7 @@ int main() {
   state.bounds = { 8, 8 };
 
   state.snake.positions = { {2,0}, {1,0}, {0,0} };
+  state.snake.direction = { 1, 0 };
   state.pickup.position = { 5, 4 };
 
   Dialog dialog;
@@ -88,6 +89,15 @@ int main() {
 
   float accum = 0;
 
+  float TICK_SECONDS = 0.75;
+
+
+  sf::Texture texture;
+  texture.loadFromFile("snake-sheet.png");
+
+  sf::Sprite sprite;
+  sprite.setTexture(texture);
+  sprite.setScale(4.0f, 4.0f);
 
   while (window.isOpen())
   {
@@ -110,7 +120,7 @@ int main() {
     float dt = deltaClock.restart().asSeconds();
     accum += dt;
 
-    if(accum >= 0.75)
+    if(accum >= TICK_SECONDS)
     {
       move.call();
       accum = 0;
@@ -126,6 +136,8 @@ int main() {
     window.draw(PickupView(state.pickup).shape);
 
     window.draw(dialogView.text);
+
+    window.draw(sprite);
 
     window.display();
   }
