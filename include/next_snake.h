@@ -7,5 +7,5 @@ class NextSnake
 {
   public:
 
-  Snake call(Snake &snake, Direction direction);
+  Snake call(Snake &snake);
 };

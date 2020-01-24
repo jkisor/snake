@@ -6,11 +6,10 @@ TEST_CASE( "it works")
 {
   Snake snake;
   snake.positions = { {2,0}, {1,0}, {0,0} };
-
-  Direction direction = { 1, 0 };
+  snake.direction = { 1, 0 };
 
   NextSnake nextSnake;
-  Snake results = nextSnake.call(snake, direction);
+  Snake results = nextSnake.call(snake);
 
   std::vector<Position> expected = { {3,0}, {2,0}, {1,0} };
 
