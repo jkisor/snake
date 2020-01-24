@@ -11,7 +11,7 @@ class Move : public Action
 
   public:
 
-  Move(State &state, Direction direction);
+  Move(State &state);
   void call();
 
   private:

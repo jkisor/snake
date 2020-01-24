@@ -1,16 +1,13 @@
 #include "move.h"
 #include "next_snake.h"
 
-Move::Move(State &state, Direction direction)
+Move::Move(State &state)
 {
   this->state = &state;
-  this->direction = direction;
 }
 
 void Move::call()
 {
-  state->snake.direction = direction;
-
   Snake currentSnake = state->snake;
   Snake nextSnake = NextSnake().call(currentSnake);
 

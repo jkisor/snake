@@ -28,6 +28,8 @@
 #include "pickup_view.h"
 #include "bounds_view.h"
 
+#include "change_direction.h"
+
 PressedKeys pressedKeys;
 
 std::unordered_map<sf::Keyboard::Key, Action*> actionByKey;
@@ -62,17 +64,20 @@ int main() {
   NextMessage nextMessage(dialog, presenter);
   actionByKey[sf::Keyboard::Z] = &nextMessage;
 
-  Move moveRight(state, {1,0});
-  actionByKey[sf::Keyboard::Right] = &moveRight;
+  ChangeDirection changeDirectionRight(state, {1,0});
+  actionByKey[sf::Keyboard::Right] = &changeDirectionRight;
 
-  Move moveLeft(state, {-1,0});
-  actionByKey[sf::Keyboard::Left] = &moveLeft;
+  ChangeDirection changeDirectionLeft(state, {-1,0});
+  actionByKey[sf::Keyboard::Left] = &changeDirectionLeft;
 
-  Move moveUp(state, {0,-1});
-  actionByKey[sf::Keyboard::Up] = &moveUp;
+  ChangeDirection changeDirectionUp(state, {0,-1});
+  actionByKey[sf::Keyboard::Up] = &changeDirectionUp;
 
-  Move moveDown(state, {0,1});
-  actionByKey[sf::Keyboard::Down] = &moveDown;
+  ChangeDirection changeDirectionDown(state, {0,1});
+  actionByKey[sf::Keyboard::Down] = &changeDirectionDown;
+
+  Move move(state);
+  actionByKey[sf::Keyboard::Space] = &move;
 
   Window window;
 

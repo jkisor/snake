@@ -13,5 +13,6 @@ Snake NextSnake::call(Snake &snake)
 
   results.positions = positions;
 
+  results.direction = snake.direction;
   return results;
 };
