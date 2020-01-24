@@ -19,5 +19,4 @@ class Move : public Action
   bool isInBounds(Snake &snake);
   bool isCollidingWithPickup(Snake &snake);
 
-
 };
