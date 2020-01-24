@@ -9,8 +9,10 @@ Move::Move(State &state, Direction direction)
 
 void Move::call()
 {
+  state->snake.direction = direction;
+
   Snake currentSnake = state->snake;
-  Snake nextSnake = NextSnake().call(currentSnake, direction);
+  Snake nextSnake = NextSnake().call(currentSnake, currentSnake.direction);
 
   if(isInBounds(nextSnake) && nextSnake.head() != currentSnake.positions[1] )
   {
