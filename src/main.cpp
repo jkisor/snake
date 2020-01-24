@@ -30,6 +30,7 @@
 
 #include "change_direction.h"
 
+
 PressedKeys pressedKeys;
 
 std::unordered_map<sf::Keyboard::Key, Action*> actionByKey;
@@ -83,6 +84,11 @@ int main() {
 
   window.open();
 
+  sf::Clock deltaClock;
+
+  float accum = 0;
+
+
   while (window.isOpen())
   {
     Events events = window.events();
@@ -100,6 +106,15 @@ int main() {
 
     for(sf::Event e : events.keyReleases())
       pressedKeys.remove(e.key.code);
+
+    float dt = deltaClock.restart().asSeconds();
+    accum += dt;
+
+    if(accum >= 0.75)
+    {
+      move.call();
+      accum = 0;
+    }
 
     window.clear();
 
