@@ -91,14 +91,6 @@ int main() {
 
   float TICK_SECONDS = 0.75;
 
-
-  sf::Texture texture;
-  texture.loadFromFile("snake-sheet.png");
-
-  sf::Sprite sprite;
-  sprite.setTexture(texture);
-  sprite.setScale(4.0f, 4.0f);
-
   while (window.isOpen())
   {
     Events events = window.events();
@@ -130,14 +122,12 @@ int main() {
 
     window.draw(BoundsView(state.bounds).shape);
 
-    for(sf::RectangleShape shape : snakeView.drawables(state.snake))
-      window.draw(shape);
+    for(sf::Sprite sprite : snakeView.drawables(state.snake))
+      window.draw(sprite);
 
     window.draw(PickupView(state.pickup).shape);
 
     window.draw(dialogView.text);
-
-    window.draw(sprite);
 
     window.display();
   }

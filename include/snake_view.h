@@ -1,14 +1,18 @@
 #pragma once
 
 #include <vector>
-#include <SFML/Graphics/RectangleShape.hpp>
+#include <SFML/Graphics/Sprite.hpp>
+#include <SFML/Graphics/Texture.hpp>
 
 #include "snake.h"
 
 class SnakeView
 {
+  sf::Texture texture;
+
   public:
 
-  std::vector<sf::RectangleShape> drawables(Snake &snake);
+  SnakeView();
+  std::vector<sf::Sprite> drawables(Snake &snake);
 
 };
