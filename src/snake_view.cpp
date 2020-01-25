@@ -15,8 +15,9 @@ std::vector<sf::Sprite> SnakeView::drawables(Snake &snake)
 
   // Tail
   Position tailPos = snake.positions[snake.positions.size()-1];
-  Direction tailDir = snake.directions[snake.directions.size()-1];
+  Position prevPos = snake.positions[snake.positions.size()-2];
 
+  Direction tailDir = { prevPos.x - tailPos.x, prevPos.y - tailPos.y };
 
   sf::Sprite tailSprite;
   tailSprite.setTexture(texture);
@@ -25,19 +26,25 @@ std::vector<sf::Sprite> SnakeView::drawables(Snake &snake)
   tailSprite.setScale(SCALE, SCALE);
   tailSprite.setTextureRect(sf::IntRect(FRAME_SIZE * 0, 0, FRAME_SIZE, FRAME_SIZE));
 
-  float tailRotation;
+  if(tailDir.x == 0 && tailDir.y == 1 )
+  {
+    tailSprite.setRotation(90);
+  }
 
-    if(tailDir.x == 1)
-      tailRotation = 0.0f;
-    else if(tailDir.x == -1)
-      tailRotation = 180.0f;
-    else if(tailDir.y == -1)
-      tailRotation = -90.0f;
-    else if(tailDir.y == 1)
-      tailRotation = 90.0f;
+  else if (tailDir.x == -1 && tailDir.y == 0)
+  {
+    tailSprite.setRotation(180);
+  }
 
-    tailSprite.setRotation(tailRotation);
+  else if (tailDir.x == 0 && tailDir.y == -1)
+  {
+    tailSprite.setRotation(270);
+  }
 
+  else if (tailDir.x == 1 && tailDir.y == 0)
+  {
+    tailSprite.setRotation(0);
+  }
 
   output.push_back(tailSprite);
 
