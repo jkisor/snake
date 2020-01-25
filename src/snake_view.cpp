@@ -8,6 +8,7 @@ SnakeView::SnakeView()
 std::vector<sf::Sprite> SnakeView::drawables(Snake &snake)
 {
   int SIZE = 64;
+  int SCALE = 4.0f;
 
   std::vector<sf::Sprite> output;
 
@@ -17,7 +18,7 @@ std::vector<sf::Sprite> SnakeView::drawables(Snake &snake)
   sf::Sprite tailSprite;
   tailSprite.setTexture(texture);
   tailSprite.setPosition(tailPos.x * SIZE, tailPos.y * SIZE);
-  tailSprite.setScale(4.0f, 4.0f);
+  tailSprite.setScale(SCALE, SCALE);
   tailSprite.setTextureRect(sf::IntRect(16 * 0, 0, 16, 16));
 
   output.push_back(tailSprite);
@@ -30,7 +31,7 @@ std::vector<sf::Sprite> SnakeView::drawables(Snake &snake)
     sf::Sprite sprite;
     sprite.setTexture(texture);
     sprite.setPosition(p.x * SIZE, p.y * SIZE);
-    sprite.setScale(4.0f, 4.0f);
+    sprite.setScale(SCALE, SCALE);
     sprite.setTextureRect(sf::IntRect(16 * 1, 0, 16, 16));
 
     output.push_back(sprite);
@@ -43,7 +44,7 @@ std::vector<sf::Sprite> SnakeView::drawables(Snake &snake)
   sprite.setTexture(texture);
   sprite.setOrigin(16/2, 16/2); //original size
   sprite.setPosition((p.x * SIZE) + SIZE/2, (p.y * SIZE) + SIZE/2);
-  sprite.setScale(4.0f, 4.0f);
+  sprite.setScale(SCALE, SCALE);
   sprite.setTextureRect(sf::IntRect(16 * 2, 0, 16, 16));
 
   float rotation;
