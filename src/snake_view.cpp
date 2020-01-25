@@ -45,27 +45,64 @@ std::vector<sf::Sprite> SnakeView::drawables(Snake &snake)
   for(int i = 1; i < snake.positions.size()-1; i++)
   {
     Position p = snake.positions[i];
+    Position prevPos = snake.positions[i-1];
+    Position nextPos = snake.positions[i+1];
+
     Direction d = snake.directions[i];
 
     sf::Sprite sprite;
+
     sprite.setTexture(texture);
     sprite.setOrigin(FRAME_SIZE/2, FRAME_SIZE/2);
     sprite.setPosition((p.x * SIZE) + SIZE/2, (p.y * SIZE) + SIZE/2);
     sprite.setScale(SCALE, SCALE);
-    sprite.setTextureRect(sf::IntRect(FRAME_SIZE * 1, 0, FRAME_SIZE, FRAME_SIZE));
 
-    float rotation;
+    Direction dd = { prevPos.x - nextPos.x, prevPos.y - nextPos.y };
+    if(dd.x == 1 && dd.y == 1 )
+    {
+      float rotation = 0;
+      sprite.setRotation(rotation);
+      sprite.setTextureRect(sf::IntRect(FRAME_SIZE * 4, 0, FRAME_SIZE, FRAME_SIZE));
+    }
 
-    if(d.x == 1)
-      rotation = 0.0f;
-    else if(d.x == -1)
-      rotation = 180.0f;
-    else if(d.y == -1)
-      rotation = 90.0f;
-    else if(d.y == 1)
-      rotation = -90.0f;
+    else if (dd.x == 1 && dd.y == -1)
+    {
+      float rotation = 270.0f;
+      sprite.setRotation(rotation);
+      sprite.setTextureRect(sf::IntRect(FRAME_SIZE * 4, 0, FRAME_SIZE, FRAME_SIZE));
+    }
 
-    sprite.setRotation(rotation);
+    else if (dd.x == -1 && dd.y == -1)
+    {
+      float rotation = 180.0f;
+      sprite.setRotation(rotation);
+      sprite.setTextureRect(sf::IntRect(FRAME_SIZE * 4, 0, FRAME_SIZE, FRAME_SIZE));
+    }
+
+    else if (dd.x == -1 && dd.y == 1)
+    {
+      float rotation = 90.0f;
+
+      sprite.setRotation(rotation);
+      sprite.setTextureRect(sf::IntRect(FRAME_SIZE * 4, 0, FRAME_SIZE, FRAME_SIZE));
+    }
+
+    else
+    {
+      float rotation;
+
+      if(d.x == 1)
+        rotation = 0.0f;
+      else if(d.x == -1)
+        rotation = 180.0f;
+      else if(d.y == -1)
+        rotation = 90.0f;
+      else if(d.y == 1)
+        rotation = -90.0f;
+
+      sprite.setRotation(rotation);
+      sprite.setTextureRect(sf::IntRect(FRAME_SIZE * 1, 0, FRAME_SIZE, FRAME_SIZE));
+    }
 
     output.push_back(sprite);
   }
