@@ -17,6 +17,8 @@ void Move::call()
     if (isCollidingWithPickup(nextSnake))
     {
       nextSnake.positions.push_back(currentSnake.tail());
+      Direction d = currentSnake.directions[currentSnake.directions.size()-1];
+      nextSnake.directions.push_back(d);
 
       Pickup nextPickup;
       nextPickup.position = { rand() % state->bounds.width, rand() % state->bounds.height };
