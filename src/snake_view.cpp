@@ -65,32 +65,28 @@ std::vector<sf::Sprite> SnakeView::drawables(Snake &snake)
     sprite.setScale(SCALE, SCALE);
 
     Direction dd = { prevPos.x - nextPos.x, prevPos.y - nextPos.y };
+    
     if(dd.x == 1 && dd.y == 1 )
     {
-      float rotation = 0;
-      sprite.setRotation(rotation);
+      sprite.setRotation(0);
       sprite.setTextureRect(sf::IntRect(FRAME_SIZE * 4, 0, FRAME_SIZE, FRAME_SIZE));
     }
 
     else if (dd.x == 1 && dd.y == -1)
     {
-      float rotation = 270.0f;
-      sprite.setRotation(rotation);
+      sprite.setRotation(270);
       sprite.setTextureRect(sf::IntRect(FRAME_SIZE * 4, 0, FRAME_SIZE, FRAME_SIZE));
     }
 
     else if (dd.x == -1 && dd.y == -1)
     {
-      float rotation = 180.0f;
-      sprite.setRotation(rotation);
+      sprite.setRotation(180);
       sprite.setTextureRect(sf::IntRect(FRAME_SIZE * 4, 0, FRAME_SIZE, FRAME_SIZE));
     }
 
     else if (dd.x == -1 && dd.y == 1)
     {
-      float rotation = 90.0f;
-
-      sprite.setRotation(rotation);
+      sprite.setRotation(90);
       sprite.setTextureRect(sf::IntRect(FRAME_SIZE * 4, 0, FRAME_SIZE, FRAME_SIZE));
     }
 
