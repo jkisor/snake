@@ -6,7 +6,7 @@ TEST_CASE( "it works")
 {
   Snake snake;
   snake.positions = { {2,0}, {1,0}, {0,0} };
-  snake.direction = { 1, 0 };
+  snake.nextDirection = { 1, 0 };
 
   NextSnake nextSnake;
   Snake results = nextSnake.call(snake);

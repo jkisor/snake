@@ -7,9 +7,9 @@
 struct Snake
 {
   std::vector<Position> positions;
-  std::vector<Direction> directions;
 
-  Direction direction;
+  Direction currentDirection;
+  Direction nextDirection;
 
 
   Position& head();

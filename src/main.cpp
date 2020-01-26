@@ -51,11 +51,12 @@ int main() {
   state.bounds = { 8, 8 };
 
   state.snake.positions = { {2,0}, {1,0}, {0,0} };
-  state.snake.directions = { { 1, 0 }, { 1, 0 }, { 1, 0 } };
-  state.snake.direction = { 1, 0 };
+  state.snake.nextDirection = { 1, 0 };
+  state.snake.currentDirection = { 1, 0 };
+
 
   state.pickup.position = { 5, 4 };
-  
+
   Dialog dialog;
 
   DialogView dialogView;

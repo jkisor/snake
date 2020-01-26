@@ -8,5 +8,5 @@ ChangeDirection::ChangeDirection(State &state, Direction direction)
 
 void ChangeDirection::call()
 {
-  state->snake.direction = direction;
+  state->snake.nextDirection = direction;
 }

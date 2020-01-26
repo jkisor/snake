@@ -115,7 +115,7 @@ std::vector<sf::Sprite> SnakeView::drawables(Snake &snake)
 
   // Head
   Position p = snake.positions[0];
-  Direction d = snake.directions[0];
+  Direction d = snake.currentDirection;
 
   sf::Sprite sprite;
   sprite.setTexture(texture);
