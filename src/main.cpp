@@ -53,8 +53,9 @@ int main() {
   state.snake.positions = { {2,0}, {1,0}, {0,0} };
   state.snake.directions = { { 1, 0 }, { 1, 0 }, { 1, 0 } };
   state.snake.direction = { 1, 0 };
-  state.pickup.position = { 5, 4 };
 
+  state.pickup.position = { 5, 4 };
+  
   Dialog dialog;
 
   DialogView dialogView;
@@ -126,7 +127,7 @@ int main() {
     for(sf::Sprite sprite : snakeView.drawables(state.snake))
       window.draw(sprite);
 
-    window.draw(PickupView(state.pickup).shape);
+    window.draw(PickupView(state.pickup).sprite);
 
     window.draw(dialogView.text);
 
