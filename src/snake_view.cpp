@@ -55,8 +55,6 @@ std::vector<sf::Sprite> SnakeView::drawables(Snake &snake)
     Position aheadPos = snake.positions[i-1];
     Position behindPos = snake.positions[i+1];
 
-    Direction d = snake.directions[i];
-
     sf::Sprite sprite;
 
     sprite.setTexture(texture);
@@ -70,13 +68,13 @@ std::vector<sf::Sprite> SnakeView::drawables(Snake &snake)
     {
       float rotation;
 
-      if(d.x == 1)
+      if(a.x == 1)
         rotation = 0.0f;
-      else if(d.x == -1)
+      else if(a.x == -1)
         rotation = 180.0f;
-      else if(d.y == -1)
+      else if(a.y == -1)
         rotation = 90.0f;
-      else if(d.y == 1)
+      else if(a.y == 1)
         rotation = -90.0f;
 
       sprite.setRotation(rotation);
