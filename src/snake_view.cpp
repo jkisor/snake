@@ -52,8 +52,8 @@ std::vector<sf::Sprite> SnakeView::drawables(Snake &snake)
   for(int i = 1; i < snake.positions.size()-1; i++)
   {
     Position p = snake.positions[i];
-    Position prevPos = snake.positions[i-1];
-    Position nextPos = snake.positions[i+1];
+    Position aheadPos = snake.positions[i-1];
+    Position behindPos = snake.positions[i+1];
 
     Direction d = snake.directions[i];
 
@@ -64,33 +64,9 @@ std::vector<sf::Sprite> SnakeView::drawables(Snake &snake)
     sprite.setPosition((p.x * SIZE) + SIZE/2, (p.y * SIZE) + SIZE/2);
     sprite.setScale(SCALE, SCALE);
 
-    Direction dd = { prevPos.x - nextPos.x, prevPos.y - nextPos.y };
-    
-    if(dd.x == 1 && dd.y == 1 )
-    {
-      sprite.setRotation(0);
-      sprite.setTextureRect(sf::IntRect(FRAME_SIZE * 4, 0, FRAME_SIZE, FRAME_SIZE));
-    }
-
-    else if (dd.x == 1 && dd.y == -1)
-    {
-      sprite.setRotation(270);
-      sprite.setTextureRect(sf::IntRect(FRAME_SIZE * 4, 0, FRAME_SIZE, FRAME_SIZE));
-    }
-
-    else if (dd.x == -1 && dd.y == -1)
-    {
-      sprite.setRotation(180);
-      sprite.setTextureRect(sf::IntRect(FRAME_SIZE * 4, 0, FRAME_SIZE, FRAME_SIZE));
-    }
-
-    else if (dd.x == -1 && dd.y == 1)
-    {
-      sprite.setRotation(90);
-      sprite.setTextureRect(sf::IntRect(FRAME_SIZE * 4, 0, FRAME_SIZE, FRAME_SIZE));
-    }
-
-    else
+    Direction a = { aheadPos.x - p.x, aheadPos.y - p.y };
+    Direction b = { p.x - behindPos.x, p.y - behindPos.y };
+    if(a == b)
     {
       float rotation;
 
@@ -105,6 +81,35 @@ std::vector<sf::Sprite> SnakeView::drawables(Snake &snake)
 
       sprite.setRotation(rotation);
       sprite.setTextureRect(sf::IntRect(FRAME_SIZE * 1, 0, FRAME_SIZE, FRAME_SIZE));
+    }
+    else if( (a == Direction({-1,0}) && b == Direction({0,-1}))
+            || (a == Direction({0,1}) && b == Direction({1,0}))
+    )
+    {
+      sprite.setRotation(0);
+      sprite.setTextureRect(sf::IntRect(FRAME_SIZE * 4, 0, FRAME_SIZE, FRAME_SIZE));
+    }
+    else if( (a == Direction({-1,0}) && b == Direction({0,1}))
+            || (a == Direction({0,-1}) && b == Direction({1,0})))
+    {
+      sprite.setRotation(90);
+      sprite.setTextureRect(sf::IntRect(FRAME_SIZE * 4, 0, FRAME_SIZE, FRAME_SIZE));
+    }
+    else if( (a == Direction({1,0}) && b == Direction({0,1}))
+            || (a == Direction({0,-1}) && b == Direction({-1,0})))
+    {
+      sprite.setRotation(180);
+      sprite.setTextureRect(sf::IntRect(FRAME_SIZE * 4, 0, FRAME_SIZE, FRAME_SIZE));
+    }
+    else if( (a == Direction({0,1}) && b == Direction({-1,0}))
+            || (a == Direction({1,0}) && b == Direction({0,-1})))
+    {
+      sprite.setRotation(270);
+      sprite.setTextureRect(sf::IntRect(FRAME_SIZE * 4, 0, FRAME_SIZE, FRAME_SIZE));
+    }
+    else // ERROR
+    {
+      sprite.setTextureRect(sf::IntRect(FRAME_SIZE * 3, 0, FRAME_SIZE, FRAME_SIZE));
     }
 
     output.push_back(sprite);
