@@ -7,6 +7,7 @@
 struct Snake
 {
   std::vector<Position> positions;
+  bool dead = false;
 
   Direction currentDirection;
   Direction nextDirection;

@@ -91,7 +91,7 @@ int main() {
 
   float accum = 0;
 
-  float TICK_SECONDS = 0.75;
+  float TICK_SECONDS = 0.50;
 
   while (window.isOpen())
   {
@@ -114,7 +114,7 @@ int main() {
     float dt = deltaClock.restart().asSeconds();
     accum += dt;
 
-    if(accum >= TICK_SECONDS)
+    if(!state.snake.dead && accum >= TICK_SECONDS)
     {
       move.call();
       accum = 0;

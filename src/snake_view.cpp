@@ -122,7 +122,11 @@ std::vector<sf::Sprite> SnakeView::drawables(Snake &snake)
   sprite.setOrigin(FRAME_SIZE/2, FRAME_SIZE/2);
   sprite.setPosition((p.x * SIZE) + SIZE/2, (p.y * SIZE) + SIZE/2);
   sprite.setScale(SCALE, SCALE);
-  sprite.setTextureRect(sf::IntRect(FRAME_SIZE * 2, 0, FRAME_SIZE, FRAME_SIZE));
+
+  if(snake.dead)
+    sprite.setTextureRect(sf::IntRect(FRAME_SIZE * 6, 0, FRAME_SIZE, FRAME_SIZE));
+  else
+    sprite.setTextureRect(sf::IntRect(FRAME_SIZE * 2, 0, FRAME_SIZE, FRAME_SIZE));
 
   float rotation;
 

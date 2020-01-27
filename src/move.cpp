@@ -11,7 +11,11 @@ void Move::call()
   Snake currentSnake = state->snake;
   Snake nextSnake = NextSnake().call(currentSnake);
 
-  if(isInBounds(nextSnake) && nextSnake.head() != currentSnake.positions[1] )
+  if(!isInBounds(nextSnake))
+  {
+    state->snake.dead = true;
+  }
+  else if(isInBounds(nextSnake) && nextSnake.head() != currentSnake.positions[1] )
   {
 
     if (isCollidingWithPickup(nextSnake))
