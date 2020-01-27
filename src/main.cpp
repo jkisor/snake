@@ -54,7 +54,6 @@ int main() {
   state.snake.nextDirection = { 1, 0 };
   state.snake.currentDirection = { 1, 0 };
 
-
   state.pickup.position = { 5, 4 };
 
   Dialog dialog;
