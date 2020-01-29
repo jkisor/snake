@@ -142,26 +142,31 @@ std::vector<sf::Sprite> SnakeView::drawables(Snake &snake)
   sprite.setRotation(rotation);
   output.push_back(sprite);
 
-  sf::Sprite arrowSprite;
+  if(!snake.dead)
+  {
 
-  arrowSprite.setTexture(texture);
-  arrowSprite.setOrigin(FRAME_SIZE/2, FRAME_SIZE/2);
-  arrowSprite.setPosition(((p.x + snake.nextDirection.x ) * SIZE) + SIZE/2, ((p.y + snake.nextDirection.y ) * SIZE) + SIZE/2);
-  arrowSprite.setScale(SCALE, SCALE);
-  arrowSprite.setTextureRect(sf::IntRect(FRAME_SIZE * 5, 0, FRAME_SIZE, FRAME_SIZE));
+    sf::Sprite arrowSprite;
 
-  if(snake.nextDirection.x == 1)
-    arrowSprite.setRotation(0.0f);
-  else if(snake.nextDirection.x == -1)
-    arrowSprite.setRotation(180.0f);
-  else if(snake.nextDirection.y == -1)
-    arrowSprite.setRotation(-90.0);
-  else if(snake.nextDirection.y == 1)
-    arrowSprite.setRotation(90.0f);
+    arrowSprite.setTexture(texture);
+    arrowSprite.setOrigin(FRAME_SIZE/2, FRAME_SIZE/2);
+    arrowSprite.setPosition(((p.x + snake.nextDirection.x ) * SIZE) + SIZE/2, ((p.y + snake.nextDirection.y ) * SIZE) + SIZE/2);
+    arrowSprite.setScale(SCALE, SCALE);
+    arrowSprite.setTextureRect(sf::IntRect(FRAME_SIZE * 5, 0, FRAME_SIZE, FRAME_SIZE));
+
+    if(snake.nextDirection.x == 1)
+      arrowSprite.setRotation(0.0f);
+    else if(snake.nextDirection.x == -1)
+      arrowSprite.setRotation(180.0f);
+    else if(snake.nextDirection.y == -1)
+      arrowSprite.setRotation(-90.0);
+    else if(snake.nextDirection.y == 1)
+      arrowSprite.setRotation(90.0f);
 
 
-  output.push_back(arrowSprite);
+    output.push_back(arrowSprite);
 
+
+  }
 
 
   return output;
