@@ -15,7 +15,11 @@ void Move::call()
   {
     state->snake.dead = true;
   }
-  else if(isInBounds(nextSnake) && nextSnake.head() != currentSnake.positions[1] )
+  else if(std::find(nextSnake.positions.begin()+1, nextSnake.positions.end(), nextSnake.head()) != nextSnake.positions.end())
+  {
+    state->snake.dead = true;
+  }
+  else if(nextSnake.head() != currentSnake.positions[1] )
   {
 
     if (isCollidingWithPickup(nextSnake))
