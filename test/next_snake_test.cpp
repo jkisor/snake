@@ -13,5 +13,15 @@ TEST_CASE( "it works")
 
   std::vector<Position> expected = { {3,0}, {2,0}, {1,0} };
 
-  REQUIRE( results.positions == expected );
+  // Not using Position == operator so we can see diff in fail message
+  REQUIRE( results.positions[0].x == expected[0].x );
+  REQUIRE( results.positions[0].y == expected[0].y );
+
+  REQUIRE( results.positions[1].x == expected[1].x );
+  REQUIRE( results.positions[1].y == expected[1].y );
+
+  REQUIRE( results.positions[2].x == expected[2].x );
+  REQUIRE( results.positions[2].y == expected[2].y );
+
+
 };
