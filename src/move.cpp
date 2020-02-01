@@ -30,10 +30,7 @@ void Move::call()
 
 bool Move::isInBounds(Position &position)
 {
-  return position.y < state->bounds.height
-    && position.x >= 0
-    && position.x < state->bounds.width
-    && position.y >= 0;
+  return state->bounds.contains(position);
 }
 
 bool Move::isCollidingWithSelf(Snake &snake)
