@@ -15,7 +15,7 @@ void Move::call()
   {
     state->snake.dead = true;
   }
-  else if(std::find(nextSnake.positions.begin()+1, nextSnake.positions.end(), nextSnake.head()) != nextSnake.positions.end())
+  else if(isCollidingWithSelf(nextSnake))
   {
     state->snake.dead = true;
   }
@@ -44,6 +44,11 @@ bool Move::isInBounds(Snake &snake)
     && head.x >= 0
     && head.x < state->bounds.width
     && head.y >= 0;
+}
+
+bool Move::isCollidingWithSelf(Snake &snake)
+{
+  return std::find(snake.positions.begin()+1, snake.positions.end(), snake.head()) != snake.positions.end();
 }
 
 bool Move::isCollidingWithPickup(Snake &snake)
