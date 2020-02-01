@@ -19,7 +19,6 @@ Snake Snake::add(Position p)
 {
   Snake snake(*this);
 
-  snake.positions = positions;
   snake.positions.push_back(p);
 
   return snake;
