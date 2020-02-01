@@ -1,5 +1,6 @@
 #include "move.h"
 #include "next_snake.h"
+#include "spawn_pickup.h"
 
 Move::Move(State &state)
 {
@@ -47,8 +48,6 @@ bool Move::isCollidingWithPickup(Position &position)
 
 void Move::spawnPickup()
 {
-  Pickup nextPickup;
-  nextPickup.position = { rand() % state->bounds.width, rand() % state->bounds.height };
-  state->pickup = nextPickup;
+  SpawnPickup(*state).call();
 }
 
