@@ -19,10 +19,7 @@ void Move::call()
     if (isCollidingWithPickup(nextSnake))
     {
       nextSnake.positions.push_back(currentSnake.tail());
-
-      Pickup nextPickup;
-      nextPickup.position = { rand() % state->bounds.width, rand() % state->bounds.height };
-      state->pickup = nextPickup;
+      spawnPickup();
     }
 
     state->snake = nextSnake;
@@ -46,4 +43,11 @@ bool Move::isCollidingWithSelf(Snake &snake)
 bool Move::isCollidingWithPickup(Snake &snake)
 {
   return snake.head() == state->pickup.position;
+}
+
+void Move::spawnPickup()
+{
+  Pickup nextPickup;
+  nextPickup.position = { rand() % state->bounds.width, rand() % state->bounds.height };
+  state->pickup = nextPickup;
 }
