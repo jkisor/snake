@@ -19,7 +19,7 @@ void Move::call()
 
     if (isCollidingWithPickup(nextSnake.head()))
     {
-      nextSnake.positions.push_back(currentSnake.tail());
+      nextSnake = nextSnake.add(currentSnake.tail());
       spawnPickup();
     }
 

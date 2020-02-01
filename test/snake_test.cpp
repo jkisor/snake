@@ -14,3 +14,13 @@ TEST_CASE("test colliding with self")
   REQUIRE(overlappingSnake.isCollidingWithSelf());
 
 }
+
+TEST_CASE("Adding to snake")
+{
+  Snake snake;
+
+  Snake result = snake.add({0,0});
+
+  REQUIRE(result.tail() == p)
+}
+}
