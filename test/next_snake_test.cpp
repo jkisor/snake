@@ -1,4 +1,3 @@
-// tests-factorial.cpp
 #include "catch.hpp"
 #include "next_snake.h"
 

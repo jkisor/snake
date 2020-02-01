@@ -12,7 +12,6 @@ struct Snake
   Direction currentDirection;
   Direction nextDirection;
 
-
   Position& head();
   Position tail();
 
