@@ -18,7 +18,8 @@ class Move : public Action
 
   bool isInBounds(Position &position);
   bool isCollidingWithSelf(Snake &snake);
-  bool isCollidingWithPickup(Snake &snake);
+  bool isCollidingWithPickup(Position &position);
   void spawnPickup();
-  
+
+
 };
