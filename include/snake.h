@@ -15,4 +15,6 @@ struct Snake
 
   Position& head();
   Position tail();
+
+  bool isCollidingWithSelf();
 };
