@@ -11,6 +11,14 @@ void Move::call()
   Snake currentSnake = state->snake;
   Snake nextSnake = NextSnake().call(currentSnake);
 
+  // Invalid
+  if(nextSnake.head() == currentSnake.positions[1])
+  {
+    // Temporary fix, reset direction
+    state->snake.nextDirection = currentSnake.currentDirection;
+    return;
+  }
+
   if(!isInBounds(nextSnake))
   {
     state->snake.dead = true;
@@ -19,7 +27,7 @@ void Move::call()
   {
     state->snake.dead = true;
   }
-  else if(nextSnake.head() != currentSnake.positions[1] )
+  else
   {
 
     if (isCollidingWithPickup(nextSnake))
