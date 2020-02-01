@@ -11,7 +11,7 @@ void Move::call()
   Snake currentSnake = state->snake;
   Snake nextSnake = NextSnake().call(currentSnake);
 
-  if(!isInBounds(nextSnake) || isCollidingWithSelf(nextSnake))
+  if(!isInBounds(nextSnake.head()) || isCollidingWithSelf(nextSnake))
     state->snake.dead = true;
   else
   {
@@ -30,14 +30,12 @@ void Move::call()
   }
 }
 
-bool Move::isInBounds(Snake &snake)
+bool Move::isInBounds(Position &position)
 {
-  Position head = snake.head();
-
-  return head.y < state->bounds.height
-    && head.x >= 0
-    && head.x < state->bounds.width
-    && head.y >= 0;
+  return position.y < state->bounds.height
+    && position.x >= 0
+    && position.x < state->bounds.width
+    && position.y >= 0;
 }
 
 bool Move::isCollidingWithSelf(Snake &snake)
