@@ -23,3 +23,10 @@ Snake Snake::add(Position p)
 
   return snake;
 }
+
+Snake Snake::kill()
+{
+  Snake snake(*this);
+  snake.dead = true;
+  return snake;
+}

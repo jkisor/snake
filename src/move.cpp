@@ -13,19 +13,16 @@ void Move::call()
   Snake nextSnake = NextSnake().call(currentSnake);
 
   if(!isInBounds(nextSnake.head()) || nextSnake.isCollidingWithSelf())
-    state->snake.dead = true;
-  else
+    nextSnake = currentSnake.kill();
+
+  if (isCollidingWithPickup(nextSnake.head()))
   {
-
-    if (isCollidingWithPickup(nextSnake.head()))
-    {
-      nextSnake = nextSnake.add(currentSnake.tail());
-      spawnPickup();
-    }
-
-    state->snake = nextSnake;
-
+    nextSnake = nextSnake.add(currentSnake.tail());
+    spawnPickup();
   }
+
+  state->snake = nextSnake;
+
 }
 
 bool Move::isInBounds(Position &position)

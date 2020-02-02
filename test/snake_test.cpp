@@ -17,10 +17,19 @@ TEST_CASE("test colliding with self")
 
 TEST_CASE("Adding to snake")
 {
+  Position p = {0,0};
   Snake snake;
 
   Snake result = snake.add({0,0});
 
-  REQUIRE(result.tail() == p)
+  REQUIRE(result.tail() == p);
 }
+
+TEST_CASE("killing snake")
+{
+  Snake snake;
+
+  Snake result = snake.kill();
+
+  REQUIRE(result.dead == true);
 }
