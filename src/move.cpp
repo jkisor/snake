@@ -1,5 +1,4 @@
 #include "move.h"
-#include "next_snake.h"
 #include "spawn_pickup.h"
 
 Move::Move(State &state)
@@ -10,7 +9,7 @@ Move::Move(State &state)
 void Move::call()
 {
   Snake currentSnake = state->snake;
-  Snake nextSnake = NextSnake().call(currentSnake);
+  Snake nextSnake = currentSnake.next();
 
   if(!isInBounds(nextSnake.head()) || nextSnake.isCollidingWithSelf())
     nextSnake = currentSnake.kill();

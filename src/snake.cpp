@@ -27,6 +27,28 @@ Snake Snake::add(Position p)
 Snake Snake::kill()
 {
   Snake snake(*this);
+
   snake.dead = true;
+
   return snake;
 }
+
+Snake Snake::next()
+  {
+    Snake results(*this);
+
+    // Positions
+    std::vector<Position> updatedPositions;
+
+    updatedPositions.push_back(head().move(nextDirection));
+
+    for(int i = 0; i < positions.size()-1; i++)
+      updatedPositions.push_back(positions[i]);
+
+    results.positions = updatedPositions;
+
+    // Direction
+    results.currentDirection = nextDirection;
+
+    return results;
+  }
