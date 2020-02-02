@@ -33,7 +33,7 @@ Snake Snake::kill()
   return snake;
 }
 
-Snake Snake::next()
+Snake Snake::move()
   {
     Snake results(*this);
 

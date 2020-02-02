@@ -30,7 +30,6 @@
 
 #include "change_direction.h"
 
-
 PressedKeys pressedKeys;
 
 std::unordered_map<sf::Keyboard::Key, Action*> actionByKey;

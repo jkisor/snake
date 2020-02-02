@@ -9,7 +9,7 @@ Move::Move(State &state)
 void Move::call()
 {
   Snake currentSnake = state->snake;
-  Snake nextSnake = currentSnake.next();
+  Snake nextSnake = currentSnake.move();
 
   if(!isInBounds(nextSnake.head()) || nextSnake.isCollidingWithSelf())
     nextSnake = currentSnake.kill();

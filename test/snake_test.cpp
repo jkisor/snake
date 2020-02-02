@@ -34,13 +34,13 @@ TEST_CASE("killing snake")
   REQUIRE(result.dead == true);
 }
 
-TEST_CASE( "next")
+TEST_CASE( "moving snake")
 {
   Snake snake;
   snake.positions = { {2,0}, {1,0}, {0,0} };
   snake.nextDirection = { 1, 0 };
 
-  Snake results = snake.next();
+  Snake results = snake.move();
 
   std::vector<Position> expected = { {3,0}, {2,0}, {1,0} };
 

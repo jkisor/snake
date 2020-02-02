@@ -18,6 +18,6 @@ struct Snake
   bool isCollidingWithSelf();
   Snake add(Position position);
   Snake kill();
-  Snake next();
+  Snake move();
 
 };
