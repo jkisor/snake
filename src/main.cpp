@@ -31,15 +31,14 @@
 
 #include "controls.h"
 
-PressedKeys pressedKeys;
-Controls controls;
-
-int SIZE = 64;
-
 #include "snake_view.h"
 #include "state.h"
 
 int main() {
+
+  PressedKeys pressedKeys;
+  Controls controls;
+
   State state;
 
   state.bounds = { 8, 8 };
