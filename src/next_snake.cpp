@@ -7,18 +7,12 @@ Snake NextSnake::call(Snake &snake)
 
   std::vector<Position> positions;
 
-  Position pos;
-  pos.x = snake.head().x + snake.nextDirection.x;
-  pos.y = snake.head().y + snake.nextDirection.y;
-
-  positions.push_back(pos);
-
-  Direction dir;
-  dir.x = pos.x - snake.positions[0].x;
-  dir.y = pos.y - snake.positions[0].y;
+  Position head = snake.head().move(snake.nextDirection);
 
   results.currentDirection = snake.nextDirection;
   results.nextDirection = snake.nextDirection;
+
+  positions.push_back(head);
 
   for(int i = 0; i < snake.positions.size()-1; i++)
     positions.push_back(snake.positions[i]);
