@@ -95,9 +95,7 @@ int main() {
     {
       if ( !pressedKeys.contains(e.key.code)) {
         pressedKeys.add(e.key.code);
-        if (controls.isKeyPresent(e.key.code))
-          controls.get(e.key.code)->call();
-
+        controls.trigger(e.key.code);
       }
     }
 

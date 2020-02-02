@@ -21,6 +21,16 @@ class Controls
     return actionByKey[key];
   };
 
+  void trigger(sf::Keyboard::Key key)
+  {
+    if (!isKeyPresent(key))
+      return;
+
+    get(key)->call();
+  };
+
+  private:
+
   bool isKeyPresent(sf::Keyboard::Key key)
   {
     return !(actionByKey.find(key) == actionByKey.end());
