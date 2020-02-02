@@ -4,7 +4,6 @@
 
 #include <string>
 #include <vector>
-#include <unordered_map>
 #include <algorithm>
 
 #include "events.h"
@@ -30,9 +29,11 @@
 
 #include "change_direction.h"
 
+#include "controls.h"
+
 PressedKeys pressedKeys;
 
-std::unordered_map<sf::Keyboard::Key, Action*> actionByKey;
+Controls controls;
 
 bool isKeyPresent(std::unordered_map<sf::Keyboard::Key, Action*> m, sf::Keyboard::Key key)
 {
@@ -65,19 +66,19 @@ int main() {
   presenter.onChangeMessage(dialog.message());
 
   NextMessage nextMessage(dialog, presenter);
-  actionByKey[sf::Keyboard::Z] = &nextMessage;
+  controls.set(sf::Keyboard::Z, nextMessage);
 
   ChangeDirection changeDirectionRight(state, {1,0});
-  actionByKey[sf::Keyboard::Right] = &changeDirectionRight;
+  controls.set(sf::Keyboard::Right, changeDirectionRight);
 
   ChangeDirection changeDirectionLeft(state, {-1,0});
-  actionByKey[sf::Keyboard::Left] = &changeDirectionLeft;
+  controls.set(sf::Keyboard::Left, changeDirectionLeft);
 
   ChangeDirection changeDirectionUp(state, {0,-1});
-  actionByKey[sf::Keyboard::Up] = &changeDirectionUp;
+  controls.set(sf::Keyboard::Up, changeDirectionUp);
 
   ChangeDirection changeDirectionDown(state, {0,1});
-  actionByKey[sf::Keyboard::Down] = &changeDirectionDown;
+  controls.set(sf::Keyboard::Down, changeDirectionDown);
 
   Move move(state);
 
@@ -99,9 +100,8 @@ int main() {
     {
       if ( !pressedKeys.contains(e.key.code)) {
         pressedKeys.add(e.key.code);
-
-        if (isKeyPresent(actionByKey, e.key.code))
-          actionByKey[e.key.code]->call();
+        if (isKeyPresent(controls.actionByKey, e.key.code))
+          controls.get(e.key.code)->call();
 
       }
     }
