@@ -80,7 +80,6 @@ int main() {
   actionByKey[sf::Keyboard::Down] = &changeDirectionDown;
 
   Move move(state);
-  actionByKey[sf::Keyboard::Space] = &move;
 
   Window window;
 
