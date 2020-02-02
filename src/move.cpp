@@ -11,7 +11,7 @@ void Move::call()
   Snake currentSnake = state->snake;
   Snake nextSnake = currentSnake.move();
 
-  if(!isInBounds(nextSnake.head()) || nextSnake.isCollidingWithSelf())
+  if(isOutOfBounds(nextSnake.head()) || nextSnake.isCollidingWithSelf())
     nextSnake = currentSnake.kill();
 
   if (isCollidingWithPickup(nextSnake.head()))
@@ -24,9 +24,9 @@ void Move::call()
 
 }
 
-bool Move::isInBounds(Position &position)
+bool Move::isOutOfBounds(Position &position)
 {
-  return state->bounds.contains(position);
+  return !state->bounds.contains(position);
 }
 
 bool Move::isCollidingWithPickup(Position &position)

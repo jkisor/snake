@@ -16,7 +16,7 @@ class Move : public Action
 
   private:
 
-  bool isInBounds(Position &position);
+  bool isOutOfBounds(Position &position);
   bool isCollidingWithPickup(Position &position);
   void spawnPickup();
 
