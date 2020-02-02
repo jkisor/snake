@@ -35,11 +35,6 @@ PressedKeys pressedKeys;
 
 Controls controls;
 
-bool isKeyPresent(std::unordered_map<sf::Keyboard::Key, Action*> m, sf::Keyboard::Key key)
-{
-  return !(m.find(key) == m.end());
-}
-
 int SIZE = 64;
 
 #include "snake_view.h"
@@ -100,7 +95,7 @@ int main() {
     {
       if ( !pressedKeys.contains(e.key.code)) {
         pressedKeys.add(e.key.code);
-        if (isKeyPresent(controls.actionByKey, e.key.code))
+        if (controls.isKeyPresent(e.key.code))
           controls.get(e.key.code)->call();
 
       }

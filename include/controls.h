@@ -21,4 +21,9 @@ class Controls
     return actionByKey[key];
   };
 
+  bool isKeyPresent(sf::Keyboard::Key key)
+  {
+    return !(actionByKey.find(key) == actionByKey.end());
+  }
+
 };
