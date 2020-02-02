@@ -40,7 +40,9 @@ Snake Snake::move()
     // Positions
     std::vector<Position> updatedPositions;
 
-    updatedPositions.push_back(head().move(nextDirection));
+    Position newHead = head().move(nextDirection);
+
+    updatedPositions.push_back(newHead);
 
     for(int i = 0; i < positions.size()-1; i++)
       updatedPositions.push_back(positions[i]);
