@@ -7,33 +7,17 @@
 class Controls
 {
 
-  public:
-
   std::unordered_map<sf::Keyboard::Key, Action*> actionByKey;
 
-  void set(sf::Keyboard::Key key, Action &action)
-  {
-    actionByKey[key] = &action;
-  };
+  public:
 
-  Action * get(sf::Keyboard::Key key)
-  {
-    return actionByKey[key];
-  };
+  void set(sf::Keyboard::Key key, Action &action);
 
-  void trigger(sf::Keyboard::Key key)
-  {
-    if (!isKeyPresent(key))
-      return;
-
-    get(key)->call();
-  };
+  Action * get(sf::Keyboard::Key key);
+  void trigger(sf::Keyboard::Key key);
 
   private:
 
-  bool isKeyPresent(sf::Keyboard::Key key)
-  {
-    return !(actionByKey.find(key) == actionByKey.end());
-  }
+  bool isKeyPresent(sf::Keyboard::Key key);
 
 };

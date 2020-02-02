@@ -32,7 +32,6 @@
 #include "controls.h"
 
 PressedKeys pressedKeys;
-
 Controls controls;
 
 int SIZE = 64;
