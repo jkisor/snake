@@ -15,7 +15,7 @@ bool Snake::isCollidingWithSelf()
   return std::find(positions.begin()+1, positions.end(), head()) != positions.end();
 }
 
-Snake Snake::add(Position p)
+Snake Snake::grow(Position p)
 {
   Snake snake(*this);
 
