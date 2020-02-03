@@ -34,6 +34,8 @@
 #include "snake_view.h"
 #include "state.h"
 
+#include "countdown_view.h"
+
 int main() {
 
   PressedKeys pressedKeys;
@@ -81,9 +83,11 @@ int main() {
 
   sf::Clock deltaClock;
 
-  float accum = 0;
+  float accum = 0.0f;
 
-  float TICK_SECONDS = 0.50;
+  Countdown countdown(3.0f);
+
+  float TICK_SECONDS = 0.5f;
 
   while (window.isOpen())
   {
@@ -101,6 +105,10 @@ int main() {
       pressedKeys.remove(e.key.code);
 
     float dt = deltaClock.restart().asSeconds();
+
+    if(!countdown.isDone())
+      countdown = countdown.update(dt);
+
     accum += dt;
 
     if(!state.snake.dead && accum >= TICK_SECONDS)
@@ -117,6 +125,8 @@ int main() {
       window.draw(sprite);
 
     window.draw(PickupView(state.pickup).sprite);
+
+    window.draw(CountdownView(countdown).sprite);
 
     window.draw(dialogView.text);
 

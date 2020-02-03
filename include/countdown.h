@@ -2,9 +2,10 @@
 
 class Countdown
 {
-  float secondsLeft;
 
   public:
+
+  float secondsLeft;
 
   Countdown(float duration);
   Countdown update(float dt);
