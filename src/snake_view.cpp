@@ -69,27 +69,27 @@ std::vector<sf::Sprite> SnakeView::drawables(Snake &snake)
       sprite.setRotation(rotation);
       sprite.setTextureRect(sf::IntRect(FRAME_SIZE * 1, 0, FRAME_SIZE, FRAME_SIZE));
     }
-    else if( (a == Direction({-1,0}) && b == Direction({0,-1}))
-            || (a == Direction({0,1}) && b == Direction({1,0}))
+    else if( (a == LEFT && b == UP)
+            || (a == DOWN && b == RIGHT)
     )
     {
       sprite.setRotation(0);
       sprite.setTextureRect(sf::IntRect(FRAME_SIZE * 4, 0, FRAME_SIZE, FRAME_SIZE));
     }
-    else if( (a == Direction({-1,0}) && b == Direction({0,1}))
-            || (a == Direction({0,-1}) && b == Direction({1,0})))
+    else if( (a == LEFT && b == DOWN)
+            || (a == UP && b == RIGHT))
     {
       sprite.setRotation(90);
       sprite.setTextureRect(sf::IntRect(FRAME_SIZE * 4, 0, FRAME_SIZE, FRAME_SIZE));
     }
-    else if( (a == Direction({1,0}) && b == Direction({0,1}))
-            || (a == Direction({0,-1}) && b == Direction({-1,0})))
+    else if( (a == RIGHT && b == DOWN)
+            || (a == UP && b == LEFT))
     {
       sprite.setRotation(180);
       sprite.setTextureRect(sf::IntRect(FRAME_SIZE * 4, 0, FRAME_SIZE, FRAME_SIZE));
     }
-    else if( (a == Direction({0,1}) && b == Direction({-1,0}))
-            || (a == Direction({1,0}) && b == Direction({0,-1})))
+    else if( (a == DOWN && b == LEFT)
+            || (a == RIGHT && b == UP))
     {
       sprite.setRotation(270);
       sprite.setTextureRect(sf::IntRect(FRAME_SIZE * 4, 0, FRAME_SIZE, FRAME_SIZE));
@@ -147,7 +147,6 @@ std::vector<sf::Sprite> SnakeView::drawables(Snake &snake)
 
   }
 
-
   return output;
 
 };
@@ -155,6 +154,7 @@ std::vector<sf::Sprite> SnakeView::drawables(Snake &snake)
 int SnakeView::arrowRotation(Direction direction)
 {
   int result;
+
   if(direction.x == 1)
     result = 0;
   else if(direction.x == -1)
