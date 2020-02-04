@@ -111,6 +111,7 @@ std::vector<sf::Sprite> SnakeView::drawables(Snake &snake)
   sprite.setRotation(rotation);
   output.push_back(sprite);
 
+  // Arrow
   if(!snake.dead)
   {
 
