@@ -26,13 +26,13 @@ std::vector<sf::Sprite> SnakeView::drawables(Snake &snake)
   tailSprite.setScale(SCALE, SCALE);
   tailSprite.setTextureRect(sf::IntRect(FRAME_SIZE * 0, 0, FRAME_SIZE, FRAME_SIZE));
 
-  if(tailDir.x == 0 && tailDir.y == 1 )
+  if(tailDir == RIGHT )
     tailSprite.setRotation(90);
-  else if (tailDir.x == -1 && tailDir.y == 0)
+  else if (tailDir == LEFT)
     tailSprite.setRotation(180);
-  else if (tailDir.x == 0 && tailDir.y == -1)
+  else if (tailDir == UP)
     tailSprite.setRotation(270);
-  else if (tailDir.x == 1 && tailDir.y == 0)
+  else if (tailDir == RIGHT)
     tailSprite.setRotation(0);
 
   output.push_back(tailSprite);
@@ -119,14 +119,15 @@ std::vector<sf::Sprite> SnakeView::drawables(Snake &snake)
 
   float rotation;
 
-  if(d.x == 1)
-    rotation = 0.0f;
-  else if(d.x == -1)
-    rotation = 180.0f;
-  else if(d.y == -1)
-    rotation = -90.0f;
-  else if(d.y == 1)
-    rotation = 90.0f;
+ if(d == RIGHT)
+    rotation = 0;
+  else if(d == LEFT)
+    rotation = 180;
+  else if(d == UP)
+    rotation = -90;
+  else if(d == DOWN)
+    rotation = 90;
+
 
   sprite.setRotation(rotation);
   output.push_back(sprite);
@@ -155,13 +156,13 @@ int SnakeView::arrowRotation(Direction direction)
 {
   int result;
 
-  if(direction.x == 1)
+  if(direction == RIGHT)
     result = 0;
-  else if(direction.x == -1)
+  else if(direction == LEFT)
     result = 180;
-  else if(direction.y == -1)
+  else if(direction == UP)
     result = -90;
-  else if(direction.y == 1)
+  else if(direction == DOWN)
     result = 90;
 
   return result;
