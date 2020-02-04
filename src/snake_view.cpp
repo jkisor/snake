@@ -142,18 +142,8 @@ std::vector<sf::Sprite> SnakeView::drawables(Snake &snake)
     arrowSprite.setScale(SCALE, SCALE);
     arrowSprite.setTextureRect(sf::IntRect(FRAME_SIZE * 5, 0, FRAME_SIZE, FRAME_SIZE));
 
-    if(snake.nextDirection.x == 1)
-      arrowSprite.setRotation(0.0f);
-    else if(snake.nextDirection.x == -1)
-      arrowSprite.setRotation(180.0f);
-    else if(snake.nextDirection.y == -1)
-      arrowSprite.setRotation(-90.0);
-    else if(snake.nextDirection.y == 1)
-      arrowSprite.setRotation(90.0f);
-
-
+    arrowSprite.setRotation(arrowRotation(snake.nextDirection));
     output.push_back(arrowSprite);
-
 
   }
 
@@ -161,3 +151,18 @@ std::vector<sf::Sprite> SnakeView::drawables(Snake &snake)
   return output;
 
 };
+
+int SnakeView::arrowRotation(Direction direction)
+{
+  int result;
+  if(direction.x == 1)
+    result = 0;
+  else if(direction.x == -1)
+    result = 180;
+  else if(direction.y == -1)
+    result = -90;
+  else if(direction.y == 1)
+    result = 90;
+
+  return result;
+}
