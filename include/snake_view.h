@@ -5,6 +5,7 @@
 #include <SFML/Graphics/Texture.hpp>
 
 #include "snake.h"
+#include "tail_view.h"
 
 class SnakeView
 {
@@ -18,5 +19,4 @@ class SnakeView
   private:
 
   int arrowRotation(Direction direction);
-  sf::Sprite buildTailSprite(Snake &snake);
 };
