@@ -36,13 +36,13 @@ std::vector<sf::Sprite> SnakeView::drawables(Snake &snake)
     {
       float rotation;
 
-      if(a.x == 1)
+      if(a == RIGHT)
         rotation = 0.0f;
-      else if(a.x == -1)
+      else if(a == LEFT)
         rotation = 180.0f;
-      else if(a.y == -1)
+      else if(a == UP)
         rotation = 90.0f;
-      else if(a.y == 1)
+      else if(a == DOWN)
         rotation = -90.0f;
 
       sprite.setRotation(rotation);
