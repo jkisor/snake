@@ -108,13 +108,16 @@ int main() {
 
     if(!countdown.isDone())
       countdown = countdown.update(dt);
-
-    accum += dt;
-
-    if(!state.snake.dead && accum >= TICK_SECONDS)
+    else
     {
-      move.call();
-      accum = 0;
+      accum += dt;
+
+      if(!state.snake.dead && accum >= TICK_SECONDS)
+      {
+        move.call();
+        accum = 0;
+      }
+
     }
 
     window.clear();
@@ -126,7 +129,8 @@ int main() {
 
     window.draw(PickupView(state.pickup).sprite);
 
-    window.draw(CountdownView(countdown).sprite);
+    if(!countdown.isDone())
+      window.draw(CountdownView(countdown).sprite);
 
     window.draw(dialogView.text);
 
