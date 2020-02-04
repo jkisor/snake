@@ -83,11 +83,12 @@ int main() {
 
   sf::Clock deltaClock;
 
-  float accum = 0.0f;
-
   Countdown countdown(3.0f);
 
   float TICK_SECONDS = 0.5f;
+
+  Countdown tickCountdown(TICK_SECONDS);
+
 
   while (window.isOpen())
   {
@@ -110,12 +111,12 @@ int main() {
       countdown = countdown.update(dt);
     else
     {
-      accum += dt;
+      tickCountdown = tickCountdown.update(dt);
 
-      if(!state.snake.dead && accum >= TICK_SECONDS)
+      if(!state.snake.dead && tickCountdown.isDone())
       {
         move.call();
-        accum = 0;
+        tickCountdown = Countdown(TICK_SECONDS);
       }
 
     }
