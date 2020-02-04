@@ -15,6 +15,8 @@ class SnakeView
   SnakeView();
   std::vector<sf::Sprite> drawables(Snake &snake);
 
-  int arrowRotation(Direction direction);
+  private:
 
+  int arrowRotation(Direction direction);
+  sf::Sprite buildTailSprite(Snake &snake);
 };
