@@ -26,14 +26,19 @@ std::vector<sf::Sprite> SnakeView::drawables(Snake &snake)
   tailSprite.setScale(SCALE, SCALE);
   tailSprite.setTextureRect(sf::IntRect(FRAME_SIZE * 0, 0, FRAME_SIZE, FRAME_SIZE));
 
+  int r;
+
   if(tailDir == RIGHT )
-    tailSprite.setRotation(90);
+    r = 90;
   else if (tailDir == LEFT)
-    tailSprite.setRotation(180);
+    r = 180;
   else if (tailDir == UP)
-    tailSprite.setRotation(270);
+    r = 270;
   else if (tailDir == RIGHT)
-    tailSprite.setRotation(0);
+    r = 0;
+
+  tailSprite.setRotation(r);
+
 
   output.push_back(tailSprite);
 
