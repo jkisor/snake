@@ -15,7 +15,6 @@ std::vector<sf::Sprite> SnakeView::drawables(Snake &snake)
 
   // Tail
   TailView tailView(texture);
-
   output.push_back(tailView.sprite(snake));
 
   // Body
@@ -86,30 +85,19 @@ std::vector<sf::Sprite> SnakeView::drawables(Snake &snake)
 
     sprite.setRotation(rotation);
     sprite.setTextureRect(rect);
+
     output.push_back(sprite);
   }
 
   // Head
   sf::Sprite sprite = headSprite(snake);
-
   output.push_back(sprite);
 
   // Arrow
   if(!snake.dead)
   {
-    Position p = snake.positions[0];
-
-    sf::Sprite arrowSprite;
-
-    arrowSprite.setTexture(texture);
-    arrowSprite.setOrigin(FRAME_SIZE/2, FRAME_SIZE/2);
-    arrowSprite.setPosition(((p.x + snake.nextDirection.x ) * SIZE) + SIZE/2, ((p.y + snake.nextDirection.y ) * SIZE) + SIZE/2);
-    arrowSprite.setScale(SCALE, SCALE);
-    arrowSprite.setTextureRect(sf::IntRect(FRAME_SIZE * 5, 0, FRAME_SIZE, FRAME_SIZE));
-
-    arrowSprite.setRotation(arrowRotation(snake.nextDirection));
-    output.push_back(arrowSprite);
-
+    sf::Sprite arrow_sprite = arrowSprite(snake);
+    output.push_back(arrow_sprite);
   }
 
   return output;
@@ -134,7 +122,6 @@ int SnakeView::arrowRotation(Direction direction)
 
 sf::Sprite SnakeView::headSprite(Snake &snake)
 {
-
   int SIZE = 64;
   int SCALE = 4.0f;
   int FRAME_SIZE = 16.0f;
@@ -173,3 +160,26 @@ sf::Sprite SnakeView::headSprite(Snake &snake)
 
   return sprite;
 }
+
+sf::Sprite SnakeView::arrowSprite(Snake &snake)
+{
+  int SIZE = 64;
+  int SCALE = 4.0f;
+  int FRAME_SIZE = 16.0f;
+
+  Position p = snake.positions[0];
+
+  sf::Sprite sprite;
+
+  sprite.setTexture(texture);
+  sprite.setOrigin(FRAME_SIZE/2, FRAME_SIZE/2);
+  sprite.setPosition(((p.x + snake.nextDirection.x ) * SIZE) + SIZE/2, ((p.y + snake.nextDirection.y ) * SIZE) + SIZE/2);
+  sprite.setScale(SCALE, SCALE);
+  sprite.setTextureRect(sf::IntRect(FRAME_SIZE * 5, 0, FRAME_SIZE, FRAME_SIZE));
+
+  sprite.setRotation(arrowRotation(snake.nextDirection));
+
+  return sprite;
+
+}
+

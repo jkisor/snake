@@ -21,4 +21,5 @@ class SnakeView
   int arrowRotation(Direction direction);
 
   sf::Sprite headSprite(Snake &snake);
+  sf::Sprite arrowSprite(Snake &snake);
 };
