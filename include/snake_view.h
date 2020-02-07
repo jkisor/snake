@@ -19,4 +19,6 @@ class SnakeView
   private:
 
   int arrowRotation(Direction direction);
+
+  sf::Sprite headSprite(Snake &snake);
 };

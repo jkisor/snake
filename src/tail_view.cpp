@@ -14,9 +14,6 @@ sf::Sprite TailView::sprite(Snake &snake)
   sf::Sprite result;
 
   Position tailPos = snake.positions[snake.positions.size()-1];
-  Position prevPos = snake.positions[snake.positions.size()-2];
-
-  Direction direction = { prevPos.x - tailPos.x, prevPos.y - tailPos.y };
 
   result.setTexture(*texture);
   result.setOrigin(FRAME_SIZE/2, FRAME_SIZE/2);
@@ -25,6 +22,9 @@ sf::Sprite TailView::sprite(Snake &snake)
   result.setTextureRect(sf::IntRect(FRAME_SIZE * 0, 0, FRAME_SIZE, FRAME_SIZE));
 
   int r;
+
+  Position prevPos = snake.positions[snake.positions.size()-2];
+  Direction direction = { prevPos.x - tailPos.x, prevPos.y - tailPos.y };
 
   if(direction == DOWN )
     r = 90;
