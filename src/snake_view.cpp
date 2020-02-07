@@ -7,10 +7,6 @@ SnakeView::SnakeView()
 
 std::vector<sf::Sprite> SnakeView::drawables(Snake &snake)
 {
-  int SIZE = 64;
-  int SCALE = 4.0f;
-  int FRAME_SIZE = 16.0f;
-
   std::vector<sf::Sprite> output;
 
   // Tail
