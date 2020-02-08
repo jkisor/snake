@@ -1,5 +1,7 @@
 #include "snake_view.h"
 
+#include "head_view_model.h"
+
 SnakeView::SnakeView()
 {
   texture.loadFromFile("snake-sheet.png");
@@ -50,41 +52,16 @@ int SnakeView::arrowRotation(Direction direction)
 
 sf::Sprite SnakeView::headSprite(Snake &snake)
 {
-  int SIZE = 64;
-  int SCALE = 4.0f;
-  int FRAME_SIZE = 16.0f;
-
-  Position p = snake.positions[0];
-  Direction d = snake.currentDirection;
+  HeadViewModel model(snake);
 
   sf::Sprite sprite;
 
   sprite.setTexture(texture);
-  sprite.setOrigin(FRAME_SIZE/2, FRAME_SIZE/2);
-  sprite.setPosition((p.x * SIZE) + SIZE/2, (p.y * SIZE) + SIZE/2);
-  sprite.setScale(SCALE, SCALE);
-
-  sf::IntRect rect;
-
-  if(snake.dead)
-    rect = sf::IntRect(FRAME_SIZE * 6, 0, FRAME_SIZE, FRAME_SIZE);
-  else
-    rect = sf::IntRect(FRAME_SIZE * 2, 0, FRAME_SIZE, FRAME_SIZE);
-
-  float rotation;
-
-  if(d == RIGHT)
-    rotation = 0;
-  else if(d == LEFT)
-    rotation = 180;
-  else if(d == UP)
-    rotation = -90;
-  else if(d == DOWN)
-    rotation = 90;
-
-
-  sprite.setRotation(rotation);
-  sprite.setTextureRect(rect);
+  sprite.setOrigin(model.origin.x, model.origin.y);
+  sprite.setPosition(model.position.x, model.position.y);
+  sprite.setScale(model.scale.x, model.scale.y);
+  sprite.setRotation(model.rotation.degrees);
+  sprite.setTextureRect(sf::IntRect(model.rectangle.left, model.rectangle.top, model.rectangle.width, model.rectangle.height));
 
   return sprite;
 }
@@ -104,7 +81,6 @@ sf::Sprite SnakeView::arrowSprite(Snake &snake)
   sprite.setPosition(((p.x + snake.nextDirection.x ) * SIZE) + SIZE/2, ((p.y + snake.nextDirection.y ) * SIZE) + SIZE/2);
   sprite.setScale(SCALE, SCALE);
   sprite.setTextureRect(sf::IntRect(FRAME_SIZE * 5, 0, FRAME_SIZE, FRAME_SIZE));
-
   sprite.setRotation(arrowRotation(snake.nextDirection));
 
   return sprite;
