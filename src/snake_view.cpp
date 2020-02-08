@@ -21,52 +21,19 @@ std::vector<sf::Sprite> SnakeView::drawables(Snake &snake)
   output.insert(output.end(), body_sprites.begin(), body_sprites.end() );
 
   // Head
-  sf::Sprite sprite = headSprite(snake);
+  sf::Sprite sprite = buildSprite(HeadViewModel(snake));
   output.push_back(sprite);
 
   // Arrow
   if(!snake.dead)
   {
-    sf::Sprite arrow_sprite = arrowSprite(snake);
+    sf::Sprite arrow_sprite = buildSprite(ArrowViewModel(snake));
     output.push_back(arrow_sprite);
   }
 
   return output;
 
 };
-
-sf::Sprite SnakeView::headSprite(Snake &snake)
-{
-  HeadViewModel model(snake);
-
-  sf::Sprite sprite;
-
-  sprite.setTexture(texture);
-  sprite.setOrigin(model.origin.x, model.origin.y);
-  sprite.setPosition(model.position.x, model.position.y);
-  sprite.setScale(model.scale.x, model.scale.y);
-  sprite.setRotation(model.rotation.degrees);
-  sprite.setTextureRect(sf::IntRect(model.rectangle.left, model.rectangle.top, model.rectangle.width, model.rectangle.height));
-
-  return sprite;
-}
-
-sf::Sprite SnakeView::arrowSprite(Snake &snake)
-{
-  ArrowViewModel model(snake);
-
-  sf::Sprite sprite;
-
-  sprite.setTexture(texture);
-  sprite.setOrigin(model.origin.x, model.origin.y);
-  sprite.setPosition(model.position.x, model.position.y);
-  sprite.setScale(model.scale.x, model.scale.y);
-  sprite.setRotation(model.rotation.degrees);
-  sprite.setTextureRect(sf::IntRect(model.rectangle.left, model.rectangle.top, model.rectangle.width, model.rectangle.height));
-
-  return sprite;
-
-}
 
 std::vector<sf::Sprite> SnakeView::bodySprites(Snake &snake)
 {
@@ -149,5 +116,20 @@ std::vector<sf::Sprite> SnakeView::bodySprites(Snake &snake)
 
   return results;
 }
+
+sf::Sprite SnakeView::buildSprite(ViewModel model)
+{
+  sf::Sprite sprite;
+
+  sprite.setTexture(texture);
+  sprite.setOrigin(model.origin.x, model.origin.y);
+  sprite.setPosition(model.position.x, model.position.y);
+  sprite.setScale(model.scale.x, model.scale.y);
+  sprite.setRotation(model.rotation.degrees);
+  sprite.setTextureRect(sf::IntRect(model.rectangle.left, model.rectangle.top, model.rectangle.width, model.rectangle.height));
+
+  return sprite;
+}
+
 
 

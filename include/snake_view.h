@@ -6,6 +6,7 @@
 
 #include "snake.h"
 #include "tail_view.h"
+#include "view_model.h"
 
 class SnakeView
 {
@@ -18,7 +19,6 @@ class SnakeView
 
   private:
 
-  sf::Sprite headSprite(Snake &snake);
-  sf::Sprite arrowSprite(Snake &snake);
   std::vector<sf::Sprite> bodySprites(Snake &snake);
+  sf::Sprite buildSprite(ViewModel viewModel);
 };
