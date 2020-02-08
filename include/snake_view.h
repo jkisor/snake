@@ -18,8 +18,6 @@ class SnakeView
 
   private:
 
-  int arrowRotation(Direction direction);
-
   sf::Sprite headSprite(Snake &snake);
   sf::Sprite arrowSprite(Snake &snake);
   std::vector<sf::Sprite> bodySprites(Snake &snake);
