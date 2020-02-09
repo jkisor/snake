@@ -5,7 +5,6 @@
 #include <SFML/Graphics/Texture.hpp>
 
 #include "snake.h"
-#include "tail_view.h"
 #include "view_model.h"
 
 class SnakeView

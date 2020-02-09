@@ -3,6 +3,8 @@
 #include "head_view_model.h"
 #include "arrow_view_model.h"
 #include "body_view_model.h"
+#include "tail_view_model.h"
+
 
 SnakeView::SnakeView()
 {
@@ -14,8 +16,7 @@ std::vector<sf::Sprite> SnakeView::drawables(Snake &snake)
   std::vector<sf::Sprite> output;
 
   // Tail
-  TailView tailView(texture);
-  output.push_back(tailView.sprite(snake));
+  output.push_back(buildSprite(TailViewModel(snake)));
 
   // Body
   for(int i = 1; i < snake.positions.size()-1; i++)
