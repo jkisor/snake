@@ -18,8 +18,11 @@ std::vector<sf::Sprite> SnakeView::drawables(Snake &snake)
   output.push_back(tailView.sprite(snake));
 
   // Body
-  std::vector<sf::Sprite> body_sprites = bodySprites(snake);
-  output.insert(output.end(), body_sprites.begin(), body_sprites.end() );
+  for(int i = 1; i < snake.positions.size()-1; i++)
+  {
+    sf::Sprite sprite = buildSprite(BodyViewModel(snake, i));
+    output.push_back(sprite);
+  }
 
   // Head
   output.push_back(buildSprite(HeadViewModel(snake)));
@@ -34,19 +37,6 @@ std::vector<sf::Sprite> SnakeView::drawables(Snake &snake)
   return output;
 
 };
-
-std::vector<sf::Sprite> SnakeView::bodySprites(Snake &snake)
-{
-  std::vector<sf::Sprite> results;
-
-  for(int i = 1; i < snake.positions.size()-1; i++)
-  {
-    sf::Sprite sprite = buildSprite(BodyViewModel(snake, i));
-    results.push_back(sprite);
-  }
-
-  return results;
-}
 
 sf::Sprite SnakeView::buildSprite(ViewModel model)
 {

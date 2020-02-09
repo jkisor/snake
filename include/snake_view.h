@@ -19,6 +19,5 @@ class SnakeView
 
   private:
 
-  std::vector<sf::Sprite> bodySprites(Snake &snake);
   sf::Sprite buildSprite(ViewModel viewModel);
 };
