@@ -19,20 +19,14 @@ std::vector<sf::Sprite> SnakeView::drawables(Snake &snake)
 
   // Body
   for(int i = 1; i < snake.positions.size()-1; i++)
-  {
-    sf::Sprite sprite = buildSprite(BodyViewModel(snake, i));
-    output.push_back(sprite);
-  }
+    output.push_back(buildSprite(BodyViewModel(snake, i)));
 
   // Head
   output.push_back(buildSprite(HeadViewModel(snake)));
 
   // Arrow
   if(!snake.dead)
-  {
-    sf::Sprite arrow_sprite = buildSprite(ArrowViewModel(snake));
-    output.push_back(arrow_sprite);
-  }
+    output.push_back(buildSprite(ArrowViewModel(snake)));
 
   return output;
 
