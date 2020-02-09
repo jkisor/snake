@@ -13,21 +13,26 @@ SnakeView::SnakeView()
 
 std::vector<sf::Sprite> SnakeView::drawables(Snake &snake)
 {
-  std::vector<sf::Sprite> output;
+  std::vector<Sprite> sprites;
 
   // Tail
-  output.push_back(buildSprite(TailSprite(snake)));
+  sprites.push_back(TailSprite(snake));
 
   // Body
   for(int i = 1; i < snake.positions.size()-1; i++)
-    output.push_back(buildSprite(BodySprite(snake, i)));
+    sprites.push_back(BodySprite(snake, i));
 
   // Head
-  output.push_back(buildSprite(HeadSprite(snake)));
+  sprites.push_back(HeadSprite(snake));
 
   // Arrow
   if(!snake.dead)
-    output.push_back(buildSprite(ArrowSprite(snake)));
+    sprites.push_back(ArrowSprite(snake));
+
+  std::vector<sf::Sprite> output;
+
+  for(Sprite s : sprites)
+    output.push_back(buildSprite(s));
 
   return output;
 
