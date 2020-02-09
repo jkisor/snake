@@ -1,11 +1,11 @@
 #pragma once
 
-#include "view_model.h"
+#include "sprite.h"
 #include "snake.h"
 
-struct ArrowViewModel : public ViewModel
+struct ArrowSprite : public Sprite
 {
-  ArrowViewModel(Snake &snake)
+  ArrowSprite(Snake &snake)
   {
     int SIZE = 64;
     int SCALE = 4.0f;

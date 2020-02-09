@@ -5,7 +5,7 @@
 #include <SFML/Graphics/Texture.hpp>
 
 #include "snake.h"
-#include "view_model.h"
+#include "sprite.h"
 
 class SnakeView
 {
@@ -18,5 +18,5 @@ class SnakeView
 
   private:
 
-  sf::Sprite buildSprite(ViewModel viewModel);
+  sf::Sprite buildSprite(Sprite sprite);
 };

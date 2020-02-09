@@ -1,11 +1,11 @@
 #pragma once
 
-#include "view_model.h"
+#include "sprite.h"
 #include "snake.h"
 
-struct HeadViewModel : public ViewModel
+struct HeadSprite : public Sprite
 {
-  HeadViewModel(Snake &snake)
+  HeadSprite(Snake &snake)
   {
     int SCALE = 4.0f;
     int FRAME_SIZE = 16.0f;

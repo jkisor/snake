@@ -1,9 +1,9 @@
 #include "snake_view.h"
 
-#include "head_view_model.h"
-#include "arrow_view_model.h"
-#include "body_view_model.h"
-#include "tail_view_model.h"
+#include "head_sprite.h"
+#include "arrow_sprite.h"
+#include "body_sprite.h"
+#include "tail_sprite.h"
 
 
 SnakeView::SnakeView()
@@ -16,35 +16,35 @@ std::vector<sf::Sprite> SnakeView::drawables(Snake &snake)
   std::vector<sf::Sprite> output;
 
   // Tail
-  output.push_back(buildSprite(TailViewModel(snake)));
+  output.push_back(buildSprite(TailSprite(snake)));
 
   // Body
   for(int i = 1; i < snake.positions.size()-1; i++)
-    output.push_back(buildSprite(BodyViewModel(snake, i)));
+    output.push_back(buildSprite(BodySprite(snake, i)));
 
   // Head
-  output.push_back(buildSprite(HeadViewModel(snake)));
+  output.push_back(buildSprite(HeadSprite(snake)));
 
   // Arrow
   if(!snake.dead)
-    output.push_back(buildSprite(ArrowViewModel(snake)));
+    output.push_back(buildSprite(ArrowSprite(snake)));
 
   return output;
 
 };
 
-sf::Sprite SnakeView::buildSprite(ViewModel model)
+sf::Sprite SnakeView::buildSprite(Sprite sprite)
 {
-  sf::Sprite sprite;
+  sf::Sprite result;
 
-  sprite.setTexture(texture);
-  sprite.setOrigin(model.origin.x, model.origin.y);
-  sprite.setPosition(model.position.x, model.position.y);
-  sprite.setScale(model.scale.x, model.scale.y);
-  sprite.setRotation(model.rotation.degrees);
-  sprite.setTextureRect(sf::IntRect(model.rectangle.left, model.rectangle.top, model.rectangle.width, model.rectangle.height));
+  result.setTexture(texture);
+  result.setOrigin(sprite.origin.x, sprite.origin.y);
+  result.setPosition(sprite.position.x, sprite.position.y);
+  result.setScale(sprite.scale.x, sprite.scale.y);
+  result.setRotation(sprite.rotation.degrees);
+  result.setTextureRect(sf::IntRect(sprite.rectangle.left, sprite.rectangle.top, sprite.rectangle.width, sprite.rectangle.height));
 
-  return sprite;
+  return result;
 }
 
 

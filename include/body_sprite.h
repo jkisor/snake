@@ -1,10 +1,10 @@
 #pragma once
 
-#include "view_model.h"
+#include "sprite.h"
 
-struct BodyViewModel : public ViewModel
+struct BodySprite : public Sprite
 {
-  BodyViewModel(Snake &snake, int index)
+  BodySprite(Snake &snake, int index)
   {
     int SIZE = 64;
     int SCALE = 4.0f;

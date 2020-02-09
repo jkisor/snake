@@ -7,7 +7,7 @@
 #include "rotation.h"
 #include "texture.h"
 
-struct ViewModel
+struct Sprite
 {
   Position position;
   Rotation rotation;
