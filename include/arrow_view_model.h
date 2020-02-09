@@ -29,5 +29,7 @@ struct ArrowViewModel : public ViewModel
       rotation = {-90};
     else if(direction == DOWN)
       rotation = {90};
+
+    texture.filename =  "snake-sheet.png";
   }
 };

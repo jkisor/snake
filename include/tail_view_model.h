@@ -29,6 +29,9 @@ struct TailViewModel : public ViewModel
       rotation = { 270 };
     else if (direction == RIGHT)
       rotation = { 0 };
+
+    texture.filename =  "snake-sheet.png";
+
   }
 
 };

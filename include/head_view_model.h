@@ -32,5 +32,7 @@ struct HeadViewModel : public ViewModel
       rotation = {-90};
     else if(d == DOWN)
       rotation = {90};
-    }
+
+    texture.filename =  "snake-sheet.png";
+  }
 };

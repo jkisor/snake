@@ -67,5 +67,7 @@ struct BodyViewModel : public ViewModel
       rectangle = { FRAME_SIZE * 3, 0, FRAME_SIZE, FRAME_SIZE };
     }
 
+    texture.filename =  "snake-sheet.png";
+
   }
 };

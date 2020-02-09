@@ -5,6 +5,7 @@
 #include "scale.h"
 #include "rectangle.h"
 #include "rotation.h"
+#include "texture.h"
 
 struct ViewModel
 {
@@ -14,4 +15,5 @@ struct ViewModel
 
   Origin origin;
   Rectangle rectangle;
+  Texture texture;
 };
