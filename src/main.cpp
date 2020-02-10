@@ -29,18 +29,14 @@
 
 #include "change_direction.h"
 
-#include "controls.h"
-
 #include "snake_view.h"
 #include "state.h"
 
 #include "countdown_view.h"
+#include "gameplay_controls.h"
 
 int main() {
-
   PressedKeys pressedKeys;
-  Controls controls;
-
   State state;
 
   state.bounds = { 8, 8 };
@@ -60,20 +56,7 @@ int main() {
   Presenter presenter(dialogView);
   presenter.onChangeMessage(dialog.message());
 
-  NextMessage nextMessage(dialog, presenter);
-  controls.set(sf::Keyboard::Z, nextMessage);
-
-  ChangeDirection changeDirectionRight(state, {1,0});
-  controls.set(sf::Keyboard::Right, changeDirectionRight);
-
-  ChangeDirection changeDirectionLeft(state, {-1,0});
-  controls.set(sf::Keyboard::Left, changeDirectionLeft);
-
-  ChangeDirection changeDirectionUp(state, {0,-1});
-  controls.set(sf::Keyboard::Up, changeDirectionUp);
-
-  ChangeDirection changeDirectionDown(state, {0,1});
-  controls.set(sf::Keyboard::Down, changeDirectionDown);
+  GameplayControls controls(dialog, presenter, state);
 
   Move move(state);
 
@@ -88,7 +71,6 @@ int main() {
   float TICK_SECONDS = 0.5f;
 
   Countdown tickCountdown(TICK_SECONDS);
-
 
   while (window.isOpen())
   {
