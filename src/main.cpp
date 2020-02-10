@@ -36,41 +36,35 @@
 #include "gameplay_controls.h"
 
 int main() {
-  PressedKeys pressedKeys;
   State state;
 
   state.bounds = { 8, 8 };
-
   state.snake.positions = { {2,0}, {1,0}, {0,0} };
   state.snake.nextDirection = { 1, 0 };
   state.snake.currentDirection = { 1, 0 };
-
   state.pickup.position = { 5, 4 };
 
+  // Dialog demo
   Dialog dialog;
-
   DialogView dialogView;
-
-  SnakeView snakeView;
-
   Presenter presenter(dialogView);
   presenter.onChangeMessage(dialog.message());
 
+  Move move(state);
+  SnakeView snakeView;
+
+  // Time
+  sf::Clock deltaClock;
+  Countdown countdown(3.0f);
+  float TICK_SECONDS = 0.5f;
+  Countdown tickCountdown(TICK_SECONDS);
+
+  // Input
+  PressedKeys pressedKeys;
   GameplayControls controls(dialog, presenter, state);
 
-  Move move(state);
-
   Window window;
-
   window.open();
-
-  sf::Clock deltaClock;
-
-  Countdown countdown(3.0f);
-
-  float TICK_SECONDS = 0.5f;
-
-  Countdown tickCountdown(TICK_SECONDS);
 
   while (window.isOpen())
   {
