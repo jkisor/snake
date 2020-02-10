@@ -54,6 +54,7 @@ int main() {
   Countdown countdown(3.0f);
   float TICK_SECONDS = 0.5f;
   Countdown tickCountdown(TICK_SECONDS);
+  Countdown fadeCountdown(2.0f);
 
   // Input
   PressedKeys pressedKeys;
@@ -79,6 +80,7 @@ int main() {
 
     float dt = deltaClock.restart().asSeconds();
 
+
     if(!countdown.isDone())
       countdown = countdown.update(dt);
     else
@@ -91,6 +93,11 @@ int main() {
         tickCountdown = Countdown(TICK_SECONDS);
       }
 
+    }
+
+    if(!fadeCountdown.isDone())
+    {
+      fadeCountdown = fadeCountdown.update(dt);
     }
 
     window.clear();
@@ -106,6 +113,20 @@ int main() {
       window.draw(CountdownView(countdown).sprite);
 
     window.draw(dialogView.text);
+
+    sf::RectangleShape shape;
+
+    shape.setPosition(0, 0);
+    shape.setSize(sf::Vector2f(800, 600));
+    shape.setOutlineColor(sf::Color::Black);
+    shape.setOutlineThickness(4);
+
+    if(!fadeCountdown.isDone())
+      shape.setFillColor(sf::Color(0,0,0, (fadeCountdown.secondsLeft / fadeCountdown.duration ) * 255) );
+    else
+      shape.setFillColor(sf::Color(0,0,0,0));
+
+    window.draw(shape);
 
     window.display();
   }

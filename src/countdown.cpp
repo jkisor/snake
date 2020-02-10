@@ -2,6 +2,7 @@
 
 Countdown::Countdown(float duration)
 {
+  this->duration = duration;
   secondsLeft = duration;
 }
 
