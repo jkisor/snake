@@ -81,23 +81,25 @@ int main() {
     float dt = deltaClock.restart().asSeconds();
 
 
-    if(!countdown.isDone())
-      countdown = countdown.update(dt);
-    else
-    {
-      tickCountdown = tickCountdown.update(dt);
-
-      if(!state.snake.dead && tickCountdown.isDone())
-      {
-        move.call();
-        tickCountdown = Countdown(TICK_SECONDS);
-      }
-
-    }
-
     if(!fadeCountdown.isDone())
     {
       fadeCountdown = fadeCountdown.update(dt);
+    }
+    else
+    {
+      if(!countdown.isDone())
+        countdown = countdown.update(dt);
+      else
+      {
+        tickCountdown = tickCountdown.update(dt);
+
+        if(!state.snake.dead && tickCountdown.isDone())
+        {
+          move.call();
+          tickCountdown = Countdown(TICK_SECONDS);
+        }
+
+      }
     }
 
     window.clear();
@@ -114,19 +116,17 @@ int main() {
 
     window.draw(dialogView.text);
 
-    sf::RectangleShape shape;
+    sf::RectangleShape fadeShape;
 
-    shape.setPosition(0, 0);
-    shape.setSize(sf::Vector2f(800, 600));
-    shape.setOutlineColor(sf::Color::Black);
-    shape.setOutlineThickness(4);
+    fadeShape.setPosition(0, 0);
+    fadeShape.setSize(sf::Vector2f(800, 600));
 
     if(!fadeCountdown.isDone())
-      shape.setFillColor(sf::Color(0,0,0, (fadeCountdown.secondsLeft / fadeCountdown.duration ) * 255) );
+      fadeShape.setFillColor(sf::Color(0,0,0, (fadeCountdown.secondsLeft / fadeCountdown.duration ) * 255) );
     else
-      shape.setFillColor(sf::Color(0,0,0,0));
+      fadeShape.setFillColor(sf::Color(0,0,0,0));
 
-    window.draw(shape);
+    window.draw(fadeShape);
 
     window.display();
   }
