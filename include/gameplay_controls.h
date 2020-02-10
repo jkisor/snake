@@ -30,5 +30,7 @@ class GameplayControls : public Controls
     set(sf::Keyboard::Right, changeDirectionRight);
     set(sf::Keyboard::Left, changeDirectionLeft);
     set(sf::Keyboard::Down, changeDirectionDown);
+    set(sf::Keyboard::Up, changeDirectionUp);
+
   };
 };
