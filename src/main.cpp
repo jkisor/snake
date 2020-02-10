@@ -14,8 +14,6 @@
 #include "dialog_view.h"
 #include "presenter.h"
 
-#include "next_message.h"
-
 #include "bounds.h"
 
 #include "snake.h"
@@ -26,8 +24,6 @@
 
 #include "pickup_view.h"
 #include "bounds_view.h"
-
-#include "change_direction.h"
 
 #include "snake_view.h"
 #include "state.h"

@@ -12,5 +12,5 @@ class PressedKeys
   bool contains(sf::Keyboard::Key keyCode);
   void add(sf::Keyboard::Key keyCode);
   void remove(sf::Keyboard::Key keyCode);
-  
+
 };
