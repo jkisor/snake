@@ -18,7 +18,7 @@ class Pick : public Action
 
   void call()
   {
-
+    state->isOnMainMenu = false; 
   }
 };
 
@@ -36,7 +36,10 @@ class ChangeSelectionUp : public Action
 
   void call()
   {
+    int index = state->menuIndex - 1;
 
+    if(index >= 0 )
+      state->menuIndex = index;
   }
 };
 
@@ -53,8 +56,10 @@ class ChangeSelectionDown: public Action
 
   void call()
   {
-    state->menuIndex += 1;
-    if (state->menuIndex < )
+    int index = state->menuIndex + 1;
+
+    if(index < 2)
+      state->menuIndex = index;
   }
 };
 
@@ -67,12 +72,12 @@ class MenuControls : public Controls
   ChangeSelectionUp up;
   ChangeSelectionDown down;
 
-  MenuControls()
-    : pick(),
-    up(),
-    down()
+  MenuControls(State &state)
+    : pick(state),
+    up(state),
+    down(state)
   {
-    set(sf::Keyboard::Z, pick);
+    set(sf::Keyboard::Enter, pick);
     set(sf::Keyboard::Up, up);
     set(sf::Keyboard::Down, down);
   };

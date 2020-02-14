@@ -31,6 +31,8 @@
 #include "countdown_view.h"
 #include "gameplay_controls.h"
 
+#include "menu_controls.h"
+
 int main() {
   State state;
 
@@ -58,7 +60,11 @@ int main() {
 
   // Input
   PressedKeys pressedKeys;
-  GameplayControls controls(dialog, presenter, state);
+  GameplayControls gameplayControls(dialog, presenter, state);
+  MenuControls menuControls(state);
+
+  Controls * controls;
+  controls = &gameplayControls;
 
   Window window;
   window.open();
@@ -71,7 +77,7 @@ int main() {
     {
       if ( !pressedKeys.contains(e.key.code)) {
         pressedKeys.add(e.key.code);
-        controls.trigger(e.key.code);
+        controls->trigger(e.key.code);
       }
     }
 
@@ -81,52 +87,98 @@ int main() {
     float dt = deltaClock.restart().asSeconds();
 
 
-    if(!fadeCountdown.isDone())
+    if(state.isOnMainMenu)
     {
-      fadeCountdown = fadeCountdown.update(dt);
+      controls = &menuControls;
     }
     else
     {
-      if(!countdown.isDone())
-        countdown = countdown.update(dt);
+      controls = &gameplayControls;
+      if(!fadeCountdown.isDone())
+      {
+        fadeCountdown = fadeCountdown.update(dt);
+      }
       else
       {
-        tickCountdown = tickCountdown.update(dt);
-
-        if(!state.snake.dead && tickCountdown.isDone())
+        if(!countdown.isDone())
+          countdown = countdown.update(dt);
+        else
         {
-          move.call();
-          tickCountdown = Countdown(TICK_SECONDS);
-        }
+          tickCountdown = tickCountdown.update(dt);
 
+          if(!state.snake.dead && tickCountdown.isDone())
+          {
+            move.call();
+            tickCountdown = Countdown(TICK_SECONDS);
+          }
+        }
       }
     }
 
     window.clear();
 
-    window.draw(BoundsView(state.bounds).shape);
+    if(state.isOnMainMenu)
+    {
+      sf::RectangleShape shape;
+      shape.setPosition(0, 0);
+      shape.setSize(sf::Vector2f(800, 600));
 
-    for(sf::Sprite sprite : snakeView.drawables(state.snake))
-      window.draw(sprite);
+      shape.setFillColor(sf::Color(255,0,0,255));
 
-    window.draw(PickupView(state.pickup).sprite);
+      sf::RectangleShape optionShape;
+      optionShape.setPosition(100, 100);
+      optionShape.setSize(sf::Vector2f(128, 32));
 
-    if(!countdown.isDone())
-      window.draw(CountdownView(countdown).sprite);
+      optionShape.setFillColor(sf::Color(255,255,255,255));
 
-    window.draw(dialogView.text);
 
-    sf::RectangleShape fadeShape;
+      sf::RectangleShape optionShape2;
+      optionShape2.setPosition(100, 164);
+      optionShape2.setSize(sf::Vector2f(128, 32));
+      optionShape2.setFillColor(sf::Color(255,255,255,255));
 
-    fadeShape.setPosition(0, 0);
-    fadeShape.setSize(sf::Vector2f(800, 600));
+      sf::RectangleShape selectionShape;
 
-    if(!fadeCountdown.isDone())
-      fadeShape.setFillColor(sf::Color(0,0,0, (fadeCountdown.secondsLeft / fadeCountdown.duration ) * 255) );
+      if(state.menuIndex == 0)
+        selectionShape.setPosition(72, 100 + 8);
+      else if(state.menuIndex == 1)
+        selectionShape.setPosition(72, 164 + 8);
+
+      selectionShape.setSize(sf::Vector2f(16, 16));
+      selectionShape.setFillColor(sf::Color(255,255,255,255));
+
+      window.draw(shape);
+      window.draw(optionShape);
+      window.draw(optionShape2);
+      window.draw(selectionShape);
+
+    }
     else
-      fadeShape.setFillColor(sf::Color(0,0,0,0));
+    {
+      window.draw(BoundsView(state.bounds).shape);
 
-    window.draw(fadeShape);
+      for(sf::Sprite sprite : snakeView.drawables(state.snake))
+        window.draw(sprite);
+
+      window.draw(PickupView(state.pickup).sprite);
+
+      if(!countdown.isDone())
+        window.draw(CountdownView(countdown).sprite);
+
+      window.draw(dialogView.text);
+
+      sf::RectangleShape fadeShape;
+
+      fadeShape.setPosition(0, 0);
+      fadeShape.setSize(sf::Vector2f(800, 600));
+
+      if(!fadeCountdown.isDone())
+        fadeShape.setFillColor(sf::Color(0,0,0, (fadeCountdown.secondsLeft / fadeCountdown.duration ) * 255) );
+      else
+        fadeShape.setFillColor(sf::Color(0,0,0,0));
+
+      window.draw(fadeShape);
+    }
 
     window.display();
   }

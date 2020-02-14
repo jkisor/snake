@@ -45,5 +45,7 @@ struct State
   Pickup pickup;
   Bounds bounds;
 
-  int menuIndex;
+  int menuIndex = 0;
+  bool isOnMainMenu = true;
+
 };
