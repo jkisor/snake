@@ -121,6 +121,9 @@ int main() {
       for(sf::Drawable * d : gameView.drawables())
         window.draw(*d);
 
+      if(!countdown.isDone())
+        window.draw(CountdownView(countdown).sprite);
+
     }
 
     window.display();
