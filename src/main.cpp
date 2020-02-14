@@ -20,7 +20,6 @@
 
 #include "state.h"
 
-#include "countdown_view.h"
 #include "gameplay_controls.h"
 
 #include "menu_controls.h"
@@ -91,8 +90,8 @@ int main() {
     {
       controls = &gameplayControls;
 
-      if(!countdown.isDone())
-        countdown = countdown.update(dt);
+      if(!state.countdown.isDone())
+        state.countdown = state.countdown.update(dt);
       else
       {
         tickCountdown = tickCountdown.update(dt);
@@ -120,10 +119,6 @@ int main() {
 
       for(sf::Drawable * d : gameView.drawables())
         window.draw(*d);
-
-      if(!countdown.isDone())
-        window.draw(CountdownView(countdown).sprite);
-
     }
 
     window.display();
