@@ -33,6 +33,7 @@
 
 #include "menu_controls.h"
 #include "menu_option_view.h"
+#include "menu_view.h"
 
 int main() {
   State state;
@@ -127,30 +128,12 @@ int main() {
 
     if(state.isOnMainMenu)
     {
-      sf::RectangleShape shape;
-      shape.setPosition(0, 0);
-      shape.setSize(sf::Vector2f(800, 600));
-      shape.setFillColor(sf::Color(255,0,0,255));
+      MenuView menu_view(state);
 
-      MenuOptionView option1("Play");
-      option1.text.setPosition(100, 100);
-
-      MenuOptionView option2("Quit");
-      option2.text.setPosition(100, 164);
-
-      sf::RectangleShape cursorShape;
-      if(state.menuIndex == 0)
-        cursorShape.setPosition(72, 100 + 8);
-      else if(state.menuIndex == 1)
-        cursorShape.setPosition(72, 164 + 8);
-
-      cursorShape.setSize(sf::Vector2f(16, 16));
-      cursorShape.setFillColor(sf::Color(255,255,255,255));
-
-      window.draw(shape);
-      window.draw(option1.text);
-      window.draw(option2.text);
-      window.draw(cursorShape);
+      window.draw(menu_view.shape);
+      window.draw(menu_view.option1.text);
+      window.draw(menu_view.option2.text);
+      window.draw(menu_view.cursorShape);
 
     }
     else
