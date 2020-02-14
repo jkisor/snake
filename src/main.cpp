@@ -32,6 +32,7 @@
 #include "gameplay_controls.h"
 
 #include "menu_controls.h"
+#include "menu_option_view.h"
 
 int main() {
   State state;
@@ -60,10 +61,12 @@ int main() {
 
   // Input
   PressedKeys pressedKeys;
+
+  Controls * controls;
+
   GameplayControls gameplayControls(dialog, presenter, state);
   MenuControls menuControls(state);
 
-  Controls * controls;
   controls = &gameplayControls;
 
   Window window;
@@ -127,33 +130,27 @@ int main() {
       sf::RectangleShape shape;
       shape.setPosition(0, 0);
       shape.setSize(sf::Vector2f(800, 600));
-
       shape.setFillColor(sf::Color(255,0,0,255));
 
-      sf::RectangleShape optionShape;
-      optionShape.setPosition(100, 100);
-      optionShape.setSize(sf::Vector2f(128, 32));
-      optionShape.setFillColor(sf::Color(255,255,255,255));
+      MenuOptionView option1("Play");
+      option1.text.setPosition(100, 100);
 
-      sf::RectangleShape optionShape2;
-      optionShape2.setPosition(100, 164);
-      optionShape2.setSize(sf::Vector2f(128, 32));
-      optionShape2.setFillColor(sf::Color(255,255,255,255));
+      MenuOptionView option2("Quit");
+      option2.text.setPosition(100, 164);
 
-      sf::RectangleShape selectionShape;
-
+      sf::RectangleShape cursorShape;
       if(state.menuIndex == 0)
-        selectionShape.setPosition(72, 100 + 8);
+        cursorShape.setPosition(72, 100 + 8);
       else if(state.menuIndex == 1)
-        selectionShape.setPosition(72, 164 + 8);
+        cursorShape.setPosition(72, 164 + 8);
 
-      selectionShape.setSize(sf::Vector2f(16, 16));
-      selectionShape.setFillColor(sf::Color(255,255,255,255));
+      cursorShape.setSize(sf::Vector2f(16, 16));
+      cursorShape.setFillColor(sf::Color(255,255,255,255));
 
       window.draw(shape);
-      window.draw(optionShape);
-      window.draw(optionShape2);
-      window.draw(selectionShape);
+      window.draw(option1.text);
+      window.draw(option2.text);
+      window.draw(cursorShape);
 
     }
     else
