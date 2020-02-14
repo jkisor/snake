@@ -10,10 +10,6 @@
 #include "pressed_keys.h"
 #include "action.h"
 
-#include "dialog.h"
-#include "dialog_view.h"
-#include "presenter.h"
-
 #include "bounds.h"
 
 #include "snake.h"
@@ -42,12 +38,6 @@ int main() {
   state.snake.currentDirection = { 1, 0 };
   state.pickup.position = { 5, 4 };
 
-  // Dialog demo
-  Dialog dialog;
-  DialogView dialogView;
-  Presenter presenter(dialogView);
-  presenter.onChangeMessage(dialog.message());
-
   Move move(state);
 
   // Time
@@ -62,7 +52,7 @@ int main() {
 
   Controls * controls;
 
-  GameplayControls gameplayControls(dialog, presenter, state);
+  GameplayControls gameplayControls(state);
   MenuControls menuControls(state);
 
   controls = &gameplayControls;

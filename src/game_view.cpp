@@ -19,7 +19,6 @@ std::vector<sf::Drawable *> GameView::drawables()
     results.push_back(d);
 
   results.push_back(&pickup_view.sprite);
-  results.push_back(&dialogView.text);
 
   return results;
 }
