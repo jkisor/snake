@@ -1,7 +1,6 @@
 #include "menu_view.h"
 
 
-
 MenuView::MenuView(State &state) :
   option1("Play"),
   option2("Quit")
@@ -24,3 +23,21 @@ MenuView::MenuView(State &state) :
 
 
 }
+
+std::vector<sf::Drawable *> MenuView::drawables()
+{
+  std::vector<sf::Drawable *> results;
+
+  results.push_back(&shape);
+  results.push_back(&option1.text);
+  results.push_back(&option2.text);
+  results.push_back(&cursorShape);
+  return results;
+  // return {
+  //   &shape,
+  //   &option1,
+  //   &option2,
+  //   &cursorShape
+  // };
+
+};

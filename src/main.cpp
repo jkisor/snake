@@ -129,12 +129,9 @@ int main() {
     if(state.isOnMainMenu)
     {
       MenuView menu_view(state);
-
-      window.draw(menu_view.shape);
-      window.draw(menu_view.option1.text);
-      window.draw(menu_view.option2.text);
-      window.draw(menu_view.cursorShape);
-
+      
+      for(sf::Drawable * d : menu_view.drawables())
+        window.draw(*d);
     }
     else
     {
