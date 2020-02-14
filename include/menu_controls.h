@@ -18,7 +18,14 @@ class Pick : public Action
 
   void call()
   {
-    state->isOnMainMenu = false; 
+    if(state->menuIndex == 0)
+    {
+      state->isOnMainMenu = false;
+    }
+    else if(state->menuIndex == 1)
+    {
+      state->quit = true;
+    }
   }
 };
 

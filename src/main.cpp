@@ -86,6 +86,11 @@ int main() {
 
     float dt = deltaClock.restart().asSeconds();
 
+    if(state.quit == true)
+    {
+      window.close();
+      return 0;
+    }
 
     if(state.isOnMainMenu)
     {
@@ -94,12 +99,12 @@ int main() {
     else
     {
       controls = &gameplayControls;
-      if(!fadeCountdown.isDone())
-      {
-        fadeCountdown = fadeCountdown.update(dt);
-      }
-      else
-      {
+      // if(!fadeCountdown.isDone())
+      // {
+      //   fadeCountdown = fadeCountdown.update(dt);
+      // }
+      // else
+      // {
         if(!countdown.isDone())
           countdown = countdown.update(dt);
         else
@@ -112,7 +117,7 @@ int main() {
             tickCountdown = Countdown(TICK_SECONDS);
           }
         }
-      }
+      // }
     }
 
     window.clear();
@@ -128,9 +133,7 @@ int main() {
       sf::RectangleShape optionShape;
       optionShape.setPosition(100, 100);
       optionShape.setSize(sf::Vector2f(128, 32));
-
       optionShape.setFillColor(sf::Color(255,255,255,255));
-
 
       sf::RectangleShape optionShape2;
       optionShape2.setPosition(100, 164);
@@ -167,17 +170,17 @@ int main() {
 
       window.draw(dialogView.text);
 
-      sf::RectangleShape fadeShape;
+      // sf::RectangleShape fadeShape;
 
-      fadeShape.setPosition(0, 0);
-      fadeShape.setSize(sf::Vector2f(800, 600));
+      // fadeShape.setPosition(0, 0);
+      // fadeShape.setSize(sf::Vector2f(800, 600));
 
-      if(!fadeCountdown.isDone())
-        fadeShape.setFillColor(sf::Color(0,0,0, (fadeCountdown.secondsLeft / fadeCountdown.duration ) * 255) );
-      else
-        fadeShape.setFillColor(sf::Color(0,0,0,0));
+      // if(!fadeCountdown.isDone())
+      //   fadeShape.setFillColor(sf::Color(0,0,0, (fadeCountdown.secondsLeft / fadeCountdown.duration ) * 255) );
+      // else
+      //   fadeShape.setFillColor(sf::Color(0,0,0,0));
 
-      window.draw(fadeShape);
+      // window.draw(fadeShape);
     }
 
     window.display();

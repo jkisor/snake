@@ -47,5 +47,5 @@ struct State
 
   int menuIndex = 0;
   bool isOnMainMenu = true;
-
+  bool quit = false;
 };
