@@ -33,11 +33,5 @@ std::vector<sf::Drawable *> MenuView::drawables()
   results.push_back(&option2.text);
   results.push_back(&cursorShape);
   return results;
-  // return {
-  //   &shape,
-  //   &option1,
-  //   &option2,
-  //   &cursorShape
-  // };
 
 };

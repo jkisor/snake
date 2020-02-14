@@ -22,10 +22,6 @@
 #include "move.h"
 #include "pickup.h"
 
-#include "pickup_view.h"
-#include "bounds_view.h"
-
-#include "snake_view.h"
 #include "state.h"
 
 #include "countdown_view.h"
@@ -34,6 +30,8 @@
 #include "menu_controls.h"
 #include "menu_option_view.h"
 #include "menu_view.h"
+
+#include "game_view.h"
 
 int main() {
   State state;
@@ -51,7 +49,6 @@ int main() {
   presenter.onChangeMessage(dialog.message());
 
   Move move(state);
-  SnakeView snakeView;
 
   // Time
   sf::Clock deltaClock;
@@ -103,61 +100,37 @@ int main() {
     else
     {
       controls = &gameplayControls;
-      // if(!fadeCountdown.isDone())
-      // {
-      //   fadeCountdown = fadeCountdown.update(dt);
-      // }
-      // else
-      // {
-        if(!countdown.isDone())
-          countdown = countdown.update(dt);
-        else
-        {
-          tickCountdown = tickCountdown.update(dt);
 
-          if(!state.snake.dead && tickCountdown.isDone())
-          {
-            move.call();
-            tickCountdown = Countdown(TICK_SECONDS);
-          }
+      if(!countdown.isDone())
+        countdown = countdown.update(dt);
+      else
+      {
+        tickCountdown = tickCountdown.update(dt);
+
+        if(!state.snake.dead && tickCountdown.isDone())
+        {
+          move.call();
+          tickCountdown = Countdown(TICK_SECONDS);
         }
-      // }
+      }
     }
 
     window.clear();
 
     if(state.isOnMainMenu)
     {
-      MenuView menu_view(state);
-      
-      for(sf::Drawable * d : menu_view.drawables())
+      MenuView menuView(state);
+
+      for(sf::Drawable * d : menuView.drawables())
         window.draw(*d);
     }
     else
     {
-      window.draw(BoundsView(state.bounds).shape);
+      GameView gameView(state);
 
-      for(sf::Sprite sprite : snakeView.drawables(state.snake))
-        window.draw(sprite);
+      for(sf::Drawable * d : gameView.drawables())
+        window.draw(*d);
 
-      window.draw(PickupView(state.pickup).sprite);
-
-      if(!countdown.isDone())
-        window.draw(CountdownView(countdown).sprite);
-
-      window.draw(dialogView.text);
-
-      // sf::RectangleShape fadeShape;
-
-      // fadeShape.setPosition(0, 0);
-      // fadeShape.setSize(sf::Vector2f(800, 600));
-
-      // if(!fadeCountdown.isDone())
-      //   fadeShape.setFillColor(sf::Color(0,0,0, (fadeCountdown.secondsLeft / fadeCountdown.duration ) * 255) );
-      // else
-      //   fadeShape.setFillColor(sf::Color(0,0,0,0));
-
-      // window.draw(fadeShape);
     }
 
     window.display();

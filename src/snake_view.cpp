@@ -6,35 +6,31 @@
 #include "tail_sprite.h"
 
 
-SnakeView::SnakeView()
+SnakeView::SnakeView(Snake &snake)
 {
   texture.loadFromFile("snake-sheet.png");
-}
-
-std::vector<sf::Sprite> SnakeView::drawables(Snake &snake)
-{
-  std::vector<Sprite> sprites;
-
   // Tail
-  sprites.push_back(TailSprite(snake));
+  sprites.push_back(buildSprite(TailSprite(snake)));
 
   // Body
   for(int i = 1; i < snake.positions.size()-1; i++)
-    sprites.push_back(BodySprite(snake, i));
+    sprites.push_back(buildSprite(BodySprite(snake, i)));
 
   // Head
-  sprites.push_back(HeadSprite(snake));
+  sprites.push_back(buildSprite(HeadSprite(snake)));
 
   // Arrow
   if(!snake.dead)
-    sprites.push_back(ArrowSprite(snake));
+    sprites.push_back(buildSprite(ArrowSprite(snake)));
+}
 
-  std::vector<sf::Sprite> output;
+std::vector<sf::Drawable *> SnakeView::drawables()
+{
+  std::vector<sf::Drawable *> results;
 
-  for(Sprite s : sprites)
-    output.push_back(buildSprite(s));
-
-  return output;
+  for(sf::Sprite &sprite : sprites)
+    results.push_back(&sprite);
+  return results;
 
 };
 

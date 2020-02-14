@@ -11,10 +11,12 @@ class SnakeView
 {
   sf::Texture texture;
 
+  std::vector<sf::Sprite> sprites;
+
   public:
 
-  SnakeView();
-  std::vector<sf::Sprite> drawables(Snake &snake);
+  SnakeView(Snake &snake);
+  std::vector<sf::Drawable *> drawables();
 
   private:
 
