@@ -10,9 +10,9 @@ struct BodySprite : public Sprite
     int SCALE = 4.0f;
     int FRAME_SIZE = 16.0f;
 
-    Position p = snake.positions[index];
-    Position aheadPos = snake.positions[index-1];
-    Position behindPos = snake.positions[index+1];
+    Position p = snake.positions.all[index];
+    Position aheadPos = snake.positions.all[index-1];
+    Position behindPos = snake.positions.all[index+1];
 
     origin = { FRAME_SIZE/2, FRAME_SIZE/2 };
     position = { (p.x * SIZE) + SIZE/2, (p.y * SIZE) + SIZE/2 };

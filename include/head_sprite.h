@@ -13,7 +13,7 @@ struct HeadSprite : public Sprite
 
     origin = { FRAME_SIZE/2, FRAME_SIZE/2 };
 
-    Position p = snake.positions[0];
+    Position p = snake.positions.first();
     position = { (p.x * SIZE) + SIZE/2, (p.y * SIZE) + SIZE/2 };
     scale = { SCALE, SCALE };
 

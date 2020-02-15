@@ -28,3 +28,13 @@ Position Positions::random()
 {
   return all[rand() % all.size()];
 }
+
+Position Positions::first()
+{
+  return all[0];
+}
+
+Position Positions::last()
+{
+  return all[all.size()-1];
+}

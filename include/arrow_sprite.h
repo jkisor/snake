@@ -11,7 +11,7 @@ struct ArrowSprite : public Sprite
     int SCALE = 4.0f;
     int FRAME_SIZE = 16.0f;
 
-    Position p = snake.positions[0];
+    Position p = snake.positions.first();
 
     origin = { FRAME_SIZE/2, FRAME_SIZE/2 };
     position = { ((p.x + snake.nextDirection.x ) * SIZE) + SIZE/2, ((p.y + snake.nextDirection.y ) * SIZE) + SIZE/2 };

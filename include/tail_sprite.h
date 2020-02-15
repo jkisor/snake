@@ -11,14 +11,14 @@ struct TailSprite : public Sprite
     int SCALE = 4.0f;
     int FRAME_SIZE = 16.0f;
 
-    Position tailPos = snake.positions[snake.positions.size()-1];
+    Position tailPos = snake.positions.last();
 
     origin = { FRAME_SIZE/2, FRAME_SIZE/2 };
     position = { (tailPos.x * SIZE) + SIZE/2, (tailPos.y * SIZE) + SIZE/2 };
     scale = { SCALE, SCALE };
     rectangle = { FRAME_SIZE * 0, 0, FRAME_SIZE, FRAME_SIZE };
 
-    Position prevPos = snake.positions[snake.positions.size()-2];
+    Position prevPos = snake.positions.all[snake.positions.all.size()-2];
     Direction direction = { prevPos.x - tailPos.x, prevPos.y - tailPos.y };
 
     if(direction == DOWN )

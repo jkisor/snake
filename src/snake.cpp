@@ -2,24 +2,24 @@
 
 Position& Snake::head()
 {
-  return positions[0];
+  return positions.all[0];
 }
 
 Position Snake::tail()
 {
-  return positions[positions.size()-1];
+  return positions.last();
 }
 
 bool Snake::isCollidingWithSelf()
 {
-  return std::find(positions.begin()+1, positions.end(), head()) != positions.end();
+  return std::find(positions.all.begin()+1, positions.all.end(), head()) != positions.all.end();
 }
 
 Snake Snake::grow(Position p)
 {
   Snake snake(*this);
 
-  snake.positions.push_back(p);
+  snake.positions.all.push_back(p);
 
   return snake;
 }
@@ -44,8 +44,8 @@ Snake Snake::move()
 
     updatedPositions.push_back(newHead);
 
-    for(int i = 0; i < positions.size()-1; i++)
-      updatedPositions.push_back(positions[i]);
+    for(int i = 0; i < positions.all.size()-1; i++)
+      updatedPositions.push_back(positions.all[i]);
 
     results.positions = updatedPositions;
 

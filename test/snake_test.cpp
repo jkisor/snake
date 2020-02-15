@@ -37,7 +37,7 @@ TEST_CASE("killing snake")
 TEST_CASE( "moving snake")
 {
   Snake snake;
-  snake.positions = { {2,0}, {1,0}, {0,0} };
+  snake.positions = Positions({ {2,0}, {1,0}, {0,0} });
   snake.nextDirection = { 1, 0 };
 
   Snake results = snake.move();

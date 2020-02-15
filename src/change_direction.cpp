@@ -16,7 +16,7 @@ void ChangeDirection::call()
 
 
   // Valid
-  if(pos != state->snake.positions[1])
+  if(pos != state->snake.positions.all[1])
     state->snake.nextDirection = direction;
 
 }

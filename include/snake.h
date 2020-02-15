@@ -1,12 +1,12 @@
 #pragma once
 
-#include <vector>
+#include "positions.h"
 #include "position.h"
 #include "direction.h"
 
 struct Snake
 {
-  std::vector<Position> positions;
+  Positions positions;
   bool dead = false;
 
   Direction currentDirection;

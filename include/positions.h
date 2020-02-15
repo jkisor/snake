@@ -17,5 +17,7 @@ class Positions
 
   Position random();
 
+  Position first();
+  Position last();
 
 };

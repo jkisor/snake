@@ -13,7 +13,7 @@ SnakeView::SnakeView(Snake &snake)
   sprites.push_back(buildSprite(TailSprite(snake)));
 
   // Body
-  for(int i = 1; i < snake.positions.size()-1; i++)
+  for(int i = 1; i < snake.positions.all.size()-1; i++)
     sprites.push_back(buildSprite(BodySprite(snake, i)));
 
   // Head

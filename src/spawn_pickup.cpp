@@ -9,7 +9,7 @@ SpawnPickup::SpawnPickup(State &state)
 void SpawnPickup::call()
 {
 
-  Positions positions = state->bounds.positions().except(Positions(state->snake.positions));
+  Positions positions = state->bounds.positions().except(state->snake.positions);
 
   Pickup nextPickup;
   nextPickup.position = positions.random();
