@@ -10,21 +10,23 @@ SpawnPickup::SpawnPickup(State &state)
 void SpawnPickup::call()
 {
 
-  std::vector<Position> positions;
+  std::vector<Position> allPositions;
 
   for(int y = 0; y < state->bounds.height; y++)
-  {
     for(int x = 0; x < state->bounds.width; x++)
-    {
-      std::vector<Position> snakePos = state->snake.positions;
+      allPositions.push_back({x,y});
 
-      if (std::find(snakePos.begin(), snakePos.end(), Position({x,y})) == snakePos.end())
-        positions.push_back({x,y});
+  std::vector<Position> invalidPositions = state->snake.positions;
+  std::vector<Position> validPositions;
 
-    }
-  };
+  std::copy_if(
+    allPositions.begin(),
+    allPositions.end(),
+    std::back_inserter(validPositions),
+    [invalidPositions](Position p) { return std::find(invalidPositions.begin(), invalidPositions.end(), p) == invalidPositions.end(); } // not found
+  );
 
   Pickup nextPickup;
-  nextPickup.position = positions[rand() % positions.size()];
+  nextPickup.position = validPositions[rand() % validPositions.size()];
   state->pickup = nextPickup;
 }
