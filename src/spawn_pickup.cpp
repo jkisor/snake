@@ -1,6 +1,5 @@
 #include "spawn_pickup.h"
-#include <algorithm>
-#include <vector>
+#include "positions.h"
 
 SpawnPickup::SpawnPickup(State &state)
 {
@@ -9,24 +8,17 @@ SpawnPickup::SpawnPickup(State &state)
 
 void SpawnPickup::call()
 {
-
-  std::vector<Position> allPositions;
+  Positions positions;
 
   for(int y = 0; y < state->bounds.height; y++)
     for(int x = 0; x < state->bounds.width; x++)
-      allPositions.push_back({x,y});
+      positions.all.push_back({x,y});
 
-  std::vector<Position> invalidPositions = state->snake.positions;
-  std::vector<Position> validPositions;
+  Positions invalidPositions(state->snake.positions);
 
-  std::copy_if(
-    allPositions.begin(),
-    allPositions.end(),
-    std::back_inserter(validPositions),
-    [invalidPositions](Position p) { return std::find(invalidPositions.begin(), invalidPositions.end(), p) == invalidPositions.end(); } // not found
-  );
+  Positions validPositions = positions.except(invalidPositions);
 
   Pickup nextPickup;
-  nextPickup.position = validPositions[rand() % validPositions.size()];
+  nextPickup.position = validPositions.all[rand() % validPositions.all.size()];
   state->pickup = nextPickup;
 }
