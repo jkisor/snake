@@ -44,7 +44,6 @@ int main() {
   Countdown countdown(3.0f);
   float TICK_SECONDS = 0.5f;
   Countdown tickCountdown(TICK_SECONDS);
-  Countdown fadeCountdown(2.0f);
 
   // Input
   PressedKeys pressedKeys;
