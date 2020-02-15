@@ -9,11 +9,9 @@ SpawnPickup::SpawnPickup(State &state)
 void SpawnPickup::call()
 {
 
-  Positions invalidPositions(state->snake.positions);
-
-  Positions validPositions = state->bounds.positions().except(invalidPositions);
+  Positions positions = state->bounds.positions().except(Positions(state->snake.positions));
 
   Pickup nextPickup;
-  nextPickup.position = validPositions.all[rand() % validPositions.all.size()];
+  nextPickup.position = positions.random();
   state->pickup = nextPickup;
 }

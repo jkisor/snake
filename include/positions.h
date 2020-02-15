@@ -15,4 +15,7 @@ class Positions
 
   Positions except(Positions blacklist);
 
+  Position random();
+
+
 };

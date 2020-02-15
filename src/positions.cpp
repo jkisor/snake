@@ -23,3 +23,8 @@ Positions Positions::except(Positions blacklist)
 
   return results;
 }
+
+Position Positions::random()
+{
+  return all[rand() % all.size()];
+}
