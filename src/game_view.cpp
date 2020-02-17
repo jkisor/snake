@@ -16,6 +16,8 @@ std::vector<sf::Drawable *> GameView::drawables()
 
   results.push_back(&bounds_view.shape);
 
+  for(sf::Sprite & sprite : bounds_view.sprites)
+    results.push_back(&sprite);
 
   for(sf::Drawable * d : snakeView.drawables())
     results.push_back(d);
