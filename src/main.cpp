@@ -31,7 +31,7 @@
 int main() {
   State state;
 
-  state.bounds = { 8, 8 };
+  state.bounds = { 12, 8 };
   state.snake.positions = Positions({ {2,0}, {1,0}, {0,0} });
   state.snake.nextDirection = { 1, 0 };
   state.snake.currentDirection = { 1, 0 };
