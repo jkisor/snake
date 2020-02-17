@@ -17,6 +17,8 @@ struct State
 
   Countdown countdown;
 
+  int score = 0;
+
   State() : countdown(3.0f)
   {
 

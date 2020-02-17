@@ -18,6 +18,7 @@ void Move::call()
   {
     nextSnake = nextSnake.grow(currentSnake.tail());
     spawnPickup();
+    state->score += 1;
   }
 
   state->snake = nextSnake;

@@ -4,7 +4,8 @@ GameView::GameView(State &state) :
   bounds_view(state.bounds),
   pickup_view(state.pickup),
   snakeView(state.snake),
-  countdownView(state.countdown)
+  countdownView(state.countdown),
+  scoreView(state.score)
 {
   this->state = &state;
 }
@@ -23,6 +24,8 @@ std::vector<sf::Drawable *> GameView::drawables()
 
   if(!state->countdown.isDone())
     results.push_back(&countdownView.sprite);
+
+  results.push_back(&scoreView.text);
 
   return results;
 }
