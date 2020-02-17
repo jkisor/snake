@@ -17,6 +17,13 @@ BoundsView::BoundsView(Bounds &bounds)
       s.setPosition(x * SIZE, y * SIZE);
       s.setTexture(texture);
       s.setOrigin(0, 0);
+
+      // This cases them to change randomly every frame... need to persist the randomness
+      // int arr[2] = { -1, 1 };
+      // int ix = rand() % 2;
+      // int iy = rand() % 2;
+      // s.setScale(SCALE * arr[ix], SCALE * arr[iy]);
+
       s.setScale(SCALE, SCALE);
       s.setTextureRect(sf::IntRect(FRAME_SIZE * 0, FRAME_SIZE * 1, FRAME_SIZE, FRAME_SIZE));
       sprites.push_back(s);
