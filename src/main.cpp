@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "window.h"
+// #include "window.h"
 
 #include <string>
 #include <vector>
@@ -55,12 +55,29 @@ int main() {
 
   controls = &gameplayControls;
 
-  Window window;
-  window.open();
+  sf::RenderWindow window;
+
+  window.create(sf::VideoMode(800, 600), "SFML works!");
+
+  // High cpu usage unless limited
+  // MUST be called after create.
+  window.setFramerateLimit(60);
 
   while (window.isOpen())
   {
-    Events events = window.events();
+    std::vector<sf::Event> results;
+
+    sf::Event event;
+
+    while (window.pollEvent(event))
+    {
+      if (event.type == sf::Event::Closed)
+        window.close();
+
+      results.push_back(event);
+    }
+
+    Events events(results);
 
     for(sf::Event e : events.keyPresses())
     {
@@ -103,7 +120,7 @@ int main() {
       }
     }
 
-    window.clear();
+    window.clear(sf::Color::Black);
 
     if(state.isOnMainMenu)
     {
