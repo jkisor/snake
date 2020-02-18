@@ -65,19 +65,7 @@ int main() {
 
   while (window.isOpen())
   {
-    std::vector<sf::Event> results;
-
-    sf::Event event;
-
-    while (window.pollEvent(event))
-    {
-      if (event.type == sf::Event::Closed)
-        window.close();
-
-      results.push_back(event);
-    }
-
-    Events events(results);
+    Events events(window);
 
     for(sf::Event e : events.keyPresses())
     {
@@ -89,6 +77,8 @@ int main() {
 
     for(sf::Event e : events.keyReleases())
       pressedKeys.remove(e.key.code);
+
+    //
 
     float dt = deltaClock.restart().asSeconds();
 

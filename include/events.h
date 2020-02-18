@@ -2,6 +2,7 @@
 
 #include <vector>
 #include <SFML/Window/Event.hpp>
+#include <SFML/Graphics/RenderWindow.hpp>
 
 class Events
 {
@@ -9,7 +10,7 @@ class Events
 
   std::vector<sf::Event> all;
 
-  Events(std::vector<sf::Event> events);
+  Events(sf::RenderWindow &window);
 
   std::vector<sf::Event> keyPresses();
   std::vector<sf::Event> keyReleases();
