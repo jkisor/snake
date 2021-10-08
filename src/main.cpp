@@ -57,7 +57,7 @@ int main() {
 
   sf::RenderWindow window;
 
-  window.create(sf::VideoMode(800, 600), "SFML works!");
+  window.create(sf::VideoMode(800, 600), "Snake by John Kisor");
 
   // High cpu usage unless limited
   // MUST be called after create.
