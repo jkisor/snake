@@ -5,7 +5,6 @@
 
 #include "pickup.h"
 
-
 class PickupView
 {
   sf::Texture texture;
