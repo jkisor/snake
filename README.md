@@ -1,2 +1,3 @@
 # snake
-Snake game written in C++
+
+Snake game written in C++.
